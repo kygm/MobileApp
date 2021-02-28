@@ -22,6 +22,7 @@ environment:
 
 dependencies:
   numeric_keyboard: ^1.0.1
+  intl: ^0.16.1
   flutter:
     sdk: flutter
 

@@ -1,6 +1,8 @@
+import 'package:KYGM_Mobile/Models/client.dart';
 import 'package:flutter/material.dart';
 import 'globals.dart';
 import './login.dart';
+import 'package:intl/intl.dart';
 
 //var db = Db("")
 void main() {
@@ -14,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'KYGM Services',
       theme: ThemeData(
-        primaryColor: Colors.grey,
+        primaryColor: Colors.grey[200],
         accentColor: Colors.lightBlue,
       ),
       home: MyHomePage(),
@@ -92,10 +94,59 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             //if NOT authorized exec login widget
-            !_auth
-                ? Login()
-                //else send user to main app
-                : Text("Logged In"),
+            // !_auth
+            //     ? Login()
+            //     //else send user to main app
+            //     : Text("Logged In"),
+            Container(
+              height: 80,
+              child: ColoredBox(
+                color: Colors.grey[300],
+                child: Center(
+                  child: Text(
+                    "Todays Date\n" +
+                        DateFormat.yMd().format(DateTime.now()).toString(),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              height: 50,
+              child: ColoredBox(
+                color: Colors.grey[300],
+                child: Center(
+                  child: Text(
+                    'KYGM Services Client Tracking',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
+              ),
+            ),
+            FlatButton(
+              child: Text('View Revenue'),
+              onPressed: () {},
+            ),
+            FlatButton(
+              child: Text('View Clients'),
+              onPressed: () {},
+            ),
+            FlatButton(
+              child: Text('Add Clients'),
+              onPressed: () {},
+            ),
+            FlatButton(
+              child: Text('View Transactions'),
+              onPressed: () {},
+            ),
+            FlatButton(
+              child: Text('View Transactions'),
+              onPressed: () {},
+            ),
           ],
         ),
       ),
