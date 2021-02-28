@@ -13,7 +13,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'KYGM Services',
-      theme: ThemeData(),
+      theme: ThemeData(
+        primaryColor: Colors.grey,
+        accentColor: Colors.lightBlue,
+      ),
       home: MyHomePage(),
     );
   }
@@ -32,6 +35,55 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              // padding: EdgeInsets.zero,
+              child: Text('Menu'),
+              decoration: BoxDecoration(color: Colors.lightBlue),
+            ),
+            ListTile(
+              title: Text('Home'),
+              onTap: () {
+                // Update the state of the app, then close the drawer
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('Timer'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('View Clients'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('View Transactions'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('Add Client'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('Add Transaction'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      ),
       appBar: AppBar(
         title: Text("KYGM Services"),
       ),
@@ -40,12 +92,10 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             //if NOT authorized exec login widget
-            !_auth ? 
-            Login()
-            //else send user to main app
-            :
-
-            Text("Logged In"),
+            !_auth
+                ? Login()
+                //else send user to main app
+                : Text("Logged In"),
           ],
         ),
       ),

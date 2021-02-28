@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:numeric_keyboard/numeric_keyboard.dart';
 import './globals.dart';
+
 class Login extends StatefulWidget {
   @override
   _LoginState createState() => _LoginState();
@@ -12,10 +13,10 @@ class _LoginState extends State<Login> {
   String _pass = "1234";
   final passController = TextEditingController();
 
-  bool getAuth()
-  {
+  bool getAuth() {
     return _authenticated;
   }
+
   void _addPass(input) {
     setState(() {
       showNum == "Incorrect Pass!" ? showNum = "" : print("norm");
@@ -30,7 +31,6 @@ class _LoginState extends State<Login> {
       print(showNum);
       if (showNum == _pass) {
         _authenticated = true;
-
       } else {
         _authenticated = false;
         showNum = "Incorrect Pass!";
@@ -41,8 +41,7 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    return 
-      Column(
+    return Column(
       children: <Widget>[
         Text(
           "Enter Password",
