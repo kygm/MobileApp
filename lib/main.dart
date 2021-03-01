@@ -99,35 +99,51 @@ class _MyHomePageState extends State<MyHomePage> {
             //     //else send user to main app
             //     : Text("Logged In"),
             Container(
-              height: 80,
+              height: 150,
               child: ColoredBox(
                 color: Colors.grey[300],
                 child: Center(
-                  child: Text(
-                    "Todays Date\n" +
-                        DateFormat.yMd().format(DateTime.now()).toString(),
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 25,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Container(
-              height: 50,
-              child: ColoredBox(
-                color: Colors.grey[300],
-                child: Center(
-                  child: Text(
-                    'KYGM Services Client Tracking',
-                    style: TextStyle(fontSize: 20),
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 60,
+                        child: ColoredBox(
+                          color: Colors.grey[300],
+                          child: Center(
+                            child: Text(
+                              "Todays Date\n" +
+                                  DateFormat.yMd()
+                                      .format(DateTime.now())
+                                      .toString(),
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 25,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        height: 30,
+                        child: ColoredBox(
+                          color: Colors.grey[300],
+                          child: Center(
+                            child: Text(
+                              'KYGM Services Client Tracking',
+                              style: TextStyle(fontSize: 20),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
             ),
             FlatButton(
+              color: Colors.green,
+              minWidth: 370,
               child: Text('View Revenue'),
               onPressed: () {},
             ),
