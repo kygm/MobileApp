@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:numeric_keyboard/numeric_keyboard.dart';
-import './globals.dart';
+import '../globals.dart';
 
 class Login extends StatefulWidget {
   @override
