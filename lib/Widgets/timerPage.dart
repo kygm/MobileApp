@@ -101,7 +101,7 @@ class TimerPageState extends State<TimerPage> {
                 Navigator.pop(context);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => JobTimer()),
+                  MaterialPageRoute(builder: (context) => TimerPage()),
                 );
               },
             ),

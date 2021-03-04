@@ -1,10 +1,11 @@
+import 'package:KYGM_Mobile/Widgets/timerPage.dart';
 import 'package:flutter/material.dart';
 import './viewClients.dart';
 import './newClient.dart';
 import './viewTransactions.dart';
 import './newTransaction.dart';
 import '../main.dart';
-import './jobTimer.dart';
+import './timerPage.dart';
 import '../globals.dart';
 
 class Menu extends StatelessWidget {
@@ -53,7 +54,7 @@ class Menu extends StatelessWidget {
                 Navigator.pop(context);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => JobTimer()),
+                  MaterialPageRoute(builder: (context) => TimerPage()),
                 );
               },
             ),
