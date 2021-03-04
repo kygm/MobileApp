@@ -8,70 +8,55 @@ import '../Models/transaction.dart';
 import '../Models/client.dart';
 import 'dart:async';
 
-class ElapsedTime {
-  final int hundreds;
-  final int seconds;
-  final int minutes;
-
-  ElapsedTime({
-    this.hundreds,
-    this.seconds,
-    this.minutes,
-  });
-}
-
-class Dependencies {
-  final List<ValueChanged<ElapsedTime>> timerListeners =
-      <ValueChanged<ElapsedTime>>[];
-  final TextStyle textStyle =
-      const TextStyle(fontSize: 90.0, fontFamily: "Bebas Neue");
-  final Stopwatch stopwatch = new Stopwatch();
-  final int timerMillisecondsRefreshRate = 30;
-}
-
-// class Timer extends StatefulWidget {
-//   @override
-//   _Timer createState() => _Timer();
-// }
 class TimerPage extends StatefulWidget {
   TimerPage({Key key}) : super(key: key);
 
   TimerPageState createState() => new TimerPageState();
 }
 
+Stream<int> stopWatchStream() {
+  StreamController<int> streamController;
+  Timer timer;
+  Duration timerInterval = Duration(seconds: 1);
+  int counter = 0;
+  void stopTimer() {
+    if (timer != null) {
+      timer.cancel();
+      timer = null;
+      counter = 0;
+      streamController.close();
+    }
+  }
+
+  void tick(_) {
+    counter++;
+    streamController.add(counter);
+  }
+
+  void startTimer() {
+    timer = Timer.periodic(timerInterval, tick);
+  }
+
+  streamController = StreamController<int>(
+    onListen: startTimer,
+    onCancel: stopTimer,
+    onResume: startTimer,
+    onPause: stopTimer,
+  );
+  return streamController.stream;
+}
+
 class TimerPageState extends State<TimerPage> {
-  final Dependencies dependencies = new Dependencies();
-  void leftButtonPressed() {
-    setState(() {
-      if (dependencies.stopwatch.isRunning) {
-        print("${dependencies.stopwatch.elapsedMilliseconds}");
-      } else {
-        dependencies.stopwatch.reset();
-      }
-    });
-  }
-
-  void rightButtonPressed() {
-    setState(() {
-      if (dependencies.stopwatch.isRunning) {
-        dependencies.stopwatch.stop();
-      } else {
-        dependencies.stopwatch.start();
-      }
-    });
-  }
-
-  Widget buildFloatingButton(String text, VoidCallback callback) {
-    TextStyle roundTextStyle =
-        const TextStyle(fontSize: 16.0, color: Colors.white);
-    return new FloatingActionButton(
-        child: new Text(text, style: roundTextStyle), onPressed: callback);
-  }
-
-  // Duration dispInterval = Duration(seconds: 1);
   List<Client> viewClients; //filler so it doesnt break
-  List<Transaction> viewTransactions; //filler so it doesnt break
+  List<Transaction> viewTransactions;
+
+  get timerSubscription => null;
+
+  set timerSubscription(
+      StreamSubscription<int> timerSubscription) {} //filler so it doesnt break
   void _addNewTransaction(String phoneNum) {} //filler so it doesnt break
+  String hoursStr, minutesStr;
+  var timerStream;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -169,169 +154,95 @@ class TimerPageState extends State<TimerPage> {
         child: new Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            new Expanded(
-              child: new TimerText(dependencies: dependencies),
-            ),
-            new Expanded(
-              flex: 0,
-              child: new Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10.0),
-                child: new Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    buildFloatingButton(
-                        dependencies.stopwatch.isRunning ? "lap" : "reset",
-                        leftButtonPressed),
-                    buildFloatingButton(
-                        dependencies.stopwatch.isRunning ? "stop" : "start",
-                        rightButtonPressed),
-                  ],
+            hoursStr == null && minutesStr == null
+                ? Text(
+                    '00:00',
+                    style: TextStyle(
+                      fontSize: 70.0,
+                    ),
+                  )
+                : Text(
+                    "$hoursStr:$minutesStr",
+                    style: TextStyle(
+                      fontSize: 70.0,
+                    ),
+                  ),
+            SizedBox(height: 30.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                RaisedButton(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+                  onPressed: () {
+                    var timerStream = stopWatchStream();
+                    timerSubscription = timerStream.listen((int newTick) {
+                      setState(() {
+                        hoursStr = ((newTick / (60 * 60)) % 60)
+                            .floor()
+                            .toString()
+                            .padLeft(2, '0');
+                        minutesStr = ((newTick / 60) % 60)
+                            .floor()
+                            .toString()
+                            .padLeft(2, '0');
+                      });
+                    });
+                  },
+                  color: Colors.green,
+                  child: Text(
+                    'START',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                    ),
+                  ),
                 ),
-              ),
+                RaisedButton(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+                  onPressed: () {
+                    var timerStream = stopWatchStream();
+                    timerSubscription = timerStream.listen((stopTimer) {
+                      setState(() {
+                        hoursStr = hoursStr.toString().padLeft(2, '0');
+                        minutesStr = minutesStr.toString().padLeft(2, '0');
+                      });
+                    });
+                  },
+                  color: Colors.yellow,
+                  child: Text(
+                    'STOP',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ),
+                SizedBox(width: 40.0),
+                RaisedButton(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+                  onPressed: () {
+                    timerSubscription.cancel();
+                    timerStream = null;
+                    setState(() {
+                      hoursStr = '00';
+                      minutesStr = '00';
+                    });
+                  },
+                  color: Colors.red,
+                  child: Text(
+                    'RESET',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
       ),
     );
-  }
-}
-
-class TimerText extends StatefulWidget {
-  TimerText({this.dependencies});
-  final Dependencies dependencies;
-
-  TimerTextState createState() =>
-      new TimerTextState(dependencies: dependencies);
-}
-
-class TimerTextState extends State<TimerText> {
-  TimerTextState({this.dependencies});
-  final Dependencies dependencies;
-  Timer timer;
-  int milliseconds;
-
-  @override
-  void initState() {
-    timer = new Timer.periodic(
-        new Duration(milliseconds: dependencies.timerMillisecondsRefreshRate),
-        callback);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    timer?.cancel();
-    timer = null;
-    super.dispose();
-  }
-
-  void callback(Timer timer) {
-    if (milliseconds != dependencies.stopwatch.elapsedMilliseconds) {
-      milliseconds = dependencies.stopwatch.elapsedMilliseconds;
-      final int hundreds = (milliseconds / 10).truncate();
-      final int seconds = (hundreds / 100).truncate();
-      final int minutes = (seconds / 60).truncate();
-      final ElapsedTime elapsedTime = new ElapsedTime(
-        hundreds: hundreds,
-        seconds: seconds,
-        minutes: minutes,
-      );
-      for (final listener in dependencies.timerListeners) {
-        listener(elapsedTime);
-      }
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return new Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        new RepaintBoundary(
-          child: new SizedBox(
-            height: 72.0,
-            child: new MinutesAndSeconds(dependencies: dependencies),
-          ),
-        ),
-        new RepaintBoundary(
-          child: new SizedBox(
-            height: 72.0,
-            child: new Hundreds(dependencies: dependencies),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class MinutesAndSeconds extends StatefulWidget {
-  MinutesAndSeconds({this.dependencies});
-  final Dependencies dependencies;
-
-  MinutesAndSecondsState createState() =>
-      new MinutesAndSecondsState(dependencies: dependencies);
-}
-
-class MinutesAndSecondsState extends State<MinutesAndSeconds> {
-  MinutesAndSecondsState({this.dependencies});
-  final Dependencies dependencies;
-
-  int minutes = 0;
-  int seconds = 0;
-
-  @override
-  void initState() {
-    dependencies.timerListeners.add(onTick);
-    super.initState();
-  }
-
-  void onTick(ElapsedTime elapsed) {
-    if (elapsed.minutes != minutes || elapsed.seconds != seconds) {
-      setState(() {
-        minutes = elapsed.minutes;
-        seconds = elapsed.seconds;
-      });
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    String minutesStr = (minutes % 60).toString().padLeft(2, '0');
-    String secondsStr = (seconds % 60).toString().padLeft(2, '0');
-    return new Text('$minutesStr:$secondsStr.', style: dependencies.textStyle);
-  }
-}
-
-class Hundreds extends StatefulWidget {
-  Hundreds({this.dependencies});
-  final Dependencies dependencies;
-
-  HundredsState createState() => new HundredsState(dependencies: dependencies);
-}
-
-class HundredsState extends State<Hundreds> {
-  HundredsState({this.dependencies});
-  final Dependencies dependencies;
-
-  int hundreds = 0;
-
-  @override
-  void initState() {
-    dependencies.timerListeners.add(onTick);
-    super.initState();
-  }
-
-  void onTick(ElapsedTime elapsed) {
-    if (elapsed.hundreds != hundreds) {
-      setState(() {
-        hundreds = elapsed.hundreds;
-      });
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    String hundredsStr = (hundreds % 100).toString().padLeft(2, '0');
-    return new Text(hundredsStr, style: dependencies.textStyle);
   }
 }
