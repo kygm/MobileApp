@@ -7,25 +7,17 @@ import './addTransaction.dart';
 import '../main.dart';
 import './timerPage.dart';
 import '../globals.dart';
+import '../Models/client.dart';
+import '../Models/transaction.dart';
 
-class Menu extends StatelessWidget {
-  void _addNewTransaction(String phoneNum) {
-    //so it doesnt break
-    //   final newTrans = Transaction(
-    //     clientId: phoneNum,
-    //     title: inTitle,
-    //     dateEntered: DateTime.now(),
-    //     cost: inCost,
-    //     price: inPrice,
-    //     //serviceId: d,
-    //     date: inDate,
-    //     description: inDescription,
-    //     duration: inDuration,
-    //   );
-    //   setState(() {
-    //     _userTransactions.add(newTrans);
-    //   });
-  }
+class Menu extends StatefulWidget {
+  @override
+  _MenuState createState() => _MenuState();
+}
+
+class _MenuState extends State<Menu> {
+  List<Client> viewClients; //filler so it doesnt break
+  List<Transaction> viewTransactions; //filler so it doesnt break
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +33,7 @@ class Menu extends StatelessWidget {
             ListTile(
               title: Text('Home'),
               onTap: () {
-                //  close the drawer, then Update the state of the app
+                // Update the state of the app, then close the drawer
                 Navigator.pop(context);
                 Navigator.push(
                   context,
@@ -63,20 +55,22 @@ class Menu extends StatelessWidget {
               title: Text('View Clients'),
               onTap: () {
                 Navigator.pop(context);
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => ViewClients()),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ViewClients(viewClients)),
+                );
               },
             ),
             ListTile(
               title: Text('View Transactions'),
               onTap: () {
                 Navigator.pop(context);
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => ViewTransactions()),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ViewTransactions(viewTransactions)),
+                );
               },
             ),
             ListTile(
@@ -97,7 +91,7 @@ class Menu extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => AddTransaction(_addNewTransaction)),
+                      builder: (context) => ViewClients(viewClients)),
                 );
               },
             ),
@@ -106,4 +100,22 @@ class Menu extends StatelessWidget {
       ),
     );
   }
+}
+
+void _addNewTransaction(String phoneNum) {
+  //so it doesnt break
+  //   final newTrans = Transaction(
+  //     clientId: phoneNum,
+  //     title: inTitle,
+  //     dateEntered: DateTime.now(),
+  //     cost: inCost,
+  //     price: inPrice,
+  //     //serviceId: d,
+  //     date: inDate,
+  //     description: inDescription,
+  //     duration: inDuration,
+  //   );
+  //   setState(() {
+  //     _userTransactions.add(newTrans);
+  //   });
 }
