@@ -28,10 +28,10 @@ class ViewTransactions extends StatefulWidget {
                         ),
                         Container(
                           height: 200,
-                          child: Image.asset(
-                            'images/waiting.png',
-                            fit: BoxFit.cover,
-                          ),
+                          // child: Image.asset(
+                          //   'images/waiting.png',
+                          //   fit: BoxFit.cover,
+                          // ),
                         ),
                       ],
                     )

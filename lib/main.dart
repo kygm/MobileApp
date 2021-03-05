@@ -1,5 +1,7 @@
-import './Models/client.dart';
-import './Widgets/addTransaction.dart';
+import 'package:KYGM_Mobile/Models/client.dart';
+import 'package:KYGM_Mobile/charBar.dart';
+import 'package:KYGM_Mobile/Widgets/addTransaction.dart';
+import 'package:KYGM_Mobile/Widgets/timerPage.dart';
 import './Widgets/timerPage.dart';
 import 'package:flutter/material.dart';
 import 'globals.dart';
@@ -62,6 +64,16 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Transaction> viewTransactions; //filler so it doesnt break
   //instance variables here
   bool _auth = false;
+
+
+  void _doRevenue()
+  {
+    setState(() {
+      print("2");
+      
+    });
+    
+  }
 
 
   @override
@@ -170,7 +182,7 @@ class _MyHomePageState extends State<MyHomePage> {
               //     //else send user to main app
               //     : Text("Logged In"),
               Container(
-                height: 120,
+                height: 150,
                 child: ColoredBox(
                   color: Colors.grey[300],
                   child: Center(
@@ -214,62 +226,18 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               FlatButton(
                 color: Colors.green,
-                //minWidth: 370,
+                minWidth: 370,
                 child: Text('This Months Revenue'),
                 onPressed: () {},
               ),
-              FlatButton(
-                child: Text('View Clients'),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ViewClients(viewClients)));
-                },
-              ),
-              FlatButton(
-                child: Text('Add Clients'),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => AddClient(_addNewTransaction)));
-                },
-              ),
-              FlatButton(
-                child: Text('View Transactions'),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              ViewTransactions(viewTransactions)));
-                },
-              ),
-              FlatButton(
-                child: Text('Add Transactions'),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            AddTransaction(_addNewTransaction)),
-                  );
-                },
-              ),
-              FlatButton(
-                child: Text('Timer'),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => TimerPage()),
-                  );
-                },
-              ),
-            ],
-          ),
+            ),
+            FlatButton(
+              child: Text('View Transactions'),
+              onPressed: () {},
+            ),
+            FlatButton(
+              child: Text('View Transactions'),
+              onPressed: () {},
+            ),
+          ],
         ),
-      ),
-    );
-  }
-}
