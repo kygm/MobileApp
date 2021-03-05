@@ -1,4 +1,5 @@
 import 'package:KYGM_Mobile/Models/client.dart';
+import 'package:KYGM_Mobile/charBar.dart';
 import 'package:flutter/material.dart';
 import 'globals.dart';
 import './login.dart';
@@ -34,6 +35,18 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   //instance variables here
   bool _auth = false;
+
+
+  void _doRevenue()
+  {
+    setState(() {
+      print("2");
+      
+    });
+    
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -127,9 +140,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
+
             FlatButton(
               child: Text('View Revenue'),
-              onPressed: () {},
+              onPressed: () =>{_doRevenue()},
             ),
             FlatButton(
               child: Text('View Clients'),
