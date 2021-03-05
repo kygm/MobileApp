@@ -1,4 +1,4 @@
-import 'package:KYGM_Mobile/Widgets/timerPage.dart';
+import './timerPage.dart';
 import 'package:flutter/material.dart';
 import './viewClients.dart';
 import './addClient.dart';
@@ -41,7 +41,7 @@ class Menu extends StatelessWidget {
             ListTile(
               title: Text('Home'),
               onTap: () {
-                // Update the state of the app, then close the drawer
+                //  close the drawer, then Update the state of the app
                 Navigator.pop(context);
                 Navigator.push(
                   context,

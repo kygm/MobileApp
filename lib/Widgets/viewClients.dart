@@ -1,4 +1,4 @@
-import 'package:KYGM_Mobile/Models/client.dart';
+import '../Models/client.dart';
 import 'package:flutter/material.dart';
 import '../Models/client.dart';
 import './addTransaction.dart';

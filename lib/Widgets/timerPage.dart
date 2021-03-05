@@ -1,4 +1,4 @@
-import 'package:KYGM_Mobile/main.dart';
+import '../main.dart';
 import 'package:flutter/material.dart';
 import './viewClients.dart';
 import './addClient.dart';

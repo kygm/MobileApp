@@ -1,6 +1,5 @@
-import 'package:KYGM_Mobile/Models/client.dart';
-import 'package:KYGM_Mobile/Widgets/addTransaction.dart';
-import 'package:KYGM_Mobile/Widgets/timerPage.dart';
+import './Models/client.dart';
+import './Widgets/addTransaction.dart';
 import './Widgets/timerPage.dart';
 import 'package:flutter/material.dart';
 import 'globals.dart';
