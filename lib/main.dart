@@ -62,6 +62,18 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Transaction> viewTransactions; //filler so it doesnt break
   //instance variables here
   bool _auth = false;
+
+
+  void _doRevenue()
+  {
+    setState(() {
+      print("2");
+      
+    });
+    
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -212,7 +224,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               FlatButton(
                 color: Colors.green,
-                minWidth: 370,
+                //minWidth: 370,
                 child: Text('This Months Revenue'),
                 onPressed: () {},
               ),
