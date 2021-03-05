@@ -64,16 +64,6 @@ class _MyHomePageState extends State<MyHomePage> {
   bool _auth = false;
 
 
-  void _doRevenue()
-  {
-    setState(() {
-      print("2");
-      
-    });
-    
-  }
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -180,7 +170,7 @@ class _MyHomePageState extends State<MyHomePage> {
               //     //else send user to main app
               //     : Text("Logged In"),
               Container(
-                height: 150,
+                height: 120,
                 child: ColoredBox(
                   color: Colors.grey[300],
                   child: Center(

@@ -195,7 +195,7 @@ class _AddClientState extends State<AddClient> {
                       onSubmitted: (_) => submitData(),
                     ),
                     //use dropdown selector for service, purchase, or sale
-                    ElevatedButton(
+                    RaisedButton(
                       onPressed: submitData,
                       child: Text('Add Client'),
                     )

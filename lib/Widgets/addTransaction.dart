@@ -98,7 +98,7 @@ class _AddTransactionState extends State<AddTransaction> {
                     ),
                     //use dropdown selector for service, purchase, or sale
                     Center(
-                      child: ElevatedButton(
+                      child: RaisedButton(
                         onPressed: submitData,
                         child: Text('Add Transaction'),
                       ),
