@@ -63,16 +63,17 @@ class _MyHomePageState extends State<MyHomePage> {
   //instance variables here
   bool _auth = false;
 
-
-  void _doRevenue()
-  {
+  void _doRevenue() {
     setState(() {
       print("2");
-      
     });
-    
   }
 
+  void _menu() {
+    setState(() {
+      Menu();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -172,7 +173,6 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         body: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               //if NOT authorized exec login widget
               // !_auth
