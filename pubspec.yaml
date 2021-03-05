@@ -20,6 +20,10 @@ version: 1.0.0+1
 environment:
   sdk: ">=2.7.0 <3.0.0"
 
+analyzer:
+  enable-experiment:
+    - non-nullable
+
 dependencies:
   numeric_keyboard: ^1.0.1
   intl: ^0.16.1

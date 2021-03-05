@@ -1,15 +1,16 @@
 import 'package:KYGM_Mobile/Widgets/timerPage.dart';
 import 'package:flutter/material.dart';
 import './viewClients.dart';
-import './newClient.dart';
+import './addClient.dart';
 import './viewTransactions.dart';
-import './newTransaction.dart';
+import './addTransaction.dart';
 import '../main.dart';
 import './timerPage.dart';
 import '../globals.dart';
 
 class Menu extends StatelessWidget {
   void _addNewTransaction(String phoneNum) {
+    //so it doesnt break
     //   final newTrans = Transaction(
     //     clientId: phoneNum,
     //     title: inTitle,
@@ -85,7 +86,7 @@ class Menu extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => NewClient(_addNewTransaction)),
+                      builder: (context) => AddClient(_addNewTransaction)),
                 );
               },
             ),
@@ -96,7 +97,7 @@ class Menu extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => NewTransaction(_addNewTransaction)),
+                      builder: (context) => AddTransaction(_addNewTransaction)),
                 );
               },
             ),

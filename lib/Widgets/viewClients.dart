@@ -1,7 +1,7 @@
 import 'package:KYGM_Mobile/Models/client.dart';
 import 'package:flutter/material.dart';
 import '../Models/client.dart';
-import './newTransaction.dart';
+import './addTransaction.dart';
 import '../main.dart';
 import './menu.dart';
 
@@ -26,7 +26,7 @@ class ViewClients extends StatelessWidget {
     showModalBottomSheet(
         context: ctx,
         builder: (bCtx) {
-          return NewTransaction(_addNewTransaction);
+          return AddTransaction(_addNewTransaction);
         });
   }
 

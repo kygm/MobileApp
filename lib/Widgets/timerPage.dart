@@ -1,9 +1,9 @@
 import 'package:KYGM_Mobile/main.dart';
 import 'package:flutter/material.dart';
 import './viewClients.dart';
-import './newClient.dart';
+import './addClient.dart';
 import './viewTransactions.dart';
-import './newTransaction.dart';
+import './addTransaction.dart';
 import '../Models/transaction.dart';
 import '../Models/client.dart';
 import 'dart:async';
@@ -119,7 +119,7 @@ class TimerPageState extends State<TimerPage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => NewClient(_addNewTransaction)),
+                      builder: (context) => AddClient(_addNewTransaction)),
                 );
               },
             ),
@@ -130,7 +130,7 @@ class TimerPageState extends State<TimerPage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => NewTransaction(_addNewTransaction)),
+                      builder: (context) => AddTransaction(_addNewTransaction)),
                 );
               },
             ),

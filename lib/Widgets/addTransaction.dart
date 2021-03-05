@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../main.dart';
 
-class NewTransaction extends StatefulWidget {
+class AddTransaction extends StatefulWidget {
   final Function addTrans;
 
-  NewTransaction(this.addTrans);
+  AddTransaction(this.addTrans);
 
   @override
-  _NewTransactionState createState() => _NewTransactionState();
+  _AddTransactionState createState() => _AddTransactionState();
 }
 
-class _NewTransactionState extends State<NewTransaction> {
+class _AddTransactionState extends State<AddTransaction> {
   final titleController = TextEditingController();
   final dateController = TextEditingController();
   final costController = TextEditingController();
@@ -64,43 +64,45 @@ class _NewTransactionState extends State<NewTransaction> {
                   children: <Widget>[
                     TextField(
                       controller: titleController,
-                      decoration: InputDecoration(labelText: 'Service Name'),
+                      decoration: InputDecoration(labelText: 'Service Name:'),
                       onSubmitted: (_) => submitData(),
                     ),
                     TextField(
                       controller: dateController,
-                      decoration: InputDecoration(labelText: 'dd/mm/yyyy'),
+                      decoration: InputDecoration(labelText: 'Service Date:'),
                       keyboardType: TextInputType.datetime,
                       onSubmitted: (_) => submitData(),
                     ),
                     TextField(
                       controller: costController,
-                      decoration: InputDecoration(labelText: 'Cost'),
+                      decoration: InputDecoration(labelText: 'Cost:'),
                       keyboardType: TextInputType.number,
                       onSubmitted: (_) => submitData(),
                     ),
                     TextField(
                       controller: priceController,
-                      decoration: InputDecoration(labelText: 'Price'),
+                      decoration: InputDecoration(labelText: 'Price:'),
                       keyboardType: TextInputType.number,
                       onSubmitted: (_) => submitData(),
                     ),
                     TextField(
                       controller: timeController,
-                      decoration: InputDecoration(labelText: '3 hrs'),
+                      decoration: InputDecoration(labelText: 'Duration:'),
                       onSubmitted: (_) => submitData(),
                     ),
                     TextField(
                       controller: descriptionController,
-                      decoration: InputDecoration(labelText: 'a man'),
+                      decoration: InputDecoration(labelText: 'Description:'),
                       keyboardType: TextInputType.multiline,
                       onSubmitted: (_) => submitData(),
                     ),
                     //use dropdown selector for service, purchase, or sale
-                    ElevatedButton(
-                      onPressed: submitData,
-                      child: Text('Add Transaction'),
-                    )
+                    Center(
+                      child: ElevatedButton(
+                        onPressed: submitData,
+                        child: Text('Add Transaction'),
+                      ),
+                    ),
                   ],
                 ),
               ),

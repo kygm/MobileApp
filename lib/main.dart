@@ -1,11 +1,12 @@
 import 'package:KYGM_Mobile/Models/client.dart';
+import 'package:KYGM_Mobile/Widgets/addTransaction.dart';
 import 'package:KYGM_Mobile/Widgets/timerPage.dart';
 import './Widgets/timerPage.dart';
 import 'package:flutter/material.dart';
 import 'globals.dart';
 import './Widgets/login.dart';
 import './Widgets/viewClients.dart';
-import './Widgets/newClient.dart';
+import './Widgets/addClient.dart';
 import './Widgets/viewTransactions.dart';
 import 'package:intl/intl.dart';
 import './Models/transaction.dart';
@@ -127,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => NewClient(_addNewTransaction)),
+                        builder: (context) => AddClient(_addNewTransaction)),
                   );
                 },
               ),
@@ -231,7 +232,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => NewClient(_addNewTransaction)));
+                          builder: (context) => AddClient(_addNewTransaction)));
                 },
               ),
               FlatButton(
@@ -250,7 +251,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => ViewClients(viewClients)),
+                        builder: (context) =>
+                            AddTransaction(_addNewTransaction)),
                   );
                 },
               ),
