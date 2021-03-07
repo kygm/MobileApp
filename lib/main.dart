@@ -1,5 +1,5 @@
 import 'package:KYGM_Mobile/Models/client.dart';
-import 'package:KYGM_Mobile/charBar.dart';
+//import './widgets/chartBar.dart';
 import 'package:KYGM_Mobile/Widgets/addTransaction.dart';
 import 'package:KYGM_Mobile/Widgets/timerPage.dart';
 import './Widgets/timerPage.dart';
@@ -12,9 +12,13 @@ import './Widgets/viewTransactions.dart';
 import 'package:intl/intl.dart';
 import './Models/transaction.dart';
 import './Widgets/menu.dart';
+import './server.dart';
+
+
+//import 'package:mongo_dart/mongo_dart.dart';
 
 //var db = Db("")
-void main() {
+void main() async {
   runApp(MyApp());
 }
 
@@ -226,18 +230,71 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               FlatButton(
                 color: Colors.green,
-                minWidth: 370,
+ //               minWidth: 370,
                 child: Text('This Months Revenue'),
-                onPressed: () {},
+                onPressed: () =>{
+                  print("under dev...")
+                },
               ),
-            ),
-            FlatButton(
-              child: Text('View Transactions'),
-              onPressed: () {},
-            ),
-            FlatButton(
-              child: Text('View Transactions'),
-              onPressed: () {},
-            ),
-          ],
+              FlatButton(
+                child: Text('View Clients'),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ViewClients(viewClients)));
+                },
+              ),
+              FlatButton(
+                child: Text('Add Clients'),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AddClient(_addNewTransaction)));
+                },
+              ),
+              FlatButton(
+                child: Text('View Transactions'),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              ViewTransactions(viewTransactions)));
+                },
+              ),
+              FlatButton(
+                child: Text('Add Transactions'),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            AddTransaction(_addNewTransaction)),
+                  );
+                },
+              ),
+              FlatButton(
+                child: Text('Timer'),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => TimerPage()),
+                  );
+                },
+              ),
+              FlatButton(
+                child: Text('Test DB Connection'),
+                onPressed: () {
+                  DBConnection();
+                },
+                color: Colors.red,
+              ),
+            ],
+          ),
         ),
+      ),
+    );
+  }
+}
