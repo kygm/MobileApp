@@ -25,7 +25,8 @@ analyzer:
     - non-nullable
 
 dependencies:
-  mongo_dart: any
+  mongo_dart: ^0.4.3
+  sevr: ^1.0.4
   numeric_keyboard: ^1.0.1
   intl: ^0.16.1
   flutter:

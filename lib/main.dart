@@ -12,8 +12,7 @@ import './Widgets/viewTransactions.dart';
 import 'package:intl/intl.dart';
 import './Models/transaction.dart';
 import './Widgets/menu.dart';
-import './server.dart';
-
+import './server.dart' as server;
 
 //import 'package:mongo_dart/mongo_dart.dart';
 
@@ -69,16 +68,11 @@ class _MyHomePageState extends State<MyHomePage> {
   //instance variables here
   bool _auth = false;
 
-
-  void _doRevenue()
-  {
+  void _doRevenue() {
     setState(() {
       print("2");
-      
     });
-    
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -230,11 +224,9 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               FlatButton(
                 color: Colors.green,
- //               minWidth: 370,
+                //               minWidth: 370,
                 child: Text('This Months Revenue'),
-                onPressed: () =>{
-                  print("under dev...")
-                },
+                onPressed: () => {print("under dev...")},
               ),
               FlatButton(
                 child: Text('View Clients'),
@@ -287,7 +279,7 @@ class _MyHomePageState extends State<MyHomePage> {
               FlatButton(
                 child: Text('Test DB Connection'),
                 onPressed: () {
-                  DBConnection();
+                  // DBConnection();
                 },
                 color: Colors.red,
               ),
