@@ -1,3 +1,4 @@
+/*
 import '../main.dart';
 import 'package:flutter/material.dart';
 import './viewClients.dart';
@@ -47,6 +48,8 @@ Stream<int> stopWatchStream() {
 }
 
 class TimerPageState extends State<TimerPage> {
+
+  
   List<Client> viewClients; //filler so it doesnt break
   List<Transaction> viewTransactions;
 
@@ -246,3 +249,4 @@ class TimerPageState extends State<TimerPage> {
     );
   }
 }
+*/

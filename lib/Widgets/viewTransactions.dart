@@ -51,7 +51,7 @@ class ViewTransactions extends StatefulWidget {
                                 ),
                                 padding: EdgeInsets.all(10),
                                 child: Text(
-                                  '\$${tran.cost.toStringAsFixed(2)}',
+                                  "dev", //'\$${tran.cost.toStringAsFixed(2)}',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20,
@@ -63,13 +63,15 @@ class ViewTransactions extends StatefulWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Text(
-                                    tran.title,
+                                    "dev",
+                                    //tran.title,
                                     style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold),
                                   ),
                                   Text(
-                                    DateFormat.yMMMEd().format(tran.date),
+                                    "dev",
+                                    //DateFormat.yMMMEd().format(tran.date),
                                     style: TextStyle(color: Colors.grey),
                                   ),
                                 ],
