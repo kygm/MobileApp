@@ -145,25 +145,27 @@ class ViewClients extends StatelessWidget {
                                 padding: EdgeInsets.all(10),
                                 child: Row(
                                   children: [
-                                    Text(cli.firstName, style: s2),
-                                    Text(cli.lastName, style: s2),
+                                    //Text(cli.firstName, style: s2),
+                                    //Text(cli.lastName, style: s2),
                                   ],
                                 ),
                               ),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
+                                  /*
                                   Text(cli.address),
                                   Text(
                                     cli.city + ', ' + cli.state,
                                   ),
                                   Text(cli.phoneNumber.toString()),
+                                  */
                                 ],
                               ),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  Text(cli.description),
+                                  //Text(cli.description),
                                 ],
                               ),
                             ],

@@ -25,6 +25,7 @@ analyzer:
     - non-nullable
 
 dependencies:
+  dio: ^3.0.10
   mongo_dart: ^0.4.3
   sevr: ^1.0.4
   numeric_keyboard: ^1.0.1
