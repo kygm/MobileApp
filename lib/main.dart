@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'api.dart';
 import './widgets/mostOfApp.dart';
@@ -38,9 +37,9 @@ class _MyHomePageState extends State<MyHomePage> {
   bool _dbLoaded = false;
   List clients = [];
   @override
-  void initState(){
+  void initState() {
     super.initState();
-    widget.api.getClients().then((data){
+    widget.api.getClients().then((data) {
       setState(() {
         clients = data;
         _dbLoaded = true;

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../main.dart';
 import 'package:flutter/services.dart';
-import './menu.dart';
+import './drawer.dart';
 
 class AddClient extends StatefulWidget {
   final Function addClient;
@@ -28,160 +28,229 @@ class _AddClientState extends State<AddClient> {
     final inLName = lNameCon.text;
     final inAddress = addressCon.text;
     final inCity = cityCon.text;
-    final inState = stateCon.text;
+    String inState = stateCon.text;
     final inDes = descriptCon.text;
     final inPhoneNum = double.parse(phoneNumCon.text);
     List<String> states = new List();
     states.addAll([
-      'Aguascalientes',
-      'Alabama',
+      'aguascalientes',
+      'alabama',
       'Al',
-      'Alaska',
+      'alaska',
       'AK',
-      'Arizona',
+      'arizona',
       'AZ',
-      'Arkansas',
+      'arkansas',
       'AR',
-      'Baja California',
-      'Baja California Sur',
-      'California',
+      'baja california',
+      'baja california sur',
+      'california',
       'CA',
-      'Campenche',
-      'Chiapas',
-      'Chihuahua',
-      'Coahuila',
-      'Colima',
-      'Colorado',
+      'campenche',
+      'chiapas',
+      'chihuahua',
+      'coahuila',
+      'colima',
+      'colorado',
       'CO',
-      'Connecticut',
+      'connecticut',
       'CT',
-      'Delaware',
+      'delaware',
       'DE',
-      'District Of Colombia',
+      'district of colombia',
       'DC',
-      'Durango',
-      'Florida',
+      'durango',
+      'florida',
       'FL',
-      'Georgia',
+      'georgia',
       'GA',
-      'Guanajuato',
-      'Guerrero',
-      'Hawaii',
+      'guanajuato',
+      'guerrero',
+      'hawaii',
       'HI',
-      'Hidalgo',
-      'Idaho',
+      'hidalgo',
+      'idaho',
       'ID',
-      'Illinois',
+      'illinois',
       'IL',
-      'Indiana',
+      'indiana',
       'IN',
-      'Iowa',
+      'iowa',
       'IA',
-      'Jalisco',
-      'Kansas',
+      'jalisco',
+      'kansas',
       'KS',
-      'Kentucky',
+      'kentucky',
       'KY',
-      'Louisiana',
+      'louisiana',
       'LA',
-      'Maine',
+      'maine',
       'ME',
-      'Maryland',
+      'maryland',
       'MD',
-      'Massachusetts',
+      'massachusetts',
       'MA',
-      'Mexico',
-      'Mexico City',
-      'Michigan',
+      'mexico',
+      'mexico city',
+      'michigan',
       'MI',
-      'Michoacan',
-      'Minnesota',
+      'michoacan',
+      'minnesota',
       'MN',
-      'Mississippi',
+      'mississippi',
       'MS',
-      'Missouri',
+      'missouri',
       'MO',
-      'Montana',
+      'montana',
       'MT',
-      'Morelos',
-      'Nayarit',
-      'Nebraska',
+      'morelos',
+      'nayarit',
+      'nebraska',
       'NE',
-      'Nevada',
+      'nevada',
       'NV',
-      'New Hampshire',
+      'new hampshire',
       'NH',
-      'New Jersey',
+      'new jersey',
       'NJ',
-      'New Mexico',
+      'new mexico',
       'NM',
-      'New York',
+      'new york',
       'NY',
-      'North Carolina',
+      'north carolina',
       'NC',
-      'North Dakota',
+      'north dakota',
       'ND',
-      'Nuevo Leon',
-      'Oaxaca',
-      'Ohio',
+      'nuevo leon',
+      'oaxaca',
+      'ohio',
       'OH',
-      'Oklahoma',
+      'oklahoma',
       'OK',
-      'Oregon',
+      'oregon',
       'OR',
-      'Pennsylvania',
+      'pennsylvania',
       'PA',
-      'Puebla',
-      'Queretaro',
-      'Quintana Roo',
-      'Rhode Island',
+      'puebla',
+      'queretaro',
+      'quintana roo',
+      'rhode island',
       'RI',
-      'San Luis Potosi',
-      'Sinaloa',
-      'Sonora',
-      'South Carolina',
+      'san luis potosi',
+      'sinaloa',
+      'sonora',
+      'south carolina',
       'SC',
-      'South Dakota',
+      'south dakota',
       'SD',
-      'Tabasco',
-      'Tennessee',
+      'tabasco',
+      'tennessee',
       'TN',
-      'Texas',
+      'texas',
       'TX',
-      'Tlaxcala',
-      'Utah',
+      'tlaxcala',
+      'utah',
       'UT',
-      'Veracruz',
-      'Vermont',
+      'veracruz',
+      'vermont',
       'VT',
-      'Virginia',
+      'virginia',
       'VA',
-      'Washington',
+      'washington',
       'WA',
-      'West Virginia',
+      'west virginia',
       'WV',
-      'Wisconsin',
+      'wisconsin',
       'WI',
-      'Wyoming',
+      'wyoming',
       'WY',
-      'Yucatan',
-      'Zacatecas'
+      'yucatan',
+      'zacatecas'
     ]);
-    if (inState.length == 2) inState.toUpperCase();
+    inState.length == 2 ? inState.toUpperCase() : inState.toLowerCase();
     if (states.contains(inState)) {
       if (inFName.isEmpty || inPhoneNum <= 0) {
         return;
       } else {
-        widget.addClient(
-          inFName,
-          inLName,
-          inAddress,
-          inCity,
-          inState,
-          inDes,
-          inPhoneNum,
-        );
-        Navigator.of(context).pop();
+        if (inState == 'aguascalientes' ||
+            inState == 'baja california' ||
+            inState == 'baja california sur' ||
+            inState == 'campenche' ||
+            inState == 'chiapas' ||
+            inState == 'chihuahua' ||
+            inState == 'coahuila' ||
+            inState == 'colima' ||
+            inState == 'durango' ||
+            inState == 'guanajuato' ||
+            inState == 'guerrero' ||
+            inState == 'hidalgo' ||
+            inState == 'jalisco' ||
+            inState == 'mexico' ||
+            inState == 'mexico city' ||
+            inState == 'michoacan' ||
+            inState == 'morelos' ||
+            inState == 'nayarit' ||
+            inState == 'nuevo leon' ||
+            inState == 'oaxaca' ||
+            inState == 'puebla' ||
+            inState == 'queretaro' ||
+            inState == 'quintana roo' ||
+            inState == 'san luis potosi' ||
+            inState == 'sinaloa' ||
+            inState == 'sonora' ||
+            inState == 'tabasco' ||
+            inState == 'tlaxcala' ||
+            inState == 'veracruz' ||
+            inState == 'yucatan' ||
+            inState == 'zacatecas') {
+          inState += ', Mexico';
+        } else {
+          if (inState != 'aguascalientes' &&
+              inState != 'baja california' &&
+              inState != 'baja california sur' &&
+              inState != 'campenche' &&
+              inState != 'chiapas' &&
+              inState != 'chihuahua' &&
+              inState != 'coahuila' &&
+              inState != 'colima' &&
+              inState != 'durango' &&
+              inState != 'guanajuato' &&
+              inState != 'guerrero' &&
+              inState != 'hidalgo' &&
+              inState != 'jalisco' &&
+              inState != 'mexico' &&
+              inState != 'mexico city' &&
+              inState != 'michoacan' &&
+              inState != 'morelos' &&
+              inState != 'nayarit' &&
+              inState != 'nuevo leon' &&
+              inState != 'oaxaca' &&
+              inState != 'puebla' &&
+              inState != 'queretaro' &&
+              inState != 'quintana roo' &&
+              inState != 'san luis potosi' &&
+              inState != 'sinaloa' &&
+              inState != 'sonora' &&
+              inState != 'tabasco' &&
+              inState != 'tlaxcala' &&
+              inState != 'veracruz' &&
+              inState != 'yucatan' &&
+              inState != 'zacatecas' &&
+              inState.length != 2) {
+            int stateIndex = states.indexOf(inState) + 1;
+            inState = states.elementAt(stateIndex);
+            widget.addClient(
+              inFName,
+              inLName,
+              inAddress,
+              inCity,
+              inState,
+              inDes,
+              inPhoneNum,
+            );
+            Navigator.of(context).pop();
+          }
+        }
       }
     } else {
       return;
@@ -206,6 +275,7 @@ class _AddClientState extends State<AddClient> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: MainDrawer(),
       appBar: AppBar(
         title: FlatButton(
           onPressed: () {
@@ -278,79 +348,7 @@ class _AddClientState extends State<AddClient> {
                     RaisedButton(
                       onPressed: submitData,
                       child: Text('Add Client'),
-                    ), // DropdownButton<String>(
-                    //   value: dropdownValue,
-                    //   icon: Icon(Icons.arrow_downward),
-                    //   iconSize: 18,
-                    //   elevation: 16,
-                    //   style: TextStyle(color: Colors.deepPurple),
-                    //   underline: Container(
-                    //     height: 2,
-                    //     color: Colors.deepPurpleAccent,
-                    //   ),
-                    //   onChanged: (String? newValue) {
-                    //     setState(() {
-                    //       dropdownValue = newValue!;
-                    //     });
-                    //   },
-                    //   items: <String>[
-                    // 'Alabama',
-                    // 'Alaska',
-                    // 'Arizona',
-                    // 'Arkansas',
-                    // 'California',
-                    // 'Colorado',
-                    // 'Connecticut',
-                    // 'Delaware',
-                    // 'District Of Colombia',
-                    // 'Florida',
-                    // 'Georgia',
-                    // 'Hawaii',
-                    // 'Idaho',
-                    // 'Illinois',
-                    // 'Indiana',
-                    // 'Iowa',
-                    // 'Dansas',
-                    // 'Kentucky',
-                    // 'Louisiana',
-                    // 'Maine',
-                    // 'Maryland',
-                    // 'Massachusetts',
-                    // 'Michigan',
-                    // 'Minnesota',
-                    // 'Mississippi',
-                    // 'Missouri',
-                    // 'Montana',
-                    // 'Nebraska',
-                    // 'Nevada',
-                    // 'New Hampshire',
-                    // 'New Jersey',
-                    // 'New Mexico',
-                    // 'New York',
-                    // 'North Carolina',
-                    // 'North Dakota',
-                    // 'Ohio',
-                    // 'Oklahoma',
-                    // 'Oregon',
-                    // 'Pennsylvania',
-                    // 'Rhode Island',
-                    // 'South Carolina',
-                    // 'Tennessee',
-                    // 'Texas',
-                    // 'Utah',
-                    // 'Vermont',
-                    // 'Virginia',
-                    // 'Washington',
-                    // 'West Virginia',
-                    // 'Wisconsin',
-                    // 'Wyoming'
-                    //   ].map<DropdownMenuItem<String>>((String value) {
-                    //     return DropdownMenuItem<String>(
-                    //       value: value,
-                    //       child: Text(value),
-                    //     );
-                    //   }).toList(),
-                    // ),
+                    ),
                   ],
                 ),
               ),

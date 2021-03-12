@@ -28,8 +28,8 @@ void start() async {
   app.get('/', [
     setCors,
     (ServRequest req, ServResponse res) async {
-      final contacts = await clients.find().toList();
-      return res.status(200).json({'contacts': contacts});
+      final clientList = await clients.find().toList();
+      return res.status(200).json({'client': clientList});
     }
   ]);
 
@@ -38,16 +38,16 @@ void start() async {
     (ServRequest req, ServResponse res) async {
       await clients.save(req.body);
       return res.json(
-        await clients.findOne(where.eq('fname', req.body['name'])),
+        await clients.findOne(where.eq('fname', req.body['lname'])),
       );
     }
   ]);
 
-  app.delete('/:id', [
+  app.delete('/:phoneNumber', [
     setCors,
     (ServRequest req, ServResponse res) async {
-      await clients
-          .remove(where.eq('_id', ObjectId.fromHexString(req.params['id'])));
+      await clients.remove(where.eq(
+          '_phoneNumber', ObjectId.fromHexString(req.params['phoneNumber'])));
       return res.status(200);
     }
   ]);

@@ -28,7 +28,7 @@ dependencies:
   dio: ^3.0.10
   mongo_dart: ^0.4.3
   moneytextformfield: ^0.3.5+1
-  datetime_picker_formfield: ^2.0.0
+  # datetime_picker_formfield: ^2.0.0
   sevr: ^1.0.4
   numeric_keyboard: ^1.0.1
   intl: ^0.15.7

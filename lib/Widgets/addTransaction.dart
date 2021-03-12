@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/services.dart';
+import './drawer.dart';
 // import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import '../main.dart';
 
@@ -43,6 +44,7 @@ class _AddTransactionState extends State<AddTransaction> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: MainDrawer(),
       appBar: AppBar(
         title: FlatButton(
           onPressed: () {

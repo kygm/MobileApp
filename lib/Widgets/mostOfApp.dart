@@ -100,10 +100,8 @@ class _MostOfAppState extends State<MostOfApp> {
             FlatButton(
               child: Text('View Clients'),
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ViewClients(viewClients)));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ViewClients()));
               },
             ),
             FlatButton(

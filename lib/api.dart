@@ -12,13 +12,13 @@ class ClientsApi {
         .toList();
   }
 
-  Future<Client> createContact(String name) async {
-    final response = await _dio.post('', data: {'fname': name});
+  Future<Client> createClient(String phoneNumber) async {
+    final response = await _dio.post('', data: {'phoneNumber': phoneNumber});
     return Client.fromJson(response.data);
   }
 
-  Future deleteContact(String id) async {
-    final response = await _dio.delete('/$id');
+  Future deleteClient(String phoneNumber) async {
+    final response = await _dio.delete('/$phoneNumber');
     return response.data;
   }
 }
