@@ -38,7 +38,7 @@ void start() async {
     (ServRequest req, ServResponse res) async {
       await clients.save(req.body);
       return res.json(
-        await clients.findOne(where.eq('fname', req.body['lname'])),
+        await clients.findOne(where.eq('phoneNumber', req.body['phoneNumber'])),
       );
     }
   ]);

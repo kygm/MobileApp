@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './menu.dart';
+import './drawer.dart';
 
 class EditClientInfo extends StatefulWidget {
   final Function editClient;
@@ -43,49 +43,53 @@ class _EditClientInfoState extends State<EditClientInfo> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      child: Container(
-        padding: EdgeInsets.all(5),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: <Widget>[
-            //imageField on top
-            //give them initial values if editing
-            TextField(
-              controller: firstNameCon,
-              decoration: InputDecoration(labelText: 'First Name'),
-              onSubmitted: (_) => submitData(),
-            ),
+    return Scaffold(
+      drawer: MainDrawer(),
+      appBar: AppBar(),
+      body: Card(
+        elevation: 5,
+        child: Container(
+          padding: EdgeInsets.all(5),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+              //imageField on top
+              //give them initial values if editing
+              TextField(
+                controller: firstNameCon,
+                decoration: InputDecoration(labelText: 'First Name'),
+                onSubmitted: (_) => submitData(),
+              ),
 
-            TextField(
-              controller: lastNameCon,
-              decoration: InputDecoration(labelText: 'Last Name'),
-              onSubmitted: (_) => submitData(),
-            ),
+              TextField(
+                controller: lastNameCon,
+                decoration: InputDecoration(labelText: 'Last Name'),
+                onSubmitted: (_) => submitData(),
+              ),
 
-            TextField(
-              controller: addressCon,
-              decoration: InputDecoration(labelText: 'Address'),
-              keyboardType: TextInputType.streetAddress,
-              onSubmitted: (_) => submitData(),
-            ),
-            TextField(
-              controller: cityCon,
-              decoration: InputDecoration(labelText: 'City'),
-              onSubmitted: (_) => submitData(),
-            ),
-            TextField(
-              controller: stateCon,
-              decoration: InputDecoration(labelText: 'State'),
-              onSubmitted: (_) => submitData(),
-            ),
-            TextField(
-              controller: desciptionCon,
-              decoration: InputDecoration(labelText: 'Description'),
-              onSubmitted: (_) => submitData(),
-            ),
-          ],
+              TextField(
+                controller: addressCon,
+                decoration: InputDecoration(labelText: 'Address'),
+                keyboardType: TextInputType.streetAddress,
+                onSubmitted: (_) => submitData(),
+              ),
+              TextField(
+                controller: cityCon,
+                decoration: InputDecoration(labelText: 'City'),
+                onSubmitted: (_) => submitData(),
+              ),
+              TextField(
+                controller: stateCon,
+                decoration: InputDecoration(labelText: 'State'),
+                onSubmitted: (_) => submitData(),
+              ),
+              TextField(
+                controller: desciptionCon,
+                decoration: InputDecoration(labelText: 'Description'),
+                onSubmitted: (_) => submitData(),
+              ),
+            ],
+          ),
         ),
       ),
     );
