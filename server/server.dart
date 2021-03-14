@@ -12,7 +12,7 @@ void start() async {
   final clients = db.collection('clients');
   //print(await clients.find().toList());
 
-  const port = 8081;
+  const port = 50040;
   final app = Sevr();
 
   final corsPaths = ['/', '/:id'];
