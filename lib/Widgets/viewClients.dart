@@ -30,10 +30,10 @@ class _ViewClientsState extends State<ViewClients> {
     final s = widget.api.getClients();
     print(s.toString());
     print(s);
+    print("test");
     //this works but I cant figure out how to get any further than the outputting 'Instance of  Future<list<Client>>'
     widget.api.getClients().then((data) {
-      print(
-          3); //to see these, go to your browser debugging tool over to logging. for some reason
+      print("function executed"); //to see these, go to your browser debugging tool over to logging. for some reason
       //its not hitting anything in the widget.api.get  not sure why.
       setState(() {
         clients = data;
@@ -82,9 +82,9 @@ class _ViewClientsState extends State<ViewClients> {
                         ),
                         Container(
                           height: 200,
-                          // child: Image.asset(
+                          //    child: Image.asset(
                           //   'images/waiting.png',
-                          //   fit: BoxFit.cover,
+                          //    fit: BoxFit.cover,
                           // ),
                         ),
                       ],
@@ -116,47 +116,6 @@ class _ViewClientsState extends State<ViewClients> {
                                   )
                                   .toList(),
                             ]
-                          // Card(
-                          //   child: Row(
-                          //     children: <Widget>[
-                          //       Container(
-                          //         margin: EdgeInsets.symmetric(
-                          //             vertical: 10, horizontal: 15),
-                          //         decoration: BoxDecoration(
-                          //           border: Border.all(
-                          //             color: Theme.of(context).primaryColor,
-                          //             width: 2,
-                          //           ),
-                          //         ),
-                          //         padding: EdgeInsets.all(10),
-                          //         child: Row(
-                          //           children: [
-                          //             Text(cli.fname, style: s2),
-                          //             Text(cli.lname, style: s2),
-                          //           ],
-                          //         ),
-                          //       ),
-                          // Column(
-                          //   crossAxisAlignment:
-                          //       CrossAxisAlignment.start,
-                          //   children: <Widget>[
-                          //     Text(cli.address),
-                          //     Text(
-                          //       cli.city + ', ' + cli.state,
-                          //     ),
-                          //     Text(cli.phoneNumber.toString()),
-                          //   ],
-                          // ),
-                          // Column(
-                          //   crossAxisAlignment:
-                          //       CrossAxisAlignment.start,
-                          //   children: <Widget>[
-                          //     Text(cli.descript),
-                          //   ],
-                          // ),
-                          //     ],
-                          //   ),
-                          // );
                           ),
             ),
           ],
