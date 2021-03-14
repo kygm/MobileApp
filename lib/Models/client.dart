@@ -1,15 +1,15 @@
 class Client {
-  final String fname,
+  final String phoneNumber,
+      fname,
       lname,
       city,
       state,
       address,
-      phoneNumber,
       descript,
       dateEntered;
 
-  const Client._(this.fname, this.lname, this.city, this.state, this.address,
-      this.phoneNumber, this.descript, this.dateEntered);
+  Client._(this.phoneNumber, this.fname, this.lname, this.city, this.state,
+      this.address, this.descript, this.dateEntered);
 
   factory Client.fromJson(Map json) {
     final phoneNumber = json['_phoneNumber']

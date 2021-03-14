@@ -76,7 +76,7 @@ class _ViewClientsState extends State<ViewClients> {
               child: clients == null
                   ? Column(
                       children: <Widget>[
-                        Text('No Clients Yet'),
+                        Text('No Clients Yet, null'),
                         SizedBox(
                           height: 25,
                         ),
@@ -92,7 +92,7 @@ class _ViewClientsState extends State<ViewClients> {
                   : clients.isEmpty
                       ? Column(
                           children: <Widget>[
-                            Text('No Clients Yet'),
+                            Text('No Clients Yet, empty'),
                             SizedBox(
                               height: 25,
                             ),
@@ -106,50 +106,58 @@ class _ViewClientsState extends State<ViewClients> {
                           ],
                         )
                       : ListView(
-                          children: clients.map((cli) {
-                            Card(
-                              child: Row(
-                                children: <Widget>[
-                                  Container(
-                                    margin: EdgeInsets.symmetric(
-                                        vertical: 10, horizontal: 15),
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: Theme.of(context).primaryColor,
-                                        width: 2,
-                                      ),
+                          // ignore: missing_return
+                          children: [
+                              ...clients
+                                  .map<Widget>(
+                                    (cli) => ListTile(
+                                      title: Text(cli.fname),
                                     ),
-                                    padding: EdgeInsets.all(10),
-                                    child: Row(
-                                      children: [
-                                        Text(cli.fname, style: s2),
-                                        Text(cli.lname, style: s2),
-                                      ],
-                                    ),
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Text(cli.address),
-                                      Text(
-                                        cli.city + ', ' + cli.state,
-                                      ),
-                                      Text(cli.phoneNumber.toString()),
-                                    ],
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Text(cli.descript),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            );
-                          }).toList(),
-                        ),
+                                  )
+                                  .toList(),
+                            ]
+                          // Card(
+                          //   child: Row(
+                          //     children: <Widget>[
+                          //       Container(
+                          //         margin: EdgeInsets.symmetric(
+                          //             vertical: 10, horizontal: 15),
+                          //         decoration: BoxDecoration(
+                          //           border: Border.all(
+                          //             color: Theme.of(context).primaryColor,
+                          //             width: 2,
+                          //           ),
+                          //         ),
+                          //         padding: EdgeInsets.all(10),
+                          //         child: Row(
+                          //           children: [
+                          //             Text(cli.fname, style: s2),
+                          //             Text(cli.lname, style: s2),
+                          //           ],
+                          //         ),
+                          //       ),
+                          // Column(
+                          //   crossAxisAlignment:
+                          //       CrossAxisAlignment.start,
+                          //   children: <Widget>[
+                          //     Text(cli.address),
+                          //     Text(
+                          //       cli.city + ', ' + cli.state,
+                          //     ),
+                          //     Text(cli.phoneNumber.toString()),
+                          //   ],
+                          // ),
+                          // Column(
+                          //   crossAxisAlignment:
+                          //       CrossAxisAlignment.start,
+                          //   children: <Widget>[
+                          //     Text(cli.descript),
+                          //   ],
+                          // ),
+                          //     ],
+                          //   ),
+                          // );
+                          ),
             ),
           ],
         ),
