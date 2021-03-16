@@ -33,12 +33,11 @@ class _ViewClientsState extends State<ViewClients> {
     print("test");
     //this works but I cant figure out how to get any further than the outputting 'Instance of  Future<list<Client>>'
     widget.api.getClients().then((data) {
-      print("function executed"); //to see these, go to your browser debugging tool over to logging. for some reason
+      print(
+          "function executed"); //to see these, go to your browser debugging tool over to logging. for some reason
       //its not hitting anything in the widget.api.get  not sure why.
       setState(() {
         clients = data;
-        print(data.toString());
-        x = data.toString();
         loading = false;
       });
     });
@@ -52,7 +51,7 @@ class _ViewClientsState extends State<ViewClients> {
       fontSize: 20,
       color: Theme.of(context).primaryColor,
     );
-    stderr.writeln('4');
+    stderr.writeln(clients.toString());
     return Scaffold(
       drawer: MainDrawer(),
       appBar: AppBar(
@@ -105,18 +104,15 @@ class _ViewClientsState extends State<ViewClients> {
                             ),
                           ],
                         )
-                      : ListView(
-                          // ignore: missing_return
-                          children: [
-                              ...clients
-                                  .map<Widget>(
-                                    (cli) => ListTile(
-                                      title: Text(cli.fname),
-                                    ),
-                                  )
-                                  .toList(),
-                            ]
-                          ),
+                      : ListView(children: [
+                          ...clients
+                              .map<Widget>(
+                                (cli) => ListTile(
+                                  title: Text(cli.fname + cli.toString()),
+                                ),
+                              )
+                              .toList(),
+                        ]),
             ),
           ],
         ),
