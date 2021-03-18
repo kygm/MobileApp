@@ -41,6 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     widget.api.getClients().then((data) {
       setState(() {
+        //print(data);
         clients = data;
         _dbLoaded = true;
       });
@@ -51,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: //put drawer function here
-          !_dbLoaded
+          _dbLoaded
               ? MostOfApp(clients)
               : Center(
                   child: CircularProgressIndicator(),

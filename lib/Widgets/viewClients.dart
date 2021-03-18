@@ -24,24 +24,34 @@ class _ViewClientsState extends State<ViewClients> {
   List clients = [];
   bool loading = true;
   String x;
+  void onDelete(id) {
+    print("Deleting " + id + "!");
+  }
+
+  void _addItem() {
+    setState(() {
+      clients.add({'fname': 'First', 'lname': 'Last'});
+    });
+  }
+
   void initState() {
     super.initState();
-    print(3);
-    final s = widget.api.getClients();
-    print(s.toString());
-    print(s);
-    print("test");
-    //this works but I cant figure out how to get any further than the outputting 'Instance of  Future<list<Client>>'
+    //print(3);
+    final s = widget.api.testApi();
+    //print(s.toString());
+    //
+    //print(s);
+    //print("test");
+    
     widget.api.getClients().then((data) {
-      print(
-          "function executed"); //to see these, go to your browser debugging tool over to logging. for some reason
-      //its not hitting anything in the widget.api.get  not sure why.
       setState(() {
         clients = data;
+        print(clients);
         loading = false;
       });
     });
-    print(3);
+    
+    //print(3);
   }
 
   Widget build(BuildContext context) {
@@ -92,6 +102,11 @@ class _ViewClientsState extends State<ViewClients> {
                       ? Column(
                           children: <Widget>[
                             Text('No Clients Yet, empty'),
+                            RaisedButton(
+                              color: Colors.orange,
+                              child: Text("Add Dummy Client to List"),
+                              onPressed: () => {_addItem()},
+                            ),
                             SizedBox(
                               height: 25,
                             ),
@@ -107,9 +122,30 @@ class _ViewClientsState extends State<ViewClients> {
                       : ListView(children: [
                           ...clients
                               .map<Widget>(
-                                (cli) => ListTile(
-                                  title: Text(cli.fname + cli.toString()),
-                                ),
+                                (client) => Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 30),
+                                    child: ListTile(
+                                      leading: CircleAvatar(
+                                        radius: 30,
+                                        child: Text("TS"),
+                                      ),
+                                      title: Text(
+                                        (client['fname'] +
+                                            " " +
+                                            client['lname']),
+                                        style: TextStyle(fontSize: 20),
+                                      ),
+                                      trailing: FlatButton(
+                                        onPressed: () => {
+                                          //onDelete(contact['_id']);
+                                        },
+                                        child: Icon(
+                                          Icons.delete,
+                                          size: 30,
+                                        ),
+                                      ),
+                                    )),
                               )
                               .toList(),
                         ]),
