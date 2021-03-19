@@ -101,7 +101,7 @@ class _ViewClientsState extends State<ViewClients> {
                   : clients.isEmpty
                       ? Column(
                           children: <Widget>[
-                            Text('No Clients Yet, empty'),
+                            Text('No Clients Yet, Empty'),
                             RaisedButton(
                               color: Colors.orange,
                               child: Text("Add Dummy Client to List"),
@@ -112,10 +112,7 @@ class _ViewClientsState extends State<ViewClients> {
                             ),
                             Container(
                               height: 200,
-                              // child: Image.asset(
-                              //   'images/waiting.png',
-                              //   fit: BoxFit.cover,
-                              // ),
+                              child: CircularProgressIndicator(),
                             ),
                           ],
                         )
