@@ -1,5 +1,8 @@
 import 'dart:io';
 
+import 'package:KYGM_Mobile/widgets/addClient.dart';
+import 'package:flutter/rendering.dart';
+
 import '../api.dart';
 import '../Models/client.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +10,8 @@ import '../Models/client.dart';
 import './addTransaction.dart';
 import '../main.dart';
 import './drawer.dart';
+import './addTransaction.dart';
+import './addClient.dart';
 import 'dart:developer';
 
 class ViewClients extends StatefulWidget {
@@ -24,13 +29,24 @@ class _ViewClientsState extends State<ViewClients> {
   List clients = [];
   bool loading = true;
   String x;
-  void onDelete(id) {
-    print("Deleting " + id + "!");
+
+  void _addNewTransaction(String phoneNum) {}
+
+  void _editClient(id) {
+    print("Edit " + id);
   }
 
-  void _addItem() {
+  void _addClient() {
     setState(() {
-      clients.add({'fname': 'First', 'lname': 'Last'});
+      print("add client");
+      AddClient(_addNewTransaction);
+    });
+  }
+
+  void _addTransaction() {
+    setState(() {
+      print("add transact");
+      AddTransaction(_addNewTransaction);
     });
   }
 
@@ -42,15 +58,15 @@ class _ViewClientsState extends State<ViewClients> {
     //
     //print(s);
     //print("test");
-    
+
     widget.api.getClients().then((data) {
       setState(() {
         clients = data;
-        print(clients);
+        //print(clients);
         loading = false;
       });
     });
-    
+
     //print(3);
   }
 
@@ -81,71 +97,66 @@ class _ViewClientsState extends State<ViewClients> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Text(
+              "Click on client to add transact",
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+            ),
+            RaisedButton(
+              color: Colors.orange,
+              child: Text("Add a Client to List"),
+              onPressed: () => {_addClient()},
+            ),
             Container(
-              child: clients == null
+              child: clients.isEmpty
                   ? Column(
                       children: <Widget>[
-                        Text('No Clients Yet, null'),
+                        Text('No Clients In DB'),
                         SizedBox(
                           height: 25,
                         ),
-                        Container(
-                          height: 200,
-                          //    child: Image.asset(
-                          //   'images/waiting.png',
-                          //    fit: BoxFit.cover,
-                          // ),
-                        ),
                       ],
                     )
-                  : clients.isEmpty
-                      ? Column(
-                          children: <Widget>[
-                            Text('No Clients Yet, Empty'),
-                            RaisedButton(
-                              color: Colors.orange,
-                              child: Text("Add Dummy Client to List"),
-                              onPressed: () => {_addItem()},
-                            ),
-                            SizedBox(
-                              height: 25,
-                            ),
-                            Container(
-                              height: 200,
-                              child: CircularProgressIndicator(),
-                            ),
-                          ],
-                        )
-                      : ListView(children: [
-                          ...clients
-                              .map<Widget>(
-                                (client) => Padding(
+                  : Expanded(
+                      child: ListView(
+                          shrinkWrap: true,
+                          padding: EdgeInsets.all(15.0),
+                          children: [
+                            ...clients
+                                .map<Widget>(
+                                  (client) => Padding(
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 30),
-                                    child: ListTile(
-                                      leading: CircleAvatar(
-                                        radius: 30,
-                                        child: Text("TS"),
-                                      ),
-                                      title: Text(
-                                        (client['fname'] +
-                                            " " +
-                                            client['lname']),
-                                        style: TextStyle(fontSize: 20),
-                                      ),
-                                      trailing: FlatButton(
-                                        onPressed: () => {
-                                          //onDelete(contact['_id']);
-                                        },
-                                        child: Icon(
-                                          Icons.delete,
-                                          size: 30,
+                                    child: FlatButton(
+                                      onPressed: () => {_addTransaction()},
+                                      child: ListTile(
+                                        leading: CircleAvatar(
+                                          radius: 30,
+                                          child: Text(client['fname']
+                                                  .substring(0, 1) +
+                                              client['lname'].substring(0, 1)),
+                                        ),
+                                        title: Text(
+                                          (client['fname'] +
+                                              " " +
+                                              client['lname']),
+                                          style: TextStyle(fontSize: 20),
+                                        ),
+                                        trailing: FlatButton(
+                                          onPressed: () => {
+                                            _editClient(client['_id']),
+                                          },
+                                          child: Icon(
+                                            Icons.edit,
+                                            size: 30,
+                                          ),
                                         ),
                                       ),
-                                    )),
-                              )
-                              .toList(),
-                        ]),
+                                    ),
+                                  ),
+                                )
+                                .toList(),
+                          ]),
+                    ),
             ),
           ],
         ),

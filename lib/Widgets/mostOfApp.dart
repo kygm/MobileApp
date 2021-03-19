@@ -41,7 +41,7 @@ class _MostOfAppState extends State<MostOfApp> {
       drawer: MainDrawer(),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             //if NOT authorized exec login widget
             // !_auth
@@ -49,7 +49,7 @@ class _MostOfAppState extends State<MostOfApp> {
             //     //else send user to main app
             //     : Text("Logged In"),
             Container(
-              height: 150,
+              height: 120,
               child: ColoredBox(
                 color: Colors.grey[300],
                 child: Center(
@@ -129,7 +129,7 @@ class _MostOfAppState extends State<MostOfApp> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => AddTransaction(_addNewTransaction)),
+                      builder: (context) => ViewClients()),
                 );
               },
             ),

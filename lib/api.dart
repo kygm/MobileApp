@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import './Models/client.dart';
 
 class ClientsApi {
-  final _dio = Dio(BaseOptions(baseUrl: 'http://localhost:8080/'));
+  final _dio = Dio(BaseOptions(baseUrl: 'http://localhost:1600/'));
 
   Future<List> getClients() async {
     print("In getClients");
