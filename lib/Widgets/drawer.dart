@@ -68,7 +68,7 @@ class _MainDrawerState extends State<MainDrawer> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => ViewTransactions(viewTransactions)),
+                    builder: (context) => ViewTransacts()),
               );
             },
           ),

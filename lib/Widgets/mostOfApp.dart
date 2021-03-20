@@ -120,7 +120,7 @@ class _MostOfAppState extends State<MostOfApp> {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            ViewTransactions(viewTransactions)));
+                            ViewTransacts()));
               },
             ),
             FlatButton(
