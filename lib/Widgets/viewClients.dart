@@ -1,4 +1,4 @@
-import 'dart:io';
+//import 'dart:io';
 
 import 'package:KYGM_Mobile/widgets/addClient.dart';
 import 'package:flutter/rendering.dart';
@@ -43,9 +43,10 @@ class _ViewClientsState extends State<ViewClients> {
     });
   }
 
-  void _addTransaction() {
+  void _addTransaction(id) {
     setState(() {
-      print("add transact");
+
+      print("Add transact for " + id);
       AddTransaction(_addNewTransaction);
     });
   }
@@ -77,7 +78,7 @@ class _ViewClientsState extends State<ViewClients> {
       fontSize: 20,
       color: Theme.of(context).primaryColor,
     );
-    stderr.writeln(clients.toString());
+    //stderr.writeln(clients.toString());
     return Scaffold(
       drawer: MainDrawer(),
       appBar: AppBar(
@@ -127,7 +128,7 @@ class _ViewClientsState extends State<ViewClients> {
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 30),
                                     child: FlatButton(
-                                      onPressed: () => {_addTransaction()},
+                                      onPressed: () => {_addTransaction(client['_id'])},
                                       child: ListTile(
                                         leading: CircleAvatar(
                                           radius: 30,
@@ -158,6 +159,7 @@ class _ViewClientsState extends State<ViewClients> {
                           ]),
                     ),
             ),
+            //FloatingActionButton(onPressed: null)
           ],
         ),
       ),

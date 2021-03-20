@@ -6,7 +6,6 @@ class ClientsApi {
   final _dio = Dio(BaseOptions(baseUrl: 'http://localhost:1600/'));
 
   Future<List> getClients() async {
-    print("In getClients");
     final response = await _dio.get('');
     return response.data['client'];
   }

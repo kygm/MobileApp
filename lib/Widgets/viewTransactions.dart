@@ -30,7 +30,7 @@ class _ViewTransactsState extends State<ViewTransacts> {
     widget.api.getTransactions().then((data) {
       setState(() {
         transacts = data;
-        print(transacts.toString());
+        //print(transacts.toString());
         loading = false;
       });
     });
@@ -93,7 +93,7 @@ class _ViewTransactsState extends State<ViewTransacts> {
                                         leading: ColoredBox(
                                           color: Colors.lightBlue,
                                           child: Text(
-                                            (transact['transactPrice'] - transact['transactCost']).toString(),
+                                            "\$" +(transact['transactPrice'] - transact['transactCost']).toString(),
                                           style: TextStyle(
                                             fontSize: 30,
                                             color: Colors.yellow

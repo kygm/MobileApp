@@ -56,7 +56,7 @@ void start() async {
     (ServRequest req, ServResponse res) async {
       await clients.remove(where.eq(
           '_phoneNumber', ObjectId.fromHexString(req.params['phoneNumber'])));
-      return res.status(200);
+      return res.status(200); 
     }
   ]);
 
