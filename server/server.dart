@@ -10,6 +10,7 @@ void start() async {
   await db.open();
   //specify collection
   final clients = db.collection('clients');
+  final transactions = db.collection('transactions');
   //print(await clients.find().toList());
 
   const port = 1600;
@@ -30,6 +31,13 @@ void start() async {
     (ServRequest req, ServResponse res) async {
       final clientList = await clients.find().toList();
       return res.status(200).json({'client': clientList});
+    }
+  ]);
+  app.get('/getTransacts', [
+    setCors,
+    (ServRequest req, ServResponse res) async{
+      final transactsList = await transactions.find().toList();
+      return res.status(200).json({'transaction': transactsList});
     }
   ]);
 

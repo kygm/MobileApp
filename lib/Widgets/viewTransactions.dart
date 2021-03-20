@@ -42,63 +42,50 @@ class ViewTransactions extends StatefulWidget {
                             Text('No Transactions Yet'),
                             SizedBox(
                               height: 25,
-                            ),
-                            Container(
-                              height: 200,
-                              // child: Image.asset(
-                              //   'images/waiting.png',
-                              //   fit: BoxFit.cover,
-                              // ),
-                            ),
+                            ),                          
                           ],
                         )
-                      : ListView(
-                          children: viewTransactions.map((tran) {
-                            return Card(
-                              child: Row(
-                                children: <Widget>[
-                                  Container(
-                                    margin: EdgeInsets.symmetric(
-                                        vertical: 10, horizontal: 15),
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: Theme.of(context).primaryColor,
-                                        width: 2,
-                                      ),
-                                    ),
-                                    padding: EdgeInsets.all(10),
-                                    child: Text(
-                                      "dev", //'\$${tran.cost.toStringAsFixed(2)}',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20,
-                                        color: Theme.of(context).primaryColor,
+                      : Expanded(
+                      child: ListView(
+                          shrinkWrap: true,
+                          padding: EdgeInsets.all(15.0),
+                          children: [
+                            ...transacts
+                                .map<Widget>(
+                                  (client) => Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 30),
+                                    child: FlatButton(
+                                      onPressed: () => {_addTransaction()},
+                                      child: ListTile(
+                                        leading: CircleAvatar(
+                                          radius: 30,
+                                          child: Text(client['fname']
+                                                  .substring(0, 1) +
+                                              client['lname'].substring(0, 1)),
+                                        ),
+                                        title: Text(
+                                          (client['fname'] +
+                                              " " +
+                                              client['lname']),
+                                          style: TextStyle(fontSize: 20),
+                                        ),
+                                        trailing: FlatButton(
+                                          onPressed: () => {
+                                            _editClient(client['_id']),
+                                          },
+                                          child: Icon(
+                                            Icons.edit,
+                                            size: 30,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Text(
-                                        "dev",
-                                        //tran.title,
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Text(
-                                        "dev",
-                                        //DateFormat.yMMMEd().format(tran.date),
-                                        style: TextStyle(color: Colors.grey),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            );
-                          }).toList(),
-                        ),
+                                )
+                                .toList(),
+                          ]),
+                    ),
             )
           ],
         ),

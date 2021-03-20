@@ -8,12 +8,11 @@ class ClientsApi {
   Future<List> getClients() async {
     print("In getClients");
     final response = await _dio.get('');
-    //print(response);
-    //(response.data['client'] as List).map<Client>((json) => Client.fromJson(json)).toList()
-    //print(response.data['client'].toString());
     return response.data['client'];
-   // return (response.data['client'] as List)
-    //.map<Client>((json) => Client.fromJson(json)).toList();
+  }
+  Future<List> getTransactions() async{
+    final response = await _dio.get('/getTransacts');
+    return response.data['transaction'];
   }
 
   Future<String> testApi() async{
