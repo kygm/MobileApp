@@ -68,8 +68,9 @@ class _clientDetailsState extends State<ClientDetails> {
                           leading: CircleAvatar(
                             radius: 30,
                             child: Text('l'
-                              // cli['fname'].substring(0, 1) +
-                              //   cli['lname'].substring(0, 1)),
+                                // cli['fname'].substring(0, 1) +
+                                //   cli['lname'].substring(0, 1)),
+                                ),
                           ),
                         ),
                       ),
