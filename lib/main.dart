@@ -51,12 +51,11 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: //put drawer function here
-          _dbLoaded
-              ? MostOfApp(clients)
-              : Center(
-                  child: CircularProgressIndicator(),
-                ),
+      body: _dbLoaded
+          ? MostOfApp(clients)
+          : Center(
+              child: CircularProgressIndicator(),
+            ),
     );
   }
 }
