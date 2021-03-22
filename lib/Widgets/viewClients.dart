@@ -1,12 +1,10 @@
 //import 'dart:io';
 
-import 'package:KYGM_Mobile/widgets/addClient.dart';
+import 'package:KYGM_Mobile/Widgets/clientDetails.dart';
 import 'package:flutter/rendering.dart';
-
 import '../api.dart';
 import '../Models/client.dart';
 import 'package:flutter/material.dart';
-import '../Models/client.dart';
 import './addTransaction.dart';
 import '../main.dart';
 import './drawer.dart';
@@ -39,13 +37,12 @@ class _ViewClientsState extends State<ViewClients> {
   void _addClient() {
     setState(() {
       print("add client");
-      AddClient(_addNewTransaction);
+      // AddClient(_addNewTransaction);
     });
   }
 
   void _addTransaction(id) {
     setState(() {
-
       print("Add transact for " + id);
       AddTransaction(_addNewTransaction);
     });
@@ -128,7 +125,8 @@ class _ViewClientsState extends State<ViewClients> {
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 30),
                                     child: FlatButton(
-                                      onPressed: () => {_addTransaction(client['_id'])},
+                                      onPressed: () =>
+                                          {_addTransaction(client['_id'])},
                                       child: ListTile(
                                         leading: CircleAvatar(
                                           radius: 30,
@@ -144,7 +142,11 @@ class _ViewClientsState extends State<ViewClients> {
                                         ),
                                         trailing: FlatButton(
                                           onPressed: () => {
-                                            _editClient(client['_id']),
+                                            //_editClient(client['_id']),
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  clientDetails(client['id']),
+                                            ),
                                           },
                                           child: Icon(
                                             Icons.edit,
