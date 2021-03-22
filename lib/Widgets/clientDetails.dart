@@ -4,6 +4,7 @@ import '../main.dart';
 import './drawer.dart';
 import 'package:flutter/rendering.dart';
 import '../api.dart';
+import './viewClients.dart';
 
 class ClientDetails extends StatelessWidget {
   //client['_id'],client['_id'],client['fname'],client['lname'],client['city'],client['state'],client['address'],client['phoneNumber']
@@ -54,6 +55,23 @@ class ClientDetails extends StatelessWidget {
                                 Text(state),
                                 Text(address),
                                 Text(phoneNumber),
+                                TextButton(
+                                  child: Text(
+                                    'Back To Clients',
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                  style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all<Color>(
+                                              Colors.lightGreen)),
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ViewClients()),
+                                    );
+                                  },
+                                ),
                               ],
                             ),
                           ),

@@ -1,3 +1,4 @@
+import 'package:KYGM_Mobile/Widgets/viewTransactions.dart';
 import 'package:flutter/material.dart';
 import '../main.dart';
 import './drawer.dart';
@@ -53,6 +54,24 @@ class TransactionDetails extends StatelessWidget {
                                     Text("Cost:    " + cost.toString()),
                                     Text("Price:    " + price.toString()),
                                     Text("Description:    " + description),
+                                    TextButton(
+                                      child: Text(
+                                        'Back To Transactions',
+                                        style: TextStyle(color: Colors.black),
+                                      ),
+                                      style: ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStateProperty.all<Color>(
+                                                  Colors.lightGreen)),
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ViewTransacts()),
+                                        );
+                                      },
+                                    ),
                                   ],
                                 ),
                               ),
