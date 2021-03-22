@@ -6,7 +6,7 @@ import 'package:flutter/rendering.dart';
 import '../api.dart';
 
 class clientDetails extends StatefulWidget {
-  clientDetails(double id, {Key key, this.title, this.viewClients})
+  clientDetails(List client, {Key key, this.title, this.viewClients})
       : super(key: key);
   final String title;
   //pull from database
@@ -74,18 +74,6 @@ class _clientDetailsState extends State<clientDetails> {
                           title: Text(
                             (client['fname'] + " " + client['lname']),
                             style: TextStyle(fontSize: 20),
-                          ),
-                          trailing: FlatButton(
-                            onPressed: () => {
-                              //_editClient(client['_id']),
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      clientDetails(client['id'])),
-                            },
-                            child: Icon(
-                              Icons.edit,
-                              size: 30,
-                            ),
                           ),
                         ),
                       ),
