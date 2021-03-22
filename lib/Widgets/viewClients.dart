@@ -101,10 +101,18 @@ class _ViewClientsState extends State<ViewClients> {
               "Click on client to add transact",
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
             ),
-            RaisedButton(
-              color: Colors.orange,
-              child: Text("Add a Client to List"),
-              onPressed: () => {_addClient()},
+            ElevatedButton(
+              child: Text('Add Clients'),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.red, // background
+                onPrimary: Colors.white, // foreground
+              ),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => AddClient(_addNewTransaction)));
+              },
             ),
             Container(
               child: clients.isEmpty
