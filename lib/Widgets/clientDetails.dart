@@ -6,9 +6,8 @@ import 'package:flutter/rendering.dart';
 import '../api.dart';
 
 class ClientDetails extends StatefulWidget {
-  final List clients;
-  final int iD;
-  ClientDetails(this.clients, this.iD);
+  ClientDetails(Map client);
+
   final ClientsApi api = ClientsApi();
   @override
   _clientDetailsState createState() => _clientDetailsState();
@@ -17,6 +16,8 @@ class ClientDetails extends StatefulWidget {
 class _clientDetailsState extends State<ClientDetails> {
   List clients = [];
   bool loading = true;
+
+  get client => client;
   void initState() {
     super.initState();
     final s = widget.api.testApi();
@@ -25,8 +26,10 @@ class _clientDetailsState extends State<ClientDetails> {
       setState(() {
         clients = data;
         loading = false;
+        print(client);
       });
     });
+    // print(d);
   }
 
   @override
@@ -54,35 +57,24 @@ class _clientDetailsState extends State<ClientDetails> {
               child: ListView(
                 shrinkWrap: true,
                 padding: EdgeInsets.all(15.0),
-                children: [
-                  ...clients.map<Widget>(
-                    (client) => Padding(
+                children: <Widget>[
+                  // client.toList()
+                  ...client<Widget>(
+                    (cli) => Padding(
                       padding: const EdgeInsets.symmetric(vertical: 30),
                       child: FlatButton(
                         onPressed: () => {null},
                         child: ListTile(
                           leading: CircleAvatar(
                             radius: 30,
-                            child: Text(client['fname'].substring(0, 1) +
-                                client['lname'].substring(0, 1)),
-                          ),
-                          title: Text(
-                            (client['fname'] + " " + client['lname']),
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          trailing: FlatButton(
-                            onPressed: () => {
-                              //_editClient(client['_id']),
-                            },
-                            child: Icon(
-                              Icons.edit,
-                              size: 30,
-                            ),
+                            child: Text('l'
+                              // cli['fname'].substring(0, 1) +
+                              //   cli['lname'].substring(0, 1)),
                           ),
                         ),
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
