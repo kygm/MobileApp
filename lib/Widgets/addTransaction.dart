@@ -47,7 +47,7 @@ class _AddTransactionState extends State<AddTransaction> {
     return Scaffold(
       drawer: MainDrawer(),
       appBar: AppBar(
-        title: FlatButton(
+        title: TextButton(
           onPressed: () {
             Navigator.pop(context);
             Navigator.push(

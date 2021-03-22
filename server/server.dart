@@ -35,7 +35,7 @@ void start() async {
   ]);
   app.get('/getTransacts', [
     setCors,
-    (ServRequest req, ServResponse res) async{
+    (ServRequest req, ServResponse res) async {
       final transactsList = await transactions.find().toList();
       return res.status(200).json({'transaction': transactsList});
     }
@@ -52,12 +52,14 @@ void start() async {
     }
   ]);
 
-  app.delete('/:phoneNumber', [
+  app.post('/deleteClient', [
     setCors,
     (ServRequest req, ServResponse res) async {
-      await clients.remove(where.eq(
-          '_phoneNumber', ObjectId.fromHexString(req.params['phoneNumber'])));
-      return res.status(200); 
+      var theId = req.body['_id'].substring(10, 34);
+
+      await clients.remove(where.id(ObjectId.parse(theId)));
+      print("Removed client " + theId);
+      return res.status(200);
     }
   ]);
 

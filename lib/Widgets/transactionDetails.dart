@@ -15,7 +15,7 @@ class TransactionDetails extends StatelessWidget {
     return Scaffold(
       drawer: MainDrawer(),
       appBar: AppBar(
-        title: FlatButton(
+        title: TextButton(
           onPressed: () {
             Navigator.pop(context);
             Navigator.push(

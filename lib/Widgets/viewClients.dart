@@ -32,6 +32,21 @@ class _ViewClientsState extends State<ViewClients> {
 
   void _addNewTransaction(String phoneNum) {}
 
+
+  void deleteClient(id){
+    print("Deleting Client " + id);
+    setState(() {
+      widget.api.deleteClient(id);
+
+      MaterialPageRoute(
+        builder: (context) => ViewClients(),
+      );
+
+      Navigator.pop(context);
+
+
+    });
+  }
   void _editClient(id) {
     print("Edit " + id);
   }
@@ -81,7 +96,7 @@ class _ViewClientsState extends State<ViewClients> {
     return Scaffold(
       drawer: MainDrawer(),
       appBar: AppBar(
-        title: FlatButton(
+        title: TextButton(
           onPressed: () {
             Navigator.pop(context);
             Navigator.push(
@@ -134,9 +149,22 @@ class _ViewClientsState extends State<ViewClients> {
                                   (client) => Padding(
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 30),
-                                    child: FlatButton(
-                                      onPressed: () =>
-                                          {_addTransaction(client['_id'])},
+                                    child: TextButton(
+                                      onPressed: () => {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => ClientDetails(
+                                                client['_id'],
+                                                client['fname'],
+                                                client['lname'],
+                                                client['city'],
+                                                client['state'],
+                                                client['address'],
+                                                client['phoneNumber']),
+                                          ),
+                                        ),
+                                      },
                                       child: ListTile(
                                         leading: CircleAvatar(
                                           radius: 30,
@@ -150,20 +178,14 @@ class _ViewClientsState extends State<ViewClients> {
                                               client['lname']),
                                           style: TextStyle(fontSize: 20),
                                         ),
-                                        trailing: FlatButton(
+                                        trailing: TextButton(
                                           onPressed: () => {
                                             //_editClient(client['_id']),
 
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ClientDetails(client['_id'],client['fname'],client['lname'],client['city'],client['state'],client['address'],client['phoneNumber']),
-                                              ),
-                                            ),
+                                            deleteClient(client['_id'])
                                           },
                                           child: Icon(
-                                            Icons.edit,
+                                            Icons.delete,
                                             size: 30,
                                           ),
                                         ),

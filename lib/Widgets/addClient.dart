@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../main.dart';
 import 'package:flutter/services.dart';
+import './mostOfApp.dart';
 import './drawer.dart';
 import '../api.dart';
 
@@ -26,6 +27,18 @@ class _AddClientState extends State<AddClient> {
   final phoneNumCon = TextEditingController();
 
   DateTime _selectedDate;
+
+  void sendToHome()
+  {
+    setState(() {
+       MaterialPageRoute(
+        builder: (context) => MyHomePage(),
+      );
+      Navigator.of(context).pop();
+
+    });
+  }
+
   void submitData() {
     final inFName = fNameCon.text;
     final inLName = lNameCon.text;
@@ -49,26 +62,19 @@ class _AddClientState extends State<AddClient> {
         " " +
         inPhoneNum.toString());
 
+
+
     setState(() {
       //Flutter2 Lname2 Address2 City2 State3 Descript2 2222222222
-      if (inFName.isEmpty) {
-            
-            return;
-          }
-          else if(inPhoneNum == null)
-          {
-        
-            return;
-          }
-          else
-          {
-            widget.api.createClient(inFName, inLName, inAddress, inCity, inState,
+
+      widget.api.createClient(inFName, inLName, inAddress, inCity, inState,
           inPhoneNum.toString(), inDes);
+      //Navigator.of(context).pop();
       MaterialPageRoute(
-        builder: (context) => ViewClients(),
+        builder: (context) => MyHomePage(),
       );
-          }
-      
+      //Navigator.of(context).pop();
+
       Navigator.of(context).pop();
     });
     //List<String> states = new List();
@@ -100,8 +106,8 @@ class _AddClientState extends State<AddClient> {
         title: FlatButton(
           onPressed: () {
             Navigator.pop(context);
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => ViewClients()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => ViewClients()));
           },
           child: Text(
             "KYGM Services",
@@ -165,9 +171,20 @@ class _AddClientState extends State<AddClient> {
                       onSubmitted: (_) => submitData(),
                     ),
                     //use dropdown selector for service, purchase, or sale
-                    RaisedButton(
-                      onPressed: submitData,
-                      child: Text('Add Client'),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ElevatedButton(
+                          onPressed: sendToHome,
+                          child: Text('Cancel'),
+                          style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.red) ),
+                        ),
+                        ElevatedButton(
+                          onPressed: submitData,
+                          child: Text('Add Client'),
+                          
+                        ),
+                      ],
                     ),
                   ],
                 ),

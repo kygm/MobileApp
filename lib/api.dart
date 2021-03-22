@@ -25,8 +25,8 @@ class ClientsApi {
     return Client.fromJson(response.data);
   }
 
-  Future deleteClient(String phoneNumber) async {
-    final response = await _dio.delete('/$phoneNumber');
+  Future deleteClient(String id) async {
+    final response = await _dio.post('/deleteClient', data: {'_id' : id});
     return response.data;
   }
 }

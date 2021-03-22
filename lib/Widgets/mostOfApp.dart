@@ -26,7 +26,7 @@ class _MostOfAppState extends State<MostOfApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: FlatButton(
+        title: TextButton(
           onPressed: () {
             Navigator.pop(context);
             Navigator.push(
@@ -34,7 +34,8 @@ class _MostOfAppState extends State<MostOfApp> {
           },
           child: Text(
             "KYGM Services",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23, color: Colors.black),
+            
           ),
         ),
       ),
@@ -97,15 +98,17 @@ class _MostOfAppState extends State<MostOfApp> {
               child: Text('This Months Revenue'),
               onPressed: () => {print("under dev...")},
             ),
-            FlatButton(
-              child: Text('View Clients'),
+            TextButton(
+              child: Text('View Clients', style: TextStyle(color: Colors.black),),
+              style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.lightGreen)),
               onPressed: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => ViewClients()));
               },
             ),
-            FlatButton(
-              child: Text('Add Clients'),
+            TextButton(
+              child: Text('Add Clients', style: TextStyle(color: Colors.black),),
+              style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.lightGreen)),
               onPressed: () {
                 Navigator.push(
                     context,
@@ -113,8 +116,9 @@ class _MostOfAppState extends State<MostOfApp> {
                         builder: (context) => AddClient(_addNewTransaction)));
               },
             ),
-            FlatButton(
-              child: Text('View Transactions'),
+            TextButton(
+              child: Text('View Transactions', style: TextStyle(color: Colors.black),),
+              style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.lightGreen)),
               onPressed: () {
                 Navigator.push(
                     context,
@@ -123,8 +127,9 @@ class _MostOfAppState extends State<MostOfApp> {
                             ViewTransacts()));
               },
             ),
-            FlatButton(
-              child: Text('Add Transactions'),
+            TextButton(
+              child: Text('Add Transactions', style: TextStyle(color: Colors.black),),
+              style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.lightGreen)),
               onPressed: () {
                 Navigator.push(
                   context,

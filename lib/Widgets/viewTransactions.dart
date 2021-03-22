@@ -42,7 +42,7 @@ class _ViewTransactsState extends State<ViewTransacts> {
     return Scaffold(
       drawer: MainDrawer(),
       appBar: AppBar(
-        title: FlatButton(
+        title: TextButton(
           onPressed: () {
             Navigator.pop(context);
             Navigator.push(
@@ -89,8 +89,24 @@ class _ViewTransactsState extends State<ViewTransacts> {
                                   (transact) => Padding(
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 30),
-                                    child: FlatButton(
-                                      onPressed: () => {null},
+                                    child: TextButton(
+                                      onPressed: () => {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                TransactionDetails(
+                                                    transact['fname'],
+                                                    transact['lname'],
+                                                    transact['transactName'],
+                                                    transact['transactDate'],
+                                                    transact['transactTime'],
+                                                    transact['descript'],
+                                                    transact['transactCost'],
+                                                    transact['transactPrice']),
+                                          ),
+                                        ),
+                                      },
                                       child: ListTile(
                                         leading: ColoredBox(
                                           color: Colors.lightBlue,
@@ -111,27 +127,8 @@ class _ViewTransactsState extends State<ViewTransacts> {
                                               transact['lname']),
                                           style: TextStyle(fontSize: 20),
                                         ),
-                                        trailing: FlatButton(
-                                          onPressed: () => {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    TransactionDetails(
-                                                        transact['fname'],
-                                                        transact['lname'],
-                                                        transact[
-                                                            'transactName'],
-                                                        transact[
-                                                            'transactDate'],
-                                                        transact['transactTime'],
-                                                        transact['descript'],
-                                                        transact['transactCost'],
-
-                                                        transact['transactPrice']),
-                                              ),
-                                            ),
-                                          },
+                                        trailing: TextButton(
+                                          onPressed: () => {null},
                                           child: Icon(
                                             Icons.arrow_forward,
                                             size: 30,
