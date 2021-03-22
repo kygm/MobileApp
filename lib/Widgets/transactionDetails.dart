@@ -8,6 +8,7 @@ import '../api.dart';
 class TransactionDetails extends StatelessWidget {
   final String fname, lname, title, date, time, description;
   final int cost, price;
+  var c1 = Colors.lightBlue;
   TransactionDetails(this.fname, this.lname, this.title, this.date, this.time,
       this.description, this.cost, this.price);
   @override
@@ -45,34 +46,63 @@ class TransactionDetails extends StatelessWidget {
                               child: SizedBox(
                                 height: 1000,
                                 width: double.infinity,
-                                child: ListView(
-                                  children: <Widget>[
-                                    Text("Name:    " + fname + ' ' + lname),
-                                    Text("Title:    " + title),
-                                    Text("Date:    " + date),
-                                    Text("Time:    " + time),
-                                    Text("Cost:    " + cost.toString()),
-                                    Text("Price:    " + price.toString()),
-                                    Text("Description:    " + description),
-                                    TextButton(
-                                      child: Text(
-                                        'Back To Transactions',
-                                        style: TextStyle(color: Colors.black),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: ListView(
+                                    children: <Widget>[
+                                      ColoredBox(
+                                        color: c1,
+                                        child: Text(
+                                            "Name:    " + fname + ' ' + lname),
                                       ),
-                                      style: ButtonStyle(
-                                          backgroundColor:
-                                              MaterialStateProperty.all<Color>(
-                                                  Colors.lightGreen)),
-                                      onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ViewTransacts()),
-                                        );
-                                      },
-                                    ),
-                                  ],
+                                      ColoredBox(
+                                        color: c1,
+                                        child: Text("Title:    " + title),
+                                      ),
+                                      ColoredBox(
+                                        color: c1,
+                                        child: Text("Date:    " + date),
+                                      ),
+                                      ColoredBox(
+                                        color: c1,
+                                        child:
+                                            Text("Time:    " + time + " hours"),
+                                      ),
+                                      ColoredBox(
+                                        color: c1,
+                                        child: Text(
+                                            "Cost:    \$" + cost.toString()),
+                                      ),
+                                      ColoredBox(
+                                        color: c1,
+                                        child: Text(
+                                            "Price:    \$" + price.toString()),
+                                      ),
+                                      ColoredBox(
+                                        color: c1,
+                                        child: Text(
+                                            "Description:    " + description),
+                                      ),
+                                      TextButton(
+                                        child: Text(
+                                          'Back To Transactions',
+                                          style: TextStyle(color: Colors.black),
+                                        ),
+                                        style: ButtonStyle(
+                                            backgroundColor:
+                                                MaterialStateProperty.all<
+                                                    Color>(Colors.lightGreen)),
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ViewTransacts()),
+                                          );
+                                        },
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),

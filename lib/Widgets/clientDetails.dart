@@ -10,7 +10,7 @@ class ClientDetails extends StatelessWidget {
   //client['_id'],client['_id'],client['fname'],client['lname'],client['city'],client['state'],client['address'],client['phoneNumber']
   final String id, fname, lname, city, address, state;
   final phoneNumber;
-
+  var c1 = Colors.lightBlue;
   ClientDetails(this.id, this.fname, this.lname, this.city, this.state,
       this.address, this.phoneNumber);
 
@@ -45,35 +45,51 @@ class ClientDetails extends StatelessWidget {
                     child: ListView(
                       children: <Widget>[
                         Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 30),
-                          child: Center(
-                            child: Column(
-                              children: [
-                                Text(fname),
-                                Text(lname),
-                                Text(city),
-                                Text(state),
-                                Text(address),
-                                Text(phoneNumber),
-                                TextButton(
-                                  child: Text(
-                                    'Back To Clients',
-                                    style: TextStyle(color: Colors.black),
-                                  ),
-                                  style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all<Color>(
-                                              Colors.lightGreen)),
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => ViewClients()),
-                                    );
-                                  },
+                          padding: const EdgeInsets.symmetric(vertical: 15),
+                          child: Column(
+                            children: [
+                              ColoredBox(
+                                color: c1,
+                                child: Text("First Name:     " + fname),
+                              ),
+                              ColoredBox(
+                                color: c1,
+                                child: Text("Last Name:     " + lname),
+                              ),
+                              ColoredBox(
+                                color: c1,
+                                child: Text("City Name:     " + city),
+                              ),
+                              ColoredBox(
+                                color: c1,
+                                child: Text("State:      " + state),
+                              ),
+                              ColoredBox(
+                                color: c1,
+                                child: Text("Address:     " + address),
+                              ),
+                              ColoredBox(
+                                color: c1,
+                                child: Text("Phone Number:     " + phoneNumber),
+                              ),
+                              TextButton(
+                                child: Text(
+                                  'Back To Clients',
+                                  style: TextStyle(color: Colors.black),
                                 ),
-                              ],
-                            ),
+                                style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            Colors.lightGreen)),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ViewClients()),
+                                  );
+                                },
+                              ),
+                            ],
                           ),
                         ),
                       ],
