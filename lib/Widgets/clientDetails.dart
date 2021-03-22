@@ -40,8 +40,6 @@ class ClientDetails extends StatelessWidget {
             Expanded(
               child: Column(
                 children: <Widget>[
-                  // client.toList()
-                  //...client<Widget>(
                   Expanded(
                     child: ListView(
                       children: <Widget>[

@@ -5,12 +5,13 @@ import 'package:flutter/rendering.dart';
 import '../api.dart';
 
 class TransactionDetails extends StatelessWidget {
-  final String title, date, time, description;
-  final double cost, price;
-  TransactionDetails(this.title, this.date, this.time, this.description,
-      this.cost, this.price);
+  final String fname, lname, title, date, time, description;
+  final int cost, price;
+  TransactionDetails(this.fname, this.lname, this.title, this.date, this.time,
+      this.description, this.cost, this.price);
   @override
   Widget build(BuildContext context) {
+    print(title);
     return Scaffold(
       drawer: MainDrawer(),
       appBar: AppBar(
@@ -39,15 +40,22 @@ class TransactionDetails extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 30),
                           child: Center(
-                            child: Column(
-                              children: [
-                                Text(title),
-                                Text(date),
-                                Text(time),
-                                Text(cost.toString()),
-                                Text(price.toString()),
-                                Text(description),
-                              ],
+                            child: Expanded(
+                              child: SizedBox(
+                                height: 1000,
+                                width: double.infinity,
+                                child: ListView(
+                                  children: <Widget>[
+                                    Text("Name:    " + fname + ' ' + lname),
+                                    Text("Title:    " + title),
+                                    Text("Date:    " + date),
+                                    Text("Time:    " + time),
+                                    Text("Cost:    " + cost.toString()),
+                                    Text("Price:    " + price.toString()),
+                                    Text("Description:    " + description),
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
                         )

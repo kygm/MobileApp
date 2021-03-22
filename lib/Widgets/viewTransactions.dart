@@ -118,12 +118,19 @@ class _ViewTransactsState extends State<ViewTransacts> {
                                               MaterialPageRoute(
                                                 builder: (context) =>
                                                     TransactionDetails(
-                                                        transact['title'],
-                                                        transact['date'],
-                                                        transact['time'],
-                                                        transact['description'],
-                                                        transact['cost'],
-                                                        transact['price']),
+                                                        transact['fname'],
+                                                        transact['lname'],
+                                                        transact[
+                                                            'transactName'],
+                                                        transact[
+                                                            'transactDate'],
+                                                        transact[
+                                                            'transactTime'],
+                                                        transact['descript'],
+                                                        transact[
+                                                            'transactCost'],
+                                                        transact[
+                                                            'transactPrice']),
                                               ),
                                             ),
                                           },
