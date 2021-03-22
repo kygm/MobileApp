@@ -7,8 +7,8 @@ import '../api.dart';
 
 class ClientDetails extends StatefulWidget {
   final List clients;
-  ClientDetails(this.clients);
-
+  final int iD;
+  ClientDetails(this.clients, this.iD);
   final ClientsApi api = ClientsApi();
   @override
   _clientDetailsState createState() => _clientDetailsState();
@@ -24,7 +24,6 @@ class _clientDetailsState extends State<ClientDetails> {
     widget.api.getClients().then((data) {
       setState(() {
         clients = data;
-
         loading = false;
       });
     });
@@ -59,7 +58,6 @@ class _clientDetailsState extends State<ClientDetails> {
                   ...clients.map<Widget>(
                     (client) => Padding(
                       padding: const EdgeInsets.symmetric(vertical: 30),
-                      // client['id']==id?
                       child: FlatButton(
                         onPressed: () => {null},
                         child: ListTile(
@@ -75,9 +73,6 @@ class _clientDetailsState extends State<ClientDetails> {
                           trailing: FlatButton(
                             onPressed: () => {
                               //_editClient(client['_id']),
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      ClientDetails(client['id'])),
                             },
                             child: Icon(
                               Icons.edit,

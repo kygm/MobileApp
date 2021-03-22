@@ -160,6 +160,7 @@ class _ViewClientsState extends State<ViewClients> {
                                                 builder: (context) =>
                                                     ClientDetails(
                                                   List.castFrom(clients),
+                                                  client['id'],
                                                 ),
                                               ),
                                             ),
