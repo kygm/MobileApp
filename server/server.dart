@@ -45,6 +45,7 @@ void start() async {
     setCors,
     (ServRequest req, ServResponse res) async {
       await clients.save(req.body);
+      print(req.body);
       return res.json(
         await clients.findOne(where.eq('phoneNumber', req.body['phoneNumber'])),
       );
