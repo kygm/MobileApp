@@ -40,8 +40,8 @@ class _AddClientState extends State<AddClient> {
     print(inFName + " "+ inLName + " " + inAddress+ " " + inCity+ " " + inState+ " " + inDes+ " " + inPhoneNum.toString());
     
     setState(() {
-
-      widget.api.createClient(inFName, inLName, inAddress, inCity, inState, inDes, inPhoneNum.toString());
+        //Flutter2 Lname2 Address2 City2 State3 Descript2 2222222222
+      widget.api.createClient(inFName, inLName, inAddress, inCity, inState, inPhoneNum.toString(),inDes);
       MaterialPageRoute(builder: (context) => ViewClients(),
       );
     });
