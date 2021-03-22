@@ -31,6 +31,8 @@ class _AddClientState extends State<AddClient> {
     String inState = stateCon.text;
     final inDes = descriptCon.text;
     final inPhoneNum = double.parse(phoneNumCon.text);
+
+    print(inFName);
     List<String> states = new List();
     states.addAll([
       'aguascalientes',

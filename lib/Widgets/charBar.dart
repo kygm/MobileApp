@@ -45,3 +45,4 @@ class ChartBar extends StatelessWidget {
     );
   }
 }
+

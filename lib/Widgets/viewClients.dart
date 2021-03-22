@@ -1,6 +1,7 @@
 //import 'dart:io';
 
-import 'package:KYGM_Mobile/Widgets/clientDetails.dart';
+//import 'package:KYGM_Mobile/Widgets/clientDetails.dart';
+//import 'package:KYGM_Mobile/widgets/clientDetails.dart';
 import 'package:flutter/rendering.dart';
 import '../api.dart';
 import '../Models/client.dart';
@@ -9,6 +10,7 @@ import './addTransaction.dart';
 import '../main.dart';
 import './drawer.dart';
 import './addTransaction.dart';
+import './clientDetails.dart';
 import './addClient.dart';
 import 'dart:developer';
 
@@ -143,9 +145,12 @@ class _ViewClientsState extends State<ViewClients> {
                                         trailing: FlatButton(
                                           onPressed: () => {
                                             //_editClient(client['_id']),
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  clientDetails(client['id']),
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ClientDetails(client),
+                                              ),
                                             ),
                                           },
                                           child: Icon(

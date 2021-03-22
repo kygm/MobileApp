@@ -5,19 +5,16 @@ import './drawer.dart';
 import 'package:flutter/rendering.dart';
 import '../api.dart';
 
-class clientDetails extends StatefulWidget {
-  clientDetails(List client, {Key key, this.title, this.viewClients})
-      : super(key: key);
-  final String title;
-  //pull from database
-  final List<Client> viewClients;
+class ClientDetails extends StatefulWidget {
+  final List clients;
+  ClientDetails(this.clients);
 
   final ClientsApi api = ClientsApi();
   @override
   _clientDetailsState createState() => _clientDetailsState();
 }
 
-class _clientDetailsState extends State<clientDetails> {
+class _clientDetailsState extends State<ClientDetails> {
   List clients = [];
   bool loading = true;
   void initState() {
@@ -64,7 +61,7 @@ class _clientDetailsState extends State<clientDetails> {
                       padding: const EdgeInsets.symmetric(vertical: 30),
                       // client['id']==id?
                       child: FlatButton(
-                        onPressed: () => {},
+                        onPressed: () => {null},
                         child: ListTile(
                           leading: CircleAvatar(
                             radius: 30,
@@ -74,6 +71,18 @@ class _clientDetailsState extends State<clientDetails> {
                           title: Text(
                             (client['fname'] + " " + client['lname']),
                             style: TextStyle(fontSize: 20),
+                          ),
+                          trailing: FlatButton(
+                            onPressed: () => {
+                              //_editClient(client['_id']),
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      ClientDetails(client['id'])),
+                            },
+                            child: Icon(
+                              Icons.edit,
+                              size: 30,
+                            ),
                           ),
                         ),
                       ),
