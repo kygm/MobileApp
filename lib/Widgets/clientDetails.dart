@@ -5,23 +5,24 @@ import './drawer.dart';
 import 'package:flutter/rendering.dart';
 import '../api.dart';
 
-class clientDetails extends StatefulWidget {
-  clientDetails(double id, {Key key, this.title, this.viewClients})
-      : super(key: key);
-  final String title;
+class ClientDetails extends StatefulWidget {
+  //ClientDetails(double id, {Key key, this.title, this.viewClients})
+   //   : super(key: key);
+  //final String title;
   //pull from database
-  final List<Client> viewClients;
-
+  final List clients;
+  ClientDetails(this.clients);
+  
   final ClientsApi api = ClientsApi();
   @override
   _clientDetailsState createState() => _clientDetailsState();
 }
 
-class _clientDetailsState extends State<clientDetails> {
+class _clientDetailsState extends State<ClientDetails> {
   List clients = [];
   bool loading = true;
   void initState() {
-    super.initState();
+    super.initState();  
     final s = widget.api.testApi();
     print(s);
     widget.api.getClients().then((data) {
@@ -64,7 +65,7 @@ class _clientDetailsState extends State<clientDetails> {
                       padding: const EdgeInsets.symmetric(vertical: 30),
                       // client['id']==id?
                       child: FlatButton(
-                        onPressed: () => {},
+                        onPressed: () => {null},
                         child: ListTile(
                           leading: CircleAvatar(
                             radius: 30,
@@ -80,7 +81,7 @@ class _clientDetailsState extends State<clientDetails> {
                               //_editClient(client['_id']),
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      clientDetails(client['id'])),
+                                      ClientDetails(client['id'])),
                             },
                             child: Icon(
                               Icons.edit,
