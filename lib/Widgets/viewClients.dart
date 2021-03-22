@@ -153,11 +153,14 @@ class _ViewClientsState extends State<ViewClients> {
                                         trailing: FlatButton(
                                           onPressed: () => {
                                             //_editClient(client['_id']),
+
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    ClientDetails(client),
+                                                    ClientDetails(
+                                                  List.castFrom(clients),
+                                                ),
                                               ),
                                             ),
                                           },
