@@ -1,22 +1,15 @@
 import 'package:flutter/material.dart';
-import '../Models/client.dart';
 import '../main.dart';
 import './drawer.dart';
 import 'package:flutter/rendering.dart';
 import '../api.dart';
 
-class ClientDetails extends StatelessWidget {
-  //client['_id'],client['_id'],client['fname'],client['lname'],client['city'],client['state'],client['address'],client['phoneNumber']
-  final String id, fname, lname, city, address, state;
-  final phoneNumber;
-
-  ClientDetails(this.id, this.fname, this.lname, this.city, this.state,
-      this.address, this.phoneNumber);
-
-  final ClientsApi api = ClientsApi();
+class TransactionDetails extends StatelessWidget {
+  final String title, date, time, description;
+  final double cost, price;
+  TransactionDetails(this.title, this.date, this.time, this.description,
+      this.cost, this.price);
   @override
-  // _clientDetailsState createState() => _clientDetailsState();
-
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: MainDrawer(),
@@ -40,8 +33,6 @@ class ClientDetails extends StatelessWidget {
             Expanded(
               child: Column(
                 children: <Widget>[
-                  // client.toList()
-                  //...client<Widget>(
                   Expanded(
                     child: ListView(
                       children: <Widget>[
@@ -50,22 +41,22 @@ class ClientDetails extends StatelessWidget {
                           child: Center(
                             child: Column(
                               children: [
-                                Text(fname),
-                                Text(lname),
-                                Text(city),
-                                Text(state),
-                                Text(address),
-                                Text(phoneNumber),
+                                Text(title),
+                                Text(date),
+                                Text(time),
+                                Text(cost.toString()),
+                                Text(price.toString()),
+                                Text(description),
                               ],
                             ),
                           ),
-                        ),
+                        )
                       ],
                     ),
-                  ),
+                  )
                 ],
               ),
-            ),
+            )
           ],
         ),
       ),
