@@ -158,7 +158,7 @@ class _ViewClientsState extends State<ViewClients> {
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    ClientDetails(client),
+                                                    ClientDetails(client['_id'],client['fname'],client['lname'],client['city'],client['state'],client['address'],client['phoneNumber']),
                                               ),
                                             ),
                                           },

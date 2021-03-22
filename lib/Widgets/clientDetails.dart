@@ -6,7 +6,16 @@ import 'package:flutter/rendering.dart';
 import '../api.dart';
 
 class ClientDetails extends StatefulWidget {
-  ClientDetails(Map client);
+  //client['_id'],client['_id'],client['fname'],client['lname'],client['city'],client['state'],client['address'],client['phoneNumber']
+  final id;
+  final fname;
+  final lname;
+  final city;
+  final address;
+  final phoneNumber;
+  final state;
+
+  ClientDetails(this.id, this.fname, this.lname, this.city, this.state, this.address, this.phoneNumber);
 
   final ClientsApi api = ClientsApi();
   @override
@@ -59,23 +68,23 @@ class _clientDetailsState extends State<ClientDetails> {
                 padding: EdgeInsets.all(15.0),
                 children: <Widget>[
                   // client.toList()
-                  ...client<Widget>(
-                    (cli) => Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 30),
-                      child: FlatButton(
-                        onPressed: () => {null},
-                        child: ListTile(
-                          leading: CircleAvatar(
-                            radius: 30,
-                            child: Text('l'
-                                // cli['fname'].substring(0, 1) +
-                                //   cli['lname'].substring(0, 1)),
-                                ),
+                  //...client<Widget>(
+                   ListView(
+                     children: <Widget>[
+                       Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 30),
+                          child: TextButton(
+                            onPressed: () => {null},
+                            child: ListTile(
+                              leading: CircleAvatar(
+                                radius: 30,
+                                child: Text(""),
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                  ),
+                     ],
+                   ),                 
                 ],
               ),
             ),

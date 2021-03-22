@@ -19,8 +19,9 @@ class ClientsApi {
 
     return response.toString();
   }
-  Future<Client> createClient(String phoneNumber) async {
-    final response = await _dio.post('', data: {'phoneNumber': phoneNumber});
+  //inFName, inLName, inAddress, inCity, inState, inDes, inPhoneNum
+  Future<Client> createClient(String fname, String lname, String address, String city, String state, String descript, String phoneNumber) async {
+    final response = await _dio.post('/addClient', data: {'phoneNumber': phoneNumber}/*,{'lname': lname}*/);
     return Client.fromJson(response.data);
   }
 

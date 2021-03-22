@@ -41,7 +41,7 @@ void start() async {
     }
   ]);
 
-  app.post('/', [
+  app.post('/addClient', [
     setCors,
     (ServRequest req, ServResponse res) async {
       await clients.save(req.body);
