@@ -24,11 +24,9 @@ class _AddClientState extends State<AddClient> {
   final stateCon = TextEditingController(); //use select list, include mex/can
   final descriptCon = TextEditingController();
   final phoneNumCon = TextEditingController();
-  
+
   DateTime _selectedDate;
   void submitData() {
-
-
     final inFName = fNameCon.text;
     final inLName = lNameCon.text;
     final inAddress = addressCon.text;
@@ -37,17 +35,46 @@ class _AddClientState extends State<AddClient> {
     final inDes = descriptCon.text;
     final inPhoneNum = int.parse(phoneNumCon.text);
 
-    print(inFName + " "+ inLName + " " + inAddress+ " " + inCity+ " " + inState+ " " + inDes+ " " + inPhoneNum.toString());
-    
+    print(inFName +
+        " " +
+        inLName +
+        " " +
+        inAddress +
+        " " +
+        inCity +
+        " " +
+        inState +
+        " " +
+        inDes +
+        " " +
+        inPhoneNum.toString());
+
     setState(() {
-        //Flutter2 Lname2 Address2 City2 State3 Descript2 2222222222
-      widget.api.createClient(inFName, inLName, inAddress, inCity, inState, inPhoneNum.toString(),inDes);
-      MaterialPageRoute(builder: (context) => ViewClients(),
+      //Flutter2 Lname2 Address2 City2 State3 Descript2 2222222222
+      if (inFName.isEmpty) {
+            
+            return;
+          }
+          else if(inPhoneNum == null)
+          {
+        
+            return;
+          }
+          else
+          {
+            widget.api.createClient(inFName, inLName, inAddress, inCity, inState,
+          inPhoneNum.toString(), inDes);
+      MaterialPageRoute(
+        builder: (context) => ViewClients(),
       );
+          }
+      
+      Navigator.of(context).pop();
     });
     //List<String> states = new List();
-    
+
     inState.length == 2 ? inState.toUpperCase() : inState.toLowerCase();
+    Navigator.of(context).pop();
   }
 
   void _doDatePicker() {
@@ -74,7 +101,7 @@ class _AddClientState extends State<AddClient> {
           onPressed: () {
             Navigator.pop(context);
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => MyHomePage()));
+                context, MaterialPageRoute(builder: (context) => ViewClients()));
           },
           child: Text(
             "KYGM Services",
@@ -82,7 +109,7 @@ class _AddClientState extends State<AddClient> {
           ),
         ),
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[

@@ -124,13 +124,11 @@ class _ViewTransactsState extends State<ViewTransacts> {
                                                             'transactName'],
                                                         transact[
                                                             'transactDate'],
-                                                        transact[
-                                                            'transactTime'],
+                                                        transact['transactTime'],
                                                         transact['descript'],
-                                                        transact[
-                                                            'transactCost'],
-                                                        transact[
-                                                            'transactPrice']),
+                                                        transact['transactCost'],
+
+                                                        transact['transactPrice']),
                                               ),
                                             ),
                                           },
