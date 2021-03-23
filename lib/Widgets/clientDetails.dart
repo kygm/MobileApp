@@ -48,29 +48,39 @@ class ClientDetails extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(vertical: 15),
                           child: Column(
                             children: [
-                              ColoredBox(
-                                color: c1,
-                                child: Text("First Name:     " + fname),
+                              SizedBox(
+                                width: double.infinity,
+                                child: ColoredBox(
+                                  color: c1,
+                                  child: Center(
+                                      child: Text("First Name:     " + fname)),
+                                ),
                               ),
                               ColoredBox(
                                 color: c1,
-                                child: Text("Last Name:     " + lname),
+                                child: Center(
+                                    child: Text("Last Name:     " + lname)),
                               ),
                               ColoredBox(
                                 color: c1,
-                                child: Text("City Name:     " + city),
+                                child: Center(
+                                    child: Text("City Name:     " + city)),
                               ),
                               ColoredBox(
                                 color: c1,
-                                child: Text("State:      " + state),
+                                child:
+                                    Center(child: Text("State:      " + state)),
                               ),
                               ColoredBox(
                                 color: c1,
-                                child: Text("Address:     " + address),
+                                child: Center(
+                                    child: Text("Address:     " + address)),
                               ),
                               ColoredBox(
                                 color: c1,
-                                child: Text("Phone Number:     " + phoneNumber),
+                                child: Center(
+                                    child: Text(
+                                        "Phone Number:     " + phoneNumber)),
                               ),
                               TextButton(
                                 child: Text(
