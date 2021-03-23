@@ -53,34 +53,58 @@ class ClientDetails extends StatelessWidget {
                                 child: ColoredBox(
                                   color: c1,
                                   child: Center(
-                                      child: Text("First Name:     " + fname)),
+                                      child: Text("First Name:     " + fname,
+                                          style: TextStyle(fontSize: 20))),
                                 ),
                               ),
                               ColoredBox(
                                 color: c1,
                                 child: Center(
-                                    child: Text("Last Name:     " + lname)),
+                                    child: Text("Last Name:     " + lname,
+                                        style: TextStyle(fontSize: 20))),
                               ),
                               ColoredBox(
                                 color: c1,
                                 child: Center(
-                                    child: Text("City Name:     " + city)),
-                              ),
-                              ColoredBox(
-                                color: c1,
-                                child:
-                                    Center(child: Text("State:      " + state)),
+                                    child: Text("City Name:     " + city,
+                                        style: TextStyle(fontSize: 20))),
                               ),
                               ColoredBox(
                                 color: c1,
                                 child: Center(
-                                    child: Text("Address:     " + address)),
+                                    child: Text("State:      " + state,
+                                        style: TextStyle(fontSize: 20))),
+                              ),
+                              ColoredBox(
+                                color: c1,
+                                child: Center(
+                                    child: Text("Address:     " + address,
+                                        style: TextStyle(fontSize: 20))),
                               ),
                               ColoredBox(
                                 color: c1,
                                 child: Center(
                                     child: Text(
-                                        "Phone Number:     " + phoneNumber)),
+                                        "Phone Number:     " + phoneNumber,
+                                        style: TextStyle(fontSize: 20))),
+                              ),
+                              TextButton(
+                                child: Text(
+                                  'Add New Transaction',
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                                style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            Colors.green)),
+                                // onPressed: () {
+                                //   Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //         builder: (context) => AddNewTransaction(
+                                //             id, fname, lname, phoneNumber)),
+                                //   );
+                                // },
                               ),
                               TextButton(
                                 child: Text(

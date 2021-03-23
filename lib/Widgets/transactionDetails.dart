@@ -53,35 +53,42 @@ class TransactionDetails extends StatelessWidget {
                                       ColoredBox(
                                         color: c1,
                                         child: Text(
-                                            "Name:    " + fname + ' ' + lname),
+                                            "Name:    " + fname + ' ' + lname,
+                                            style: TextStyle(fontSize: 20)),
                                       ),
                                       ColoredBox(
                                         color: c1,
-                                        child: Text("Title:    " + title),
+                                        child: Text("Title:    " + title,
+                                            style: TextStyle(fontSize: 20)),
                                       ),
                                       ColoredBox(
                                         color: c1,
-                                        child: Text("Date:    " + date),
-                                      ),
-                                      ColoredBox(
-                                        color: c1,
-                                        child:
-                                            Text("Time:    " + time + " hours"),
-                                      ),
-                                      ColoredBox(
-                                        color: c1,
-                                        child: Text(
-                                            "Cost:    \$" + cost.toString()),
+                                        child: Text("Date:    " + date,
+                                            style: TextStyle(fontSize: 20)),
                                       ),
                                       ColoredBox(
                                         color: c1,
                                         child: Text(
-                                            "Price:    \$" + price.toString()),
+                                            "Time:    " + time + " hours",
+                                            style: TextStyle(fontSize: 20)),
                                       ),
                                       ColoredBox(
                                         color: c1,
                                         child: Text(
-                                            "Description:    " + description),
+                                            "Cost:    \$" + cost.toString(),
+                                            style: TextStyle(fontSize: 20)),
+                                      ),
+                                      ColoredBox(
+                                        color: c1,
+                                        child: Text(
+                                            "Price:    \$" + price.toString(),
+                                            style: TextStyle(fontSize: 20)),
+                                      ),
+                                      ColoredBox(
+                                        color: c1,
+                                        child: Text(
+                                            "Description:    " + description,
+                                            style: TextStyle(fontSize: 20)),
                                       ),
                                       TextButton(
                                         child: Text(
