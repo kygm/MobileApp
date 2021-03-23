@@ -51,6 +51,16 @@ void start() async {
       );
     }
   ]);
+  app.post('/addTransaction', [
+    setCors,
+    (ServRequest req, ServResponse res) async {
+      await transactions.save(req.body);
+      print(req.body);
+      return res.json(
+        await transactions.findOne(where.eq('lname', req.body['lname'])),
+      );
+    }
+  ]);
 
   app.post('/deleteClient', [
     setCors,
