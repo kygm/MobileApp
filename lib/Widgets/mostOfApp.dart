@@ -22,13 +22,14 @@ class MostOfApp extends StatefulWidget {
 class _MostOfAppState extends State<MostOfApp> {
   List transacts = [];
   bool loading = true;
-  String x;
   double getTotal(transacts) {
-    double x = 0;
+    double p = 0, c = 0, total = 0;
     transacts.forEach((t) {
-      x += t.transactPrice;
+      p += t.transactPrice;
+      c += t.transactCost;
     });
-    return x;
+    total = p - c;
+    return total;
   }
 
   void initState() {

@@ -10,10 +10,40 @@ class TransactionDetails extends StatelessWidget {
   final int cost, price;
   var c1 = Colors.lightBlue;
   bool editStatus = false;
+  final titleCon = TextEditingController(),
+      dateCon = TextEditingController(),
+      costCon = TextEditingController(),
+      priceCon = TextEditingController(),
+      timeCon = TextEditingController(),
+      descriptionCon = TextEditingController();
   TransactionDetails(this.fname, this.lname, this.title, this.date, this.time,
       this.description, this.cost, this.price);
+
   @override
   Widget build(BuildContext context) {
+    void submitData() {
+      final inTitle = titleCon.text;
+      final inDate = dateCon.text;
+      final inCost = double.parse(costCon.text);
+      final inPrice = double.parse(priceCon.text);
+      final inTime = timeCon.text;
+      final inDes = descriptionCon.text;
+      final inEntered = DateTime.now();
+      if (inTitle.isEmpty ||
+          inDate.isEmpty ||
+          inPrice == null ||
+          inCost == null ||
+          inDes.isEmpty) {
+        return;
+      } else {
+        //String fname, String lname, String phoneNumber, String transactDate, String transactTime, String descript, var transactCost, var transactPrice
+        //widget.api.createTransaction(
+        //    fname, lname, phoneNumber, inDate, inTime, inDes, inCost, inPrice);
+        Navigator.of(context).pop();
+      }
+      Navigator.of(context).pop();
+    }
+
     print(title);
     return Scaffold(
       drawer: MainDrawer(),
@@ -56,58 +86,72 @@ class TransactionDetails extends StatelessWidget {
                                 ColoredBox(
                                   color: c1,
                                   child: TextField(
-                                      decoration: InputDecoration(
-                                          prefixText: "Title:    ",
-                                          labelText: title),
-                                      style: TextStyle(fontSize: 20)),
+                                    controller: titleCon,
+                                    decoration: InputDecoration(
+                                        prefixText: "Title:    ",
+                                        labelText: title),
+                                    style: TextStyle(fontSize: 20),
+                                    onSubmitted: (_) => submitData(),
+                                  ),
                                 ),
                                 ColoredBox(
                                   color: c1,
                                   child: TextField(
-                                      decoration: InputDecoration(
-                                          prefixText: "Date:    ",
-                                          labelText: date),
-                                      style: TextStyle(fontSize: 20)),
+                                    controller: dateCon,
+                                    decoration: InputDecoration(
+                                        prefixText: "Date:    ",
+                                        labelText: date),
+                                    style: TextStyle(fontSize: 20),
+                                    onSubmitted: (_) => submitData(),
+                                  ),
                                 ),
                                 ColoredBox(
                                   color: c1,
                                   child: TextField(
+                                    controller: timeCon,
                                     decoration: InputDecoration(
                                         prefixText: "Time:    ",
                                         labelText: time,
                                         suffixText: " hours"),
                                     style: TextStyle(fontSize: 20),
                                     keyboardType: TextInputType.number,
+                                    onSubmitted: (_) => submitData(),
                                   ),
                                 ),
                                 ColoredBox(
                                   color: c1,
                                   child: TextField(
+                                    controller: costCon,
                                     decoration: InputDecoration(
                                         prefixText: "Cost:    \$",
                                         labelText: cost.toString()),
                                     style: TextStyle(fontSize: 20),
                                     keyboardType: TextInputType.number,
+                                    onSubmitted: (_) => submitData(),
                                   ),
                                 ),
                                 ColoredBox(
                                   color: c1,
                                   child: TextField(
+                                    controller: priceCon,
                                     decoration: InputDecoration(
                                         prefixText: "Price:    \$",
                                         labelText: price.toString()),
                                     style: TextStyle(fontSize: 20),
                                     keyboardType: TextInputType.number,
+                                    onSubmitted: (_) => submitData(),
                                   ),
                                 ),
                                 ColoredBox(
                                   color: c1,
                                   child: TextField(
+                                    controller: descriptionCon,
                                     decoration: InputDecoration(
                                         prefixText: "Description:    ",
                                         labelText: description),
                                     style: TextStyle(fontSize: 20),
                                     keyboardType: TextInputType.multiline,
+                                    onSubmitted: (_) => submitData(),
                                   ),
                                 ),
                                 TextButton(
@@ -169,5 +213,6 @@ class TransactionDetails extends StatelessWidget {
     } else if (editStatus == true) {
       editStatus = false;
     }
+    //setstate
   }
 }

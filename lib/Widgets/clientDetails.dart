@@ -10,13 +10,13 @@ import './addTransaction.dart';
 
 class ClientDetails extends StatelessWidget {
   //client['_id'],client['_id'],client['fname'],client['lname'],client['city'],client['state'],client['address'],client['phoneNumber']
-  // final fNameCon,
-  //     lNameCon,
-  //     addressCon,
-  //     cityCon,
-  //     stateCon,
-  //     descriptCon,
-  //     phoneNumCon = TextEditingController();
+  final fNameCon = TextEditingController(),
+      lNameCon = TextEditingController(),
+      addressCon = TextEditingController(),
+      cityCon = TextEditingController(),
+      stateCon = TextEditingController(),
+      descriptCon = TextEditingController(),
+      phoneNumCon = TextEditingController();
   DateTime _selectedDate;
   final String id, fname, lname, city, address, state;
   final phoneNumber;
@@ -38,6 +38,31 @@ class ClientDetails extends StatelessWidget {
   //_ClientDetailsState createState() => _ClientDetailsState();
 
   Widget build(BuildContext context) {
+    // void submitData() {
+    //   final inFName = fNameCon.text;
+    //   final inLName = lNameCon.text;
+    //   final inAddress = addressCon.text;
+    //   final inCity = cityCon.text;
+    //   String inState = stateCon.text;
+    //   final inDes = descriptCon.text;
+    //   final inPhoneNum = int.parse(phoneNumCon.text);
+    //   setState(() {
+    //     widget.api.createClient(inFName, inLName, inAddress, inCity, inState,
+    //         inPhoneNum.toString(), inDes);
+    //     //Navigator.of(context).pop();
+    //     MaterialPageRoute(
+    //       builder: (context) => MyHomePage(),
+    //     );
+    //     //Navigator.of(context).pop();
+
+    //     Navigator.of(context).pop();
+    //   });
+    //   //List<String> states = new List();
+
+    //   inState.length == 2 ? inState.toUpperCase() : inState.toLowerCase();
+    //   Navigator.of(context).pop();
+    // }
+
     return Scaffold(
       drawer: MainDrawer(),
       appBar: AppBar(
@@ -71,6 +96,7 @@ class ClientDetails extends StatelessWidget {
                                 color: c1,
                                 child: Center(
                                     child: TextField(
+                                        controller: fNameCon,
                                         decoration: InputDecoration(
                                             prefixText: "First Name: ",
                                             labelText: fname),
@@ -80,6 +106,7 @@ class ClientDetails extends StatelessWidget {
                                 color: c1,
                                 child: Center(
                                     child: TextField(
+                                        controller: lNameCon,
                                         decoration: InputDecoration(
                                             prefixText: "Last Name: ",
                                             labelText: lname),
@@ -89,6 +116,7 @@ class ClientDetails extends StatelessWidget {
                                 color: c1,
                                 child: Center(
                                     child: TextField(
+                                        controller: cityCon,
                                         decoration: InputDecoration(
                                             prefixText: "City Name: ",
                                             labelText: city),
@@ -98,6 +126,7 @@ class ClientDetails extends StatelessWidget {
                                 color: c1,
                                 child: Center(
                                     child: TextField(
+                                        controller: stateCon,
                                         decoration: InputDecoration(
                                             prefixText: "State: ",
                                             labelText: state),
@@ -107,6 +136,7 @@ class ClientDetails extends StatelessWidget {
                                 color: c1,
                                 child: Center(
                                   child: TextField(
+                                    controller: addressCon,
                                     decoration: InputDecoration(
                                         prefixText: "Address:",
                                         labelText: address),
@@ -120,6 +150,7 @@ class ClientDetails extends StatelessWidget {
                                 color: c1,
                                 child: Center(
                                   child: TextField(
+                                    controller: phoneNumCon,
                                     inputFormatters: [
                                       FilteringTextInputFormatter.digitsOnly,
                                       LengthLimitingTextInputFormatter(11)
@@ -166,9 +197,8 @@ class ClientDetails extends StatelessWidget {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        // builder: (context) => AddNewTransaction(
-                                        //     id, fname, lname, phoneNumber),
-                                        ),
+                                        builder: (context) => AddTransaction(
+                                            id, fname, lname, phoneNumber)),
                                   );
                                 },
                               ),
@@ -210,7 +240,7 @@ class ClientDetails extends StatelessWidget {
     } else if (editStatus == true) {
       editStatus = false;
     }
-    //do a setstate?
+    //do a setstate
   }
 
   @override

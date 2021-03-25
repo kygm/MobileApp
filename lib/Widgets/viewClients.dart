@@ -56,13 +56,6 @@ class _ViewClientsState extends State<ViewClients> {
     });
   }
 
-  void _addTransaction(id) {
-    setState(() {
-      print("Add transact for " + id);
-      AddTransaction(_addNewTransaction);
-    });
-  }
-
   void initState() {
     super.initState();
     //print(3);
