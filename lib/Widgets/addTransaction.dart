@@ -2,15 +2,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/services.dart';
+import '../api.dart';
 import './drawer.dart';
 // import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import '../main.dart';
 
 class AddTransaction extends StatefulWidget {
-  final Function addTrans;
+  //final Function addTrans;
+  final String phoneNumber;
+  final String fname;
+  final String lname;
+  final id;
 
-  AddTransaction(this.addTrans);
+  AddTransaction(this.id, this.fname, this.lname, this.phoneNumber);
 
+  final ClientsApi api = ClientsApi();
   @override
   _AddTransactionState createState() => _AddTransactionState();
 }
@@ -22,7 +28,28 @@ class _AddTransactionState extends State<AddTransaction> {
   final priceController = TextEditingController();
   final timeController = TextEditingController();
   final descriptionController = TextEditingController();
+  
 
+  void initState() {
+    
+    super.initState();
+    //print(3);
+    final s = widget.api.testApi();
+    //print(s.toString());
+    //
+    //print(s);
+    //print("test");
+
+    widget.api.getClients().then((data) {
+      setState(() {
+        //clients = data;
+        //print(clients);
+        //loading = false;
+      });
+    });
+
+    //print(3);
+  }
   void submitData() {
     final inTitle = titleController.text;
     final inDate = dateController.text;
@@ -33,17 +60,21 @@ class _AddTransactionState extends State<AddTransaction> {
     final inEntered = DateTime.now();
     if (inTitle.isEmpty || inDate.isEmpty || inPrice == null || inCost == null || inDes.isEmpty) {
       return;
-    } else {
-      widget.addTrans(
-          inTitle, inDate, inCost, inPrice, inTime, inDes, inEntered);
+    } 
+    else 
+    {
+      //String fname, String lname, String phoneNumber, String transactDate, String transactTime, String descript, var transactCost, var transactPrice
+      //widget.api.createTransaction(
+      //    fname, lname, phoneNumber, inDate, inTime, inDes, inCost, inPrice);
       Navigator.of(context).pop();
     }
     Navigator.of(context).pop();
   }
-
+  
   String dropdownValue = 'One';
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       drawer: MainDrawer(),
       appBar: AppBar(
@@ -71,6 +102,10 @@ class _AddTransactionState extends State<AddTransaction> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
+                      Text(
+                         ""
+                      ),
+
                       TextField(
                         controller: titleController,
                         decoration: InputDecoration(labelText: 'Service Name:'),
@@ -109,7 +144,7 @@ class _AddTransactionState extends State<AddTransaction> {
                       ),
                       //use dropdown selector for service, purchase, or sale
                       Center(
-                        child: RaisedButton(
+                        child: ElevatedButton(
                           onPressed: submitData,
                           child: Text('Add Transaction'),
                         ),

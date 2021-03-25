@@ -5,6 +5,7 @@ import './drawer.dart';
 import 'package:flutter/rendering.dart';
 import '../api.dart';
 import './viewClients.dart';
+import './addTransaction.dart';
 
 class ClientDetails extends StatelessWidget {
   //client['_id'],client['_id'],client['fname'],client['lname'],client['city'],client['state'],client['address'],client['phoneNumber']
@@ -97,14 +98,14 @@ class ClientDetails extends StatelessWidget {
                                     backgroundColor:
                                         MaterialStateProperty.all<Color>(
                                             Colors.green)),
-                                // onPressed: () {
-                                //   Navigator.push(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //         builder: (context) => AddNewTransaction(
-                                //             id, fname, lname, phoneNumber)),
-                                //   );
-                                // },
+                                 onPressed: () {
+                                   Navigator.push(
+                                     context,
+                                     MaterialPageRoute(
+                                        builder: (context) => AddTransaction(
+                                             id, fname, lname, phoneNumber)),
+                                );
+                                 },
                               ),
                               TextButton(
                                 child: Text(
