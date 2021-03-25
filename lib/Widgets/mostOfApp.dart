@@ -34,8 +34,8 @@ class _MostOfAppState extends State<MostOfApp> {
           },
           child: Text(
             "KYGM Services",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23, color: Colors.black),
-            
+            style: TextStyle(
+                fontWeight: FontWeight.bold, fontSize: 23, color: Colors.black),
           ),
         ),
       ),
@@ -96,19 +96,35 @@ class _MostOfAppState extends State<MostOfApp> {
               color: Colors.green,
               //               minWidth: 370,
               child: Text('This Months Revenue'),
-              onPressed: () => {print("under dev...")},
+              onPressed: () => {
+                print("under dev..."),
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) => _revenueWindow(context),
+                )
+              },
             ),
             TextButton(
-              child: Text('View Clients', style: TextStyle(color: Colors.black),),
-              style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.lightGreen)),
+              child: Text(
+                'View Clients',
+                style: TextStyle(color: Colors.black),
+              ),
+              style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.lightGreen)),
               onPressed: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => ViewClients()));
               },
             ),
             TextButton(
-              child: Text('Add Clients', style: TextStyle(color: Colors.black),),
-              style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.lightGreen)),
+              child: Text(
+                'Add Clients',
+                style: TextStyle(color: Colors.black),
+              ),
+              style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.lightGreen)),
               onPressed: () {
                 Navigator.push(
                     context,
@@ -117,24 +133,30 @@ class _MostOfAppState extends State<MostOfApp> {
               },
             ),
             TextButton(
-              child: Text('View Transactions', style: TextStyle(color: Colors.black),),
-              style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.lightGreen)),
+              child: Text(
+                'View Transactions',
+                style: TextStyle(color: Colors.black),
+              ),
+              style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.lightGreen)),
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            ViewTransacts()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ViewTransacts()));
               },
             ),
             TextButton(
-              child: Text('Add Transactions', style: TextStyle(color: Colors.black),),
-              style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.lightGreen)),
+              child: Text(
+                'Add Transactions',
+                style: TextStyle(color: Colors.black),
+              ),
+              style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.lightGreen)),
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => ViewClients()),
+                  MaterialPageRoute(builder: (context) => ViewClients()),
                 );
               },
             ),
@@ -162,4 +184,26 @@ class _MostOfAppState extends State<MostOfApp> {
       ),
     );
   }
+}
+
+Widget _revenueWindow(BuildContext context) {
+  return new AlertDialog(
+    title: const Text('Total Revenue'),
+    content: new Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text("revenue"),
+      ],
+    ),
+    actions: <Widget>[
+      new FlatButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        textColor: Theme.of(context).primaryColor,
+        child: const Text('Close'),
+      ),
+    ],
+  );
 }

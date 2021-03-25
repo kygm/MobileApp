@@ -58,7 +58,11 @@ class _AddTransactionState extends State<AddTransaction> {
     final inTime = timeController.text;
     final inDes = descriptionController.text;
     final inEntered = DateTime.now();
-    if (inTitle.isEmpty || inDate.isEmpty || inPrice == null || inCost == null || inDes.isEmpty) {
+    if (inTitle.isEmpty ||
+        inDate.isEmpty ||
+        inPrice == null ||
+        inCost == null ||
+        inDes.isEmpty) {
       return;
     } 
     else 
@@ -119,14 +123,18 @@ class _AddTransactionState extends State<AddTransaction> {
                       ),
                       TextField(
                         controller: costController,
-                        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                         decoration: InputDecoration(labelText: 'Cost:'),
                         keyboardType: TextInputType.number,
                         onSubmitted: (_) => submitData(),
                       ),
                       TextField(
                         controller: priceController,
-                        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                         decoration: InputDecoration(labelText: 'Price:'),
                         keyboardType: TextInputType.number,
                         onSubmitted: (_) => submitData(),
