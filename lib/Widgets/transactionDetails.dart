@@ -9,6 +9,7 @@ class TransactionDetails extends StatelessWidget {
   final String fname, lname, title, date, time, description;
   final int cost, price;
   var c1 = Colors.lightBlue;
+  bool editStatus = false;
   TransactionDetails(this.fname, this.lname, this.title, this.date, this.time,
       this.description, this.cost, this.price);
   @override
@@ -34,88 +35,123 @@ class TransactionDetails extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Expanded(
-              child: Column(
+              child: ListView(
                 children: <Widget>[
-                  Expanded(
-                    child: ListView(
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 30),
-                          child: Center(
-                            child: Expanded(
-                              child: SizedBox(
-                                height: 1000,
-                                width: double.infinity,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(15.0),
-                                  child: ListView(
-                                    children: <Widget>[
-                                      ColoredBox(
-                                        color: c1,
-                                        child: Text(
-                                            "Name:    " + fname + ' ' + lname,
-                                            style: TextStyle(fontSize: 20)),
-                                      ),
-                                      ColoredBox(
-                                        color: c1,
-                                        child: Text("Title:    " + title,
-                                            style: TextStyle(fontSize: 20)),
-                                      ),
-                                      ColoredBox(
-                                        color: c1,
-                                        child: Text("Date:    " + date,
-                                            style: TextStyle(fontSize: 20)),
-                                      ),
-                                      ColoredBox(
-                                        color: c1,
-                                        child: Text(
-                                            "Time:    " + time + " hours",
-                                            style: TextStyle(fontSize: 20)),
-                                      ),
-                                      ColoredBox(
-                                        color: c1,
-                                        child: Text(
-                                            "Cost:    \$" + cost.toString(),
-                                            style: TextStyle(fontSize: 20)),
-                                      ),
-                                      ColoredBox(
-                                        color: c1,
-                                        child: Text(
-                                            "Price:    \$" + price.toString(),
-                                            style: TextStyle(fontSize: 20)),
-                                      ),
-                                      ColoredBox(
-                                        color: c1,
-                                        child: Text(
-                                            "Description:    " + description,
-                                            style: TextStyle(fontSize: 20)),
-                                      ),
-                                      TextButton(
-                                        child: Text(
-                                          'Back To Transactions',
-                                          style: TextStyle(color: Colors.black),
-                                        ),
-                                        style: ButtonStyle(
-                                            backgroundColor:
-                                                MaterialStateProperty.all<
-                                                    Color>(Colors.lightGreen)),
-                                        onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ViewTransacts()),
-                                          );
-                                        },
-                                      ),
-                                    ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 30),
+                    child: Center(
+                      child: Expanded(
+                        child: SizedBox(
+                          height: 1000,
+                          width: double.infinity,
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: ListView(
+                              children: <Widget>[
+                                ColoredBox(
+                                  color: c1,
+                                  child: Text("Name:    " + fname + ' ' + lname,
+                                      style: TextStyle(fontSize: 20)),
+                                ),
+                                ColoredBox(
+                                  color: c1,
+                                  child: TextField(
+                                      decoration: InputDecoration(
+                                          prefixText: "Title:    ",
+                                          labelText: title),
+                                      style: TextStyle(fontSize: 20)),
+                                ),
+                                ColoredBox(
+                                  color: c1,
+                                  child: TextField(
+                                      decoration: InputDecoration(
+                                          prefixText: "Date:    ",
+                                          labelText: date),
+                                      style: TextStyle(fontSize: 20)),
+                                ),
+                                ColoredBox(
+                                  color: c1,
+                                  child: TextField(
+                                    decoration: InputDecoration(
+                                        prefixText: "Time:    ",
+                                        labelText: time,
+                                        suffixText: " hours"),
+                                    style: TextStyle(fontSize: 20),
+                                    keyboardType: TextInputType.number,
                                   ),
                                 ),
-                              ),
+                                ColoredBox(
+                                  color: c1,
+                                  child: TextField(
+                                    decoration: InputDecoration(
+                                        prefixText: "Cost:    \$",
+                                        labelText: cost.toString()),
+                                    style: TextStyle(fontSize: 20),
+                                    keyboardType: TextInputType.number,
+                                  ),
+                                ),
+                                ColoredBox(
+                                  color: c1,
+                                  child: TextField(
+                                    decoration: InputDecoration(
+                                        prefixText: "Price:    \$",
+                                        labelText: price.toString()),
+                                    style: TextStyle(fontSize: 20),
+                                    keyboardType: TextInputType.number,
+                                  ),
+                                ),
+                                ColoredBox(
+                                  color: c1,
+                                  child: TextField(
+                                    decoration: InputDecoration(
+                                        prefixText: "Description:    ",
+                                        labelText: description),
+                                    style: TextStyle(fontSize: 20),
+                                    keyboardType: TextInputType.multiline,
+                                  ),
+                                ),
+                                TextButton(
+                                  onPressed: editStateChange,
+                                  child: Text('Edit Transaction',
+                                      style: TextStyle(color: Colors.black)),
+                                  style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all<Color>(
+                                              Colors.yellow)),
+                                ),
+                                TextButton(
+                                  // enabled:editStatus,
+                                  onPressed: null,
+                                  child: Text('Save Transaction',
+                                      style: TextStyle(color: Colors.black)),
+                                  style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all<Color>(
+                                              Colors.blue)),
+                                ),
+                                TextButton(
+                                  child: Text(
+                                    'Back To Transactions',
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                  style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all<Color>(
+                                              Colors.lightGreen)),
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ViewTransacts()),
+                                    );
+                                  },
+                                ),
+                              ],
                             ),
                           ),
-                        )
-                      ],
+                        ),
+                      ),
                     ),
                   )
                 ],
@@ -125,5 +161,13 @@ class TransactionDetails extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void editStateChange() {
+    if (editStatus == false) {
+      editStatus = true;
+    } else if (editStatus == true) {
+      editStatus = false;
+    }
   }
 }

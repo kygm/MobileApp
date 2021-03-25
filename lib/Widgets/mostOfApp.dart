@@ -7,21 +7,43 @@ import 'drawer.dart';
 import '../Models/client.dart';
 import '../Models/transaction.dart';
 import './addClient.dart';
+import '../api.dart';
 import './addTransaction.dart';
 import 'package:intl/intl.dart';
 
 class MostOfApp extends StatefulWidget {
   final List clients;
   MostOfApp(this.clients);
+  final ClientsApi api = ClientsApi();
   @override
   _MostOfAppState createState() => _MostOfAppState();
 }
 
 class _MostOfAppState extends State<MostOfApp> {
-  List<Client> viewClients; //filler so it doesnt break
-  List<Transaction> viewTransactions; //filler so it doesnt break
-  void _addNewTransaction(String phoneNum) {}
+  List transacts = [];
+  bool loading = true;
+  String x;
+  double getTotal(transacts) {
+    double x = 0;
+    transacts.forEach((t) {
+      x += t.transactPrice;
+    });
+    return x;
+  }
 
+  void initState() {
+    super.initState();
+    final s = widget.api.getTransactions();
+    widget.api.getTransactions().then((data) {
+      setState(() {
+        transacts = data;
+        //print(transacts.toString());
+        loading = false;
+      });
+    });
+  }
+
+  void _addNewTransaction(String phoneNum) {}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -184,26 +206,27 @@ class _MostOfAppState extends State<MostOfApp> {
       ),
     );
   }
-}
 
-Widget _revenueWindow(BuildContext context) {
-  return new AlertDialog(
-    title: const Text('Total Revenue'),
-    content: new Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text("revenue"),
-      ],
-    ),
-    actions: <Widget>[
-      new FlatButton(
-        onPressed: () {
-          Navigator.of(context).pop();
-        },
-        textColor: Theme.of(context).primaryColor,
-        child: const Text('Close'),
+  Widget _revenueWindow(BuildContext context) {
+    String total = getTotal(transacts).toString();
+    return new AlertDialog(
+      title: const Text('Total Revenue'),
+      content: new Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(total),
+        ],
       ),
-    ],
-  );
+      actions: <Widget>[
+        new FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          textColor: Theme.of(context).primaryColor,
+          child: const Text('Close'),
+        ),
+      ],
+    );
+  }
 }

@@ -28,14 +28,12 @@ class _AddClientState extends State<AddClient> {
 
   DateTime _selectedDate;
 
-  void sendToHome()
-  {
+  void sendToHome() {
     setState(() {
-       MaterialPageRoute(
+      MaterialPageRoute(
         builder: (context) => MyHomePage(),
       );
       Navigator.of(context).pop();
-
     });
   }
 
@@ -62,11 +60,7 @@ class _AddClientState extends State<AddClient> {
         " " +
         inPhoneNum.toString());
 
-
-
     setState(() {
-      //Flutter2 Lname2 Address2 City2 State3 Descript2 2222222222
-
       widget.api.createClient(inFName, inLName, inAddress, inCity, inState,
           inPhoneNum.toString(), inDes);
       //Navigator.of(context).pop();
@@ -177,12 +171,13 @@ class _AddClientState extends State<AddClient> {
                         ElevatedButton(
                           onPressed: sendToHome,
                           child: Text('Cancel'),
-                          style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.red) ),
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all<Color>(Colors.red)),
                         ),
                         ElevatedButton(
                           onPressed: submitData,
                           child: Text('Add Client'),
-                          
                         ),
                       ],
                     ),
