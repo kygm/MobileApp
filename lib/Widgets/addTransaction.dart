@@ -105,45 +105,45 @@ class _AddTransactionState extends State<AddTransaction> {
                     children: <Widget>[
                       Text(""),
 
-                      TextField(
+                      TextFormField(
                         controller: titleCon,
                         decoration: InputDecoration(labelText: 'Service Name:'),
-                        onSubmitted: (_) => submitData(),
+                        onFieldSubmitted: (_) => submitData(),
                       ),
-                      TextField(
+                      TextFormField(
                         controller: dateCon,
                         decoration: InputDecoration(labelText: 'Service Date:'),
                         keyboardType: TextInputType.datetime,
-                        onSubmitted: (_) => submitData(),
+                        onFieldSubmitted: (_) => submitData(),
                       ),
-                      TextField(
+                      TextFormField(
                         controller: costCon,
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly
                         ],
                         decoration: InputDecoration(labelText: 'Cost:'),
                         keyboardType: TextInputType.number,
-                        onSubmitted: (_) => submitData(),
+                        onFieldSubmitted: (_) => submitData(),
                       ),
-                      TextField(
+                      TextFormField(
                         controller: priceCon,
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly
                         ],
                         decoration: InputDecoration(labelText: 'Price:'),
                         keyboardType: TextInputType.number,
-                        onSubmitted: (_) => submitData(),
+                        onFieldSubmitted: (_) => submitData(),
                       ),
-                      TextField(
+                      TextFormField(
                         controller: timeCon,
                         decoration: InputDecoration(labelText: 'Duration:'),
-                        onSubmitted: (_) => submitData(),
+                        onFieldSubmitted: (_) => submitData(),
                       ),
-                      TextField(
+                      TextFormField(
                         controller: descriptionCon,
                         decoration: InputDecoration(labelText: 'Description:'),
                         keyboardType: TextInputType.multiline,
-                        onSubmitted: (_) => submitData(),
+                        onFieldSubmitted: (_) => submitData(),
                       ),
                       //use dropdown selector for service, purchase, or sale
                       Center(
