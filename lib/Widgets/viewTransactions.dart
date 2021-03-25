@@ -96,6 +96,7 @@ class _ViewTransactsState extends State<ViewTransacts> {
                                           MaterialPageRoute(
                                             builder: (context) =>
                                                 TransactionDetails(
+                                                    transact['id'],
                                                     transact['fname'],
                                                     transact['lname'],
                                                     transact['transactName'],

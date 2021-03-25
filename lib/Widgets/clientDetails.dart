@@ -8,8 +8,20 @@ import '../api.dart';
 import './viewClients.dart';
 import './addTransaction.dart';
 
-class ClientDetails extends StatelessWidget {
-  //client['_id'],client['_id'],client['fname'],client['lname'],client['city'],client['state'],client['address'],client['phoneNumber']
+class ClientDetails extends StatefulWidget {
+  final String id, fname, lname, city, address, state, phoneNumber;
+  ClientDetails(this.id, this.fname, this.lname, this.city, this.address,
+      this.state, this.phoneNumber);
+  final ClientsApi api = ClientsApi();
+  @override
+  _ClientDetailsState createState() =>
+      _ClientDetailsState(id, fname, lname, city, address, state, phoneNumber);
+}
+
+class _ClientDetailsState extends State<ClientDetails> {
+  final String id, fname, lname, city, address, state, phoneNumber;
+  _ClientDetailsState(this.id, this.fname, this.lname, this.city, this.address,
+      this.state, this.phoneNumber);
   final fNameCon = TextEditingController(),
       lNameCon = TextEditingController(),
       addressCon = TextEditingController(),
@@ -18,51 +30,53 @@ class ClientDetails extends StatelessWidget {
       descriptCon = TextEditingController(),
       phoneNumCon = TextEditingController();
   DateTime _selectedDate;
-  final String id, fname, lname, city, address, state;
-  final phoneNumber;
   var c1 = Colors.lightBlue;
   bool editStatus = false;
+  void editStateChange() {
+    if (editStatus == false) {
+      setState(() => editStatus = true);
+    } else if (editStatus == true) {
+      setState(() => editStatus = false);
+    }
+  }
 
-  ClientDetails(
-    this.id,
-    this.fname,
-    this.lname,
-    this.city,
-    this.state,
-    this.address,
-    this.phoneNumber,
-  );
+  void _doDatePicker() {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2020),
+      lastDate: DateTime.now(),
+    ).then((pickedDate) {
+      if (pickedDate == null) return;
+      setState(() {
+        _selectedDate = pickedDate;
+      });
+    });
+  }
 
-  final ClientsApi api = ClientsApi();
+  submitData() {
+    final inFName = fNameCon.text;
+    final inLName = lNameCon.text;
+    final inAddress = addressCon.text;
+    final inCity = cityCon.text;
+    String inState = stateCon.text;
+    final inDes = descriptCon.text;
+    final inPhoneNum = int.parse(phoneNumCon.text);
+    setState(() {
+      widget.api.createClient(inFName, inLName, inAddress, inCity, inState,
+          inPhoneNum.toString(), inDes);
+      MaterialPageRoute(
+        builder: (context) => MyHomePage(),
+      );
+      Navigator.of(context).pop();
+    });
+    //List<String> states = new List();
+    inState.length == 2 ? inState.toUpperCase() : inState.toLowerCase();
+    Navigator.of(context).pop();
+  }
+
   @override
-  //_ClientDetailsState createState() => _ClientDetailsState();
-
   Widget build(BuildContext context) {
-    // void submitData() {
-    //   final inFName = fNameCon.text;
-    //   final inLName = lNameCon.text;
-    //   final inAddress = addressCon.text;
-    //   final inCity = cityCon.text;
-    //   String inState = stateCon.text;
-    //   final inDes = descriptCon.text;
-    //   final inPhoneNum = int.parse(phoneNumCon.text);
-    //   setState(() {
-    //     widget.api.createClient(inFName, inLName, inAddress, inCity, inState,
-    //         inPhoneNum.toString(), inDes);
-    //     //Navigator.of(context).pop();
-    //     MaterialPageRoute(
-    //       builder: (context) => MyHomePage(),
-    //     );
-    //     //Navigator.of(context).pop();
-
-    //     Navigator.of(context).pop();
-    //   });
-    //   //List<String> states = new List();
-
-    //   inState.length == 2 ? inState.toUpperCase() : inState.toLowerCase();
-    //   Navigator.of(context).pop();
-    // }
-
     return Scaffold(
       drawer: MainDrawer(),
       appBar: AppBar(
@@ -174,9 +188,9 @@ class ClientDetails extends StatelessWidget {
                                             Colors.yellow)),
                               ),
                               TextButton(
-                                // enabled:editStatus,
-                                onPressed: null,
-                                child: Text('Save Transaction',
+                                onPressed:
+                                    editStatus == true ? submitData() : null,
+                                child: Text('Save Client',
                                     style: TextStyle(color: Colors.black)),
                                 style: ButtonStyle(
                                     backgroundColor:
@@ -184,7 +198,6 @@ class ClientDetails extends StatelessWidget {
                                             Colors.blue)),
                               ),
                               TextButton(
-                                // enabled:
                                 child: Text(
                                   'Add New Transaction',
                                   style: TextStyle(color: Colors.black),
@@ -194,12 +207,15 @@ class ClientDetails extends StatelessWidget {
                                         MaterialStateProperty.all<Color>(
                                             Colors.green)),
                                 onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => AddTransaction(
-                                            id, fname, lname, phoneNumber)),
-                                  );
+                                  editStatus == true
+                                      ? null
+                                      : Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  AddTransaction(id, fname,
+                                                      lname, phoneNumber)),
+                                        );
                                 },
                               ),
                               TextButton(
@@ -232,20 +248,5 @@ class ClientDetails extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  void editStateChange() {
-    if (editStatus == false) {
-      editStatus = true;
-    } else if (editStatus == true) {
-      editStatus = false;
-    }
-    //do a setstate
-  }
-
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    throw UnimplementedError();
   }
 }

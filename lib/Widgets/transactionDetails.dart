@@ -5,46 +5,64 @@ import './drawer.dart';
 import 'package:flutter/rendering.dart';
 import '../api.dart';
 
-class TransactionDetails extends StatelessWidget {
-  final String fname, lname, title, date, time, description;
+class TransactionDetails extends StatefulWidget {
+  final String id, fname, lname, title, date, time, description;
   final int cost, price;
-  var c1 = Colors.lightBlue;
-  bool editStatus = false;
+  TransactionDetails(this.id, this.fname, this.lname, this.title, this.date,
+      this.time, this.description, this.cost, this.price);
+  final ClientsApi api = ClientsApi();
+  @override
+  _TransactionDetailsState createState() => _TransactionDetailsState(
+      id, fname, lname, title, date, time, description, cost, price);
+}
+
+class _TransactionDetailsState extends State<TransactionDetails> {
+  final String id, fname, lname, title, date, time, description;
+  final int cost, price;
+  _TransactionDetailsState(this.id, this.fname, this.lname, this.title,
+      this.date, this.time, this.description, this.cost, this.price);
   final titleCon = TextEditingController(),
       dateCon = TextEditingController(),
       costCon = TextEditingController(),
       priceCon = TextEditingController(),
       timeCon = TextEditingController(),
       descriptionCon = TextEditingController();
-  TransactionDetails(this.fname, this.lname, this.title, this.date, this.time,
-      this.description, this.cost, this.price);
+  var c1 = Colors.lightBlue;
+  bool editStatus = false;
+  void editStateChange() {
+    if (editStatus == false) {
+      setState(() => editStatus = true);
+    } else if (editStatus == true) {
+      setState(() => editStatus = false);
+    }
+  }
+
+  submitData() {
+    final inTitle = titleCon.text;
+    final inDate = dateCon.text;
+    final inCost = double.parse(costCon.text);
+    final inPrice = double.parse(priceCon.text);
+    final inTime = timeCon.text;
+    final inDes = descriptionCon.text;
+    final inEntered = DateTime.now();
+    if (inTitle.isEmpty ||
+        inDate.isEmpty ||
+        inPrice == null ||
+        inCost == null ||
+        inDes.isEmpty) {
+      return;
+    } else {
+      String fname, lname, phoneNumber, transactDate, transactTime, descript;
+      var transactCost, transactPrice;
+      widget.api.createTransaction(
+          fname, lname, phoneNumber, inDate, inTime, inDes, inCost, inPrice);
+      Navigator.of(context).pop();
+    }
+    Navigator.of(context).pop();
+  }
 
   @override
   Widget build(BuildContext context) {
-    void submitData() {
-      final inTitle = titleCon.text;
-      final inDate = dateCon.text;
-      final inCost = double.parse(costCon.text);
-      final inPrice = double.parse(priceCon.text);
-      final inTime = timeCon.text;
-      final inDes = descriptionCon.text;
-      final inEntered = DateTime.now();
-      if (inTitle.isEmpty ||
-          inDate.isEmpty ||
-          inPrice == null ||
-          inCost == null ||
-          inDes.isEmpty) {
-        return;
-      } else {
-        //String fname, String lname, String phoneNumber, String transactDate, String transactTime, String descript, var transactCost, var transactPrice
-        //widget.api.createTransaction(
-        //    fname, lname, phoneNumber, inDate, inTime, inDes, inCost, inPrice);
-        Navigator.of(context).pop();
-      }
-      Navigator.of(context).pop();
-    }
-
-    print(title);
     return Scaffold(
       drawer: MainDrawer(),
       appBar: AppBar(
@@ -205,14 +223,5 @@ class TransactionDetails extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  void editStateChange() {
-    if (editStatus == false) {
-      editStatus = true;
-    } else if (editStatus == true) {
-      editStatus = false;
-    }
-    //setstate
   }
 }
