@@ -103,73 +103,73 @@ class _TransactionDetailsState extends State<TransactionDetails> {
                                 ),
                                 ColoredBox(
                                   color: c1,
-                                  child: TextField(
+                                  child: TextFormField(
                                     controller: titleCon,
+                                    initialValue: title,
                                     decoration: InputDecoration(
-                                        prefixText: "Title:    ",
-                                        labelText: title),
+                                        prefixText: "Title:    "),
                                     style: TextStyle(fontSize: 20),
-                                    onSubmitted: (_) => submitData(),
+                                    onFieldSubmitted: (_) => submitData(),
                                   ),
                                 ),
                                 ColoredBox(
                                   color: c1,
-                                  child: TextField(
+                                  child: TextFormField(
                                     controller: dateCon,
+                                    initialValue: date,
                                     decoration: InputDecoration(
-                                        prefixText: "Date:    ",
-                                        labelText: date),
+                                        prefixText: "Date:    "),
                                     style: TextStyle(fontSize: 20),
-                                    onSubmitted: (_) => submitData(),
+                                    onFieldSubmitted: (_) => submitData(),
                                   ),
                                 ),
                                 ColoredBox(
                                   color: c1,
-                                  child: TextField(
+                                  child: TextFormField(
                                     controller: timeCon,
+                                    initialValue: time,
                                     decoration: InputDecoration(
                                         prefixText: "Time:    ",
-                                        labelText: time,
                                         suffixText: " hours"),
                                     style: TextStyle(fontSize: 20),
                                     keyboardType: TextInputType.number,
-                                    onSubmitted: (_) => submitData(),
+                                    onFieldSubmitted: (_) => submitData(),
                                   ),
                                 ),
                                 ColoredBox(
                                   color: c1,
-                                  child: TextField(
+                                  child: TextFormField(
                                     controller: costCon,
+                                    initialValue: cost.toString(),
                                     decoration: InputDecoration(
-                                        prefixText: "Cost:    \$",
-                                        labelText: cost.toString()),
+                                        prefixText: "Cost:    \$"),
                                     style: TextStyle(fontSize: 20),
                                     keyboardType: TextInputType.number,
-                                    onSubmitted: (_) => submitData(),
+                                    onFieldSubmitted: (_) => submitData(),
                                   ),
                                 ),
                                 ColoredBox(
                                   color: c1,
-                                  child: TextField(
+                                  child: TextFormField(
                                     controller: priceCon,
+                                    initialValue: price.toString(),
                                     decoration: InputDecoration(
-                                        prefixText: "Price:    \$",
-                                        labelText: price.toString()),
+                                        prefixText: "Price:    \$"),
                                     style: TextStyle(fontSize: 20),
                                     keyboardType: TextInputType.number,
-                                    onSubmitted: (_) => submitData(),
+                                    onFieldSubmitted: (_) => submitData(),
                                   ),
                                 ),
                                 ColoredBox(
                                   color: c1,
-                                  child: TextField(
+                                  child: TextFormField(
                                     controller: descriptionCon,
+                                    initialValue: description,
                                     decoration: InputDecoration(
-                                        prefixText: "Description:    ",
-                                        labelText: description),
+                                        prefixText: "Description:    "),
                                     style: TextStyle(fontSize: 20),
                                     keyboardType: TextInputType.multiline,
-                                    onSubmitted: (_) => submitData(),
+                                    onFieldSubmitted: (_) => submitData(),
                                   ),
                                 ),
                                 TextButton(

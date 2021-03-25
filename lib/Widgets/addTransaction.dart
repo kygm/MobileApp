@@ -64,9 +64,10 @@ class _AddTransactionState extends State<AddTransaction> {
         inDes.isEmpty) {
       return;
     } else {
-      //String fname, String lname, String phoneNumber, String transactDate, String transactTime, String descript, var transactCost, var transactPrice
-      //widget.api.createTransaction(
-      //    fname, lname, phoneNumber, inDate, inTime, inDes, inCost, inPrice);
+      String fname, lname, phoneNumber, transactDate, transactTime, descript;
+      var transactCost, transactPrice;
+      widget.api.createTransaction(
+          fname, lname, phoneNumber, inDate, inTime, inDes, inCost, inPrice);
       Navigator.of(context).pop();
     }
     Navigator.of(context).pop();

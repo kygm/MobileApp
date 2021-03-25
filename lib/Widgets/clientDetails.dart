@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../Models/client.dart';
@@ -109,53 +110,58 @@ class _ClientDetailsState extends State<ClientDetails> {
                               ColoredBox(
                                 color: c1,
                                 child: Center(
-                                    child: TextField(
+                                    child: TextFormField(
                                         controller: fNameCon,
+                                        initialValue: fname,
                                         decoration: InputDecoration(
-                                            prefixText: "First Name: ",
-                                            labelText: fname),
-                                        style: TextStyle(fontSize: 20))),
+                                            prefixText: "First Name: "),
+                                        style: TextStyle(fontSize: 20),
+                                        onFieldSubmitted: (_) => submitData())),
                               ),
                               ColoredBox(
                                 color: c1,
                                 child: Center(
-                                    child: TextField(
+                                    child: TextFormField(
                                         controller: lNameCon,
+                                        initialValue: lname,
                                         decoration: InputDecoration(
-                                            prefixText: "Last Name: ",
-                                            labelText: lname),
-                                        style: TextStyle(fontSize: 20))),
+                                            prefixText: "Last Name: "),
+                                        style: TextStyle(fontSize: 20),
+                                        onFieldSubmitted: (_) => submitData())),
                               ),
                               ColoredBox(
                                 color: c1,
                                 child: Center(
-                                    child: TextField(
+                                    child: TextFormField(
                                         controller: cityCon,
+                                        initialValue: city,
                                         decoration: InputDecoration(
-                                            prefixText: "City Name: ",
-                                            labelText: city),
-                                        style: TextStyle(fontSize: 20))),
+                                            prefixText: "City Name: "),
+                                        style: TextStyle(fontSize: 20),
+                                        onFieldSubmitted: (_) => submitData())),
                               ),
                               ColoredBox(
                                 color: c1,
                                 child: Center(
-                                    child: TextField(
+                                    child: TextFormField(
                                         controller: stateCon,
+                                        initialValue: state,
                                         decoration: InputDecoration(
-                                            prefixText: "State: ",
-                                            labelText: state),
-                                        style: TextStyle(fontSize: 20))),
+                                            prefixText: "State: "),
+                                        style: TextStyle(fontSize: 20),
+                                        onFieldSubmitted: (_) => submitData())),
                               ),
                               ColoredBox(
                                 color: c1,
                                 child: Center(
-                                  child: TextField(
+                                  child: TextFormField(
                                     controller: addressCon,
-                                    decoration: InputDecoration(
-                                        prefixText: "Address:",
-                                        labelText: address),
+                                    initialValue: address,
+                                    decoration:
+                                        InputDecoration(prefixText: "Address:"),
                                     keyboardType: TextInputType.streetAddress,
                                     style: TextStyle(fontSize: 20),
+                                    onFieldSubmitted: (_) => submitData(),
                                     readOnly: editStatus,
                                   ),
                                 ),
@@ -163,16 +169,17 @@ class _ClientDetailsState extends State<ClientDetails> {
                               ColoredBox(
                                 color: c1,
                                 child: Center(
-                                  child: TextField(
+                                  child: TextFormField(
                                     controller: phoneNumCon,
+                                    initialValue: phoneNumber,
                                     inputFormatters: [
                                       FilteringTextInputFormatter.digitsOnly,
                                       LengthLimitingTextInputFormatter(11)
                                     ],
                                     decoration: InputDecoration(
-                                        prefixText: "Phone Number: ",
-                                        labelText: phoneNumber),
+                                        prefixText: "Phone Number: "),
                                     style: TextStyle(fontSize: 20),
+                                    onFieldSubmitted: (_) => submitData(),
                                     keyboardType: TextInputType.phone,
                                     readOnly: editStatus,
                                   ),
