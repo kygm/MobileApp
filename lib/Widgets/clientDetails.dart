@@ -195,8 +195,8 @@ class _ClientDetailsState extends State<ClientDetails> {
                                             Colors.yellow)),
                               ),
                               TextButton(
-                                onPressed:
-                                    editStatus == true ? submitData() : null,
+                                onPressed: 
+                                    /*editStatus == true ? */ submitData(), /*: null,*/
                                 child: Text('Save Client',
                                     style: TextStyle(color: Colors.black)),
                                 style: ButtonStyle(

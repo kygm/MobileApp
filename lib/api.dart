@@ -79,6 +79,7 @@ class ClientsApi {
     });
   }
 
+/*
   Future<Transaction> editTransaction(
       String id,
       String fname,
@@ -100,6 +101,7 @@ class ClientsApi {
       'transactPrice': transactPrice
     });
   }
+  */
 
   Future deleteClient(String id) async {
     final response = await _dio.post('/deleteClient', data: {'_id': id});
