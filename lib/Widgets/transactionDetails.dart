@@ -54,8 +54,8 @@ class _TransactionDetailsState extends State<TransactionDetails> {
     } else {
       String fname, lname, phoneNumber, transactDate, transactTime, descript;
       var transactCost, transactPrice;
-      widget.api.createTransaction(
-          fname, lname, phoneNumber, inDate, inTime, inDes, inTitle, inCost, inPrice);
+      widget.api.createTransaction(fname, lname, phoneNumber, inDate, inTime,
+          inDes, inTitle, inCost, inPrice);
       Navigator.of(context).pop();
     }
     Navigator.of(context).pop();
@@ -96,82 +96,13 @@ class _TransactionDetailsState extends State<TransactionDetails> {
                             padding: const EdgeInsets.all(15.0),
                             child: ListView(
                               children: <Widget>[
-                                ColoredBox(
-                                  color: c1,
-                                  child: Text("Name:    " + fname + ' ' + lname,
-                                      style: TextStyle(fontSize: 20)),
-                                ),
-                                ColoredBox(
-                                  color: c1,
-                                  child: TextFormField(
-                                    controller: titleCon,
-                                    initialValue: title,
-                                    decoration: InputDecoration(
-                                        prefixText: "Title:    "),
-                                    style: TextStyle(fontSize: 20),
-                                    onFieldSubmitted: (_) => submitData(),
-                                  ),
-                                ),
-                                ColoredBox(
-                                  color: c1,
-                                  child: TextFormField(
-                                    controller: dateCon,
-                                    initialValue: date,
-                                    decoration: InputDecoration(
-                                        prefixText: "Date:    "),
-                                    style: TextStyle(fontSize: 20),
-                                    onFieldSubmitted: (_) => submitData(),
-                                  ),
-                                ),
-                                ColoredBox(
-                                  color: c1,
-                                  child: TextFormField(
-                                    controller: timeCon,
-                                    initialValue: time,
-                                    decoration: InputDecoration(
-                                        prefixText: "Time:    ",
-                                        suffixText: " hours"),
-                                    style: TextStyle(fontSize: 20),
-                                    keyboardType: TextInputType.number,
-                                    onFieldSubmitted: (_) => submitData(),
-                                  ),
-                                ),
-                                ColoredBox(
-                                  color: c1,
-                                  child: TextFormField(
-                                    controller: costCon,
-                                    initialValue: cost.toString(),
-                                    decoration: InputDecoration(
-                                        prefixText: "Cost:    \$"),
-                                    style: TextStyle(fontSize: 20),
-                                    keyboardType: TextInputType.number,
-                                    onFieldSubmitted: (_) => submitData(),
-                                  ),
-                                ),
-                                ColoredBox(
-                                  color: c1,
-                                  child: TextFormField(
-                                    controller: priceCon,
-                                    initialValue: price.toString(),
-                                    decoration: InputDecoration(
-                                        prefixText: "Price:    \$"),
-                                    style: TextStyle(fontSize: 20),
-                                    keyboardType: TextInputType.number,
-                                    onFieldSubmitted: (_) => submitData(),
-                                  ),
-                                ),
-                                ColoredBox(
-                                  color: c1,
-                                  child: TextFormField(
-                                    controller: descriptionCon,
-                                    initialValue: description,
-                                    decoration: InputDecoration(
-                                        prefixText: "Description:    "),
-                                    style: TextStyle(fontSize: 20),
-                                    keyboardType: TextInputType.multiline,
-                                    onFieldSubmitted: (_) => submitData(),
-                                  ),
-                                ),
+                                Text("Name: " + fname + " " + lname),
+                                Text("Title: " + title),
+                                Text("Date: " + date),
+                                Text("Time: " + time),
+                                Text("Cost: " + cost.toString()),
+                                Text("Price: " + price.toString()),
+                                Text("Description: " + description),
                                 TextButton(
                                   onPressed: editStateChange,
                                   child: Text('Edit Transaction',
