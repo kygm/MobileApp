@@ -35,11 +35,11 @@ class _ClientDetailsState extends State<ClientDetails> {
   var c1 = Colors.grey;
   bool editStatus = true;
   void editStateChange() {
-    if (editStatus == true) {
-      setState(() => editStatus = false);
-    } else if (editStatus == false) {
-      setState(() => editStatus = true);
-    }
+    // if (editStatus == true) {
+    //   setState(() => editStatus = false);
+    // } else if (editStatus == false) {
+    //   setState(() => editStatus = true);
+    // }
   }
 
   void _doDatePicker() {
@@ -50,9 +50,9 @@ class _ClientDetailsState extends State<ClientDetails> {
       lastDate: DateTime.now(),
     ).then((pickedDate) {
       if (pickedDate == null) return;
-      setState(() {
-        _selectedDate = pickedDate;
-      });
+      // setState(() {
+      //   _selectedDate = pickedDate;
+      // });
     });
   }
 
@@ -90,7 +90,7 @@ class _ClientDetailsState extends State<ClientDetails> {
       );
       Navigator.of(context).pop();
     });
-    //List<String> states = new List();
+    List<String> states = new List();
     inState.length == 2 ? inState.toUpperCase() : inState.toLowerCase();
     Navigator.of(context).pop();
   }
@@ -134,17 +134,42 @@ class _ClientDetailsState extends State<ClientDetails> {
                               // Text("Phone Number: " + phoneNumber),
                               // Text("Address: " + address),
                               // Text("City: " + city),
-                              ElevatedButton(
-                                  child: Text("Add Transaction"),
-                                  onPressed: () => {
+                              Row(
+                                children: [
+                                  ElevatedButton(
+                                      child: Text("Add Transaction"),
+                                      onPressed: () => {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      AddTransaction(id, fname,
+                                                          lname, phoneNumber)),
+                                            ),
+                                          }),
+                                  Align(
+                                    alignment: Alignment.centerRight,
+                                    child: TextButton(
+                                      child: Text(
+                                        'Back To Clients',
+                                        style: TextStyle(color: Colors.black),
+                                      ),
+                                      style: ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStateProperty.all<Color>(
+                                                  Colors.lightGreen)),
+                                      onPressed: () {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  AddTransaction(id, fname,
-                                                      lname, phoneNumber)),
-                                        ),
-                                      }),
+                                                  ViewClients()),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
                               ColoredBox(
                                 color: c1,
                                 child: Center(
@@ -238,40 +263,39 @@ class _ClientDetailsState extends State<ClientDetails> {
                                   ),
                                 ),
                               ),
-                              TextButton(
-                                onPressed: editStateChange,
-                                child: Text('Edit Client',
-                                    style: TextStyle(color: Colors.black)),
-                                style: ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            Colors.yellow)),
-                              ),
-                              TextButton(
-                                onPressed: submitData(),
-                                child: Text('Save Client',
-                                    style: TextStyle(color: Colors.black)),
-                                style: ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            Colors.blue)),
-                              ),
-                              TextButton(
-                                child: Text(
-                                  'Back To Clients',
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                                style: ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            Colors.lightGreen)),
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => ViewClients()),
-                                  );
-                                },
+                              Row(
+                                children: [
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(20, 0, 40, 0),
+                                    child: TextButton(
+                                      onPressed: editStateChange,
+                                      child: Text('Edit Client',
+                                          style:
+                                              TextStyle(color: Colors.black)),
+                                      style: ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStateProperty.all<Color>(
+                                                  Colors.yellow)),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(40, 0, 20, 0),
+                                    child: ElevatedButton(
+                                      child: Text('Save Client',
+                                          style:
+                                              TextStyle(color: Colors.black)),
+                                      style: ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStateProperty.all<Color>(
+                                                  Colors.blue)),
+                                      onPressed: () {
+                                        submitData();
+                                      },
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
