@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import './Models/client.dart';
 
 class ClientsApi {
-  final _dio = Dio(BaseOptions(baseUrl: 'http://localhost:1600/'));
+  final _dio = Dio(BaseOptions(baseUrl: 'http://localhost:1700/'));
 
   Future<List> getClients() async {
     final response = await _dio.get('');
@@ -85,7 +85,7 @@ class ClientsApi {
   }
 
   Future deleteClient(String id) async {
-    final response = await _dio.post('/deleteClient', data: {'_id': id});
+    final response = await _dio.post('/deleteClient', data: {'id': id});
     return response.data;
   }
 }

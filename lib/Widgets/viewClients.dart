@@ -173,7 +173,7 @@ class _ViewClientsState extends State<ViewClients> {
                                           onPressed: () => {
                                             //_editClient(client['_id']),
 
-                                            // deleteClient(client['_id'])
+                                             deleteClient(client['_id'])
                                           },
                                           child: Icon(
                                             Icons.delete,
