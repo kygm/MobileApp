@@ -13,6 +13,7 @@ class ClientDetails extends StatefulWidget {
   final String id, fname, lname, city, address, state, phoneNumber;
   ClientDetails(this.id, this.fname, this.lname, this.city, this.address,
       this.state, this.phoneNumber);
+      
   final ClientsApi api = ClientsApi();
   @override
   _ClientDetailsState createState() =>
@@ -128,17 +129,17 @@ class _ClientDetailsState extends State<ClientDetails> {
                               ElevatedButton(
                                   onPressed: () => print("Under Dev..."),
                                   child: Text("Edit Client")),
+
+                              
                               /*
-                              ColoredBox(
-                                color: c1,
+                              color: c1,
                                 child: Center(
-                                    child: TextFormField(
+                                    child: TextField(
                                         controller: fNameCon,
-                                        initialValue: fname,
                                         decoration: InputDecoration(
                                             prefixText: "First Name: "),
                                         style: TextStyle(fontSize: 20),
-                                        onFieldSubmitted: (_) => submitData())),
+                                        onSubmitted: (_) => submitData())),
                               ),
                               ColoredBox(
                                 color: c1,

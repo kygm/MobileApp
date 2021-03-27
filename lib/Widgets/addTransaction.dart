@@ -12,16 +12,22 @@ class AddTransaction extends StatefulWidget {
   final String phoneNumber;
   final String fname;
   final String lname;
-  final id;
+  final String id;
 
   AddTransaction(this.id, this.fname, this.lname, this.phoneNumber);
 
   final ClientsApi api = ClientsApi();
   @override
-  _AddTransactionState createState() => _AddTransactionState();
+  _AddTransactionState createState() => _AddTransactionState(id, fname, lname, phoneNumber);
 }
 
 class _AddTransactionState extends State<AddTransaction> {
+
+  final String id, phoneNumber, fname, lname;
+
+  _AddTransactionState(this.id, this.fname, this.lname, this.phoneNumber);
+
+
   final titleCon = TextEditingController();
   final dateCon = TextEditingController();
   final costCon = TextEditingController();
@@ -64,12 +70,13 @@ class _AddTransactionState extends State<AddTransaction> {
         inDes.isEmpty) {
       return;
     } else {
-      String fname, lname, phoneNumber, transactDate, transactTime, descript;
-      var transactCost, transactPrice;
+      //String fname, lname, phoneNumber, transactDate, transactTime, descript;
+      //var transactCost, transactPrice;
 
 
       widget.api.createTransaction(
           fname, lname, phoneNumber, inDate, inTime, inTitle, inDes, inCost, inPrice);
+       //print(fname+ lname+ phoneNumber+inDate+ inTime+ inTitle+ inDes+ inCost.toString() +inPrice.toString());
       Navigator.of(context).pop();
     }
     Navigator.of(context).pop();
@@ -151,7 +158,7 @@ class _AddTransactionState extends State<AddTransaction> {
                         //use dropdown selector for service, purchase, or sale
                         Center(
                           child: ElevatedButton(
-                            onPressed: submitData,
+                            onPressed: () => submitData(),
                             child: Text('Add Transaction'),
                           ),
                         ),
