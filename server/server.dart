@@ -40,7 +40,17 @@ void start() async {
       return res.status(200).json({'transaction': transactsList});
     }
   ]);
+  app.get('/getRevenue', [
+    setCors,
+    (ServRequest req, ServResponse res) async{
+      //we need to fill this variable with the revenue
+      //by using aggregation in mongo
 
+      final revenue = await transactions.find();
+
+      return revenue;
+    }
+  ]);
   app.post('/addClient', [
     setCors,
     (ServRequest req, ServResponse res) async {
@@ -54,27 +64,12 @@ void start() async {
   app.post('/clientDetails', [
     setCors,
     (ServRequest req, ServResponse res) async {
-      var theId = req.body['_id'].substring(10, 34);
-      // await clients.update(where.id(ObjectId.parse(theId)), clients);
-      // // may or may not work. have to look into document parameter
+      var id = req.body['_id'].substring(10, 34);
+      //edit client stuff here
+      await clients.update(where.eq("_id" , ObjectId.parse(id)),
+      modify.set('fname', req.body["fname"]) );
 
-      // clients.update(
-      //     where.eq('id', theId), modify.set('fname', req.body['fname']));
-      // //we may have to do this instead
-      // clients.update(
-      //     where.eq('id', theId), modify.set('lname', req.body['lname']));
-      // clients.update(
-      //     where.eq('id', theId), modify.set('address', req.body['address']));
-      // clients.update(
-      //     where.eq('id', theId), modify.set('city', req.body['city']));
-      // clients.update(
-      //     where.eq('id', theId), modify.set('state', req.body['state']));
-      // clients.update(
-      //     where.eq('id', theId), modify.set('descript', req.body['descript']));
-      // clients.update(
-      //     where.eq('id', theId), modify.set('phoneNum', req.body['phoneNum']));
-      // clients.update(
-      // where.eq('id', theId), modify.set('dateEntered', DateTime.now()));
+      //await where.eq('_id', theId), modify.set('fname', req.body['fname']));
     }
   ]);
   app.post('/addTransaction', [
@@ -91,22 +86,6 @@ void start() async {
     setCors,
     (ServRequest req, ServResponse res) async {
       var theId = req.body['_id'].substring(10, 34);
-      //await transactions.update(where.id(ObjectId.parse(theId)), transactions);
-      // transactions.update(
-      //     where.eq('id', theId), modify.set('transactName', req.body['transactName']));
-      // //we may have to do this instead
-      // transactions.update(
-      //     where.eq('id', theId), modify.set('transactDate', req.body['transactDate']));
-      // transactions.update(
-      //     where.eq('id', theId), modify.set('transactTime', req.body['transactTime']));
-      // transactions.update(
-      //     where.eq('id', theId), modify.set('descript', req.body['descript']));
-      // transactions.update(
-      //     where.eq('id', theId), modify.set('transactCost', req.body['transactCost']));
-      // transactions.update(
-      //     where.eq('id', theId), modify.set('transactPrice', req.body['transactPrice']));
-      // transactions.update(
-      // where.eq('id', theId), modify.set('dateEntered', DateTime.now()));
     }
   ]);
   app.post('/deleteClient', [
