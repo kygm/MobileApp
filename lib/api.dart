@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import './Models/client.dart';
 
 class ClientsApi {
-  final _dio = Dio(BaseOptions(baseUrl: 'http://localhost:1700/'));
+  final _dio = Dio(BaseOptions(baseUrl: 'https://kygm-mobile.herokuapp.com/'));
 
   Future<List> getClients() async {
     final response = await _dio.get('');
