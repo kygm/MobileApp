@@ -65,17 +65,23 @@ class ClientsApi {
       String phoneNumber,
       String transactDate,
       String transactTime,
+      String transactName,
       String descript,
       var transactCost,
       var transactPrice) async {
     final response = await _dio.post('/addTransaction', data: {
       'fname': fname,
       'lname': lname,
+      'phoneNumber' : phoneNumber,
       'transactDate': transactDate,
-      'descript': descript,
-      'transactTime': transactTime,
       'transactCost': transactCost,
-      'transactPrice': transactPrice
+      'transactPrice': transactPrice,
+      'transactTime': transactTime,
+      'descript': descript,
+      'transactName' : transactName,
+      'dateEntered' : DateTime.now().toString()
+      
+      
     });
   }
 

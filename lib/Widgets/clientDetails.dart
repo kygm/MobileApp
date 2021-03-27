@@ -104,9 +104,31 @@ class _ClientDetailsState extends State<ClientDetails> {
                     child: ListView(
                       children: <Widget>[
                         Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 15),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 20, horizontal: 30),
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              Text("First Name: " + fname),
+                              Text("Last Name: " + lname),
+                              Text("State: " + state),
+                              Text("Phone Number: " + phoneNumber),
+                              Text("Address: " + address),
+                              Text("City: " + city),
+                              ElevatedButton(
+                                child: Text("Add Transaction"),
+                                onPressed: () => { 
+                                  Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  AddTransaction(id, fname,
+                                                      lname, phoneNumber)),
+                              ),}),
+                              ElevatedButton(
+                                  onPressed: () => print("Under Dev..."),
+                                  child: Text("Edit Client")),
+                              /*
                               ColoredBox(
                                 color: c1,
                                 child: Center(
@@ -242,6 +264,7 @@ class _ClientDetailsState extends State<ClientDetails> {
                                   );
                                 },
                               ),
+                              */
                             ],
                           ),
                         ),

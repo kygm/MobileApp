@@ -66,8 +66,10 @@ class _AddTransactionState extends State<AddTransaction> {
     } else {
       String fname, lname, phoneNumber, transactDate, transactTime, descript;
       var transactCost, transactPrice;
+
+
       widget.api.createTransaction(
-          fname, lname, phoneNumber, inDate, inTime, inDes, inCost, inPrice);
+          fname, lname, phoneNumber, inDate, inTime, inTitle, inDes, inCost, inPrice);
       Navigator.of(context).pop();
     }
     Navigator.of(context).pop();
@@ -91,73 +93,75 @@ class _AddTransactionState extends State<AddTransaction> {
           ),
         ),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            SingleChildScrollView(
-              child: Card(
-                elevation: 5,
-                child: Container(
-                  padding: EdgeInsets.all(15),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: <Widget>[
-                      Text(""),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              SingleChildScrollView(
+                child: Card(
+                  elevation: 5,
+                  child: Container(
+                    padding: EdgeInsets.all(15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: <Widget>[
+                        Text(""),
 
-                      TextFormField(
-                        controller: titleCon,
-                        decoration: InputDecoration(labelText: 'Service Name:'),
-                        onFieldSubmitted: (_) => submitData(),
-                      ),
-                      TextFormField(
-                        controller: dateCon,
-                        decoration: InputDecoration(labelText: 'Service Date:'),
-                        keyboardType: TextInputType.datetime,
-                        onFieldSubmitted: (_) => submitData(),
-                      ),
-                      TextFormField(
-                        controller: costCon,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                        decoration: InputDecoration(labelText: 'Cost:'),
-                        keyboardType: TextInputType.number,
-                        onFieldSubmitted: (_) => submitData(),
-                      ),
-                      TextFormField(
-                        controller: priceCon,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                        decoration: InputDecoration(labelText: 'Price:'),
-                        keyboardType: TextInputType.number,
-                        onFieldSubmitted: (_) => submitData(),
-                      ),
-                      TextFormField(
-                        controller: timeCon,
-                        decoration: InputDecoration(labelText: 'Duration:'),
-                        onFieldSubmitted: (_) => submitData(),
-                      ),
-                      TextFormField(
-                        controller: descriptionCon,
-                        decoration: InputDecoration(labelText: 'Description:'),
-                        keyboardType: TextInputType.multiline,
-                        onFieldSubmitted: (_) => submitData(),
-                      ),
-                      //use dropdown selector for service, purchase, or sale
-                      Center(
-                        child: ElevatedButton(
-                          onPressed: submitData,
-                          child: Text('Add Transaction'),
+                        TextFormField(
+                          controller: titleCon,
+                          decoration: InputDecoration(labelText: 'Service Name:'),
+                          onFieldSubmitted: (_) => submitData(),
                         ),
-                      ),
-                    ],
+                        TextFormField(
+                          controller: dateCon,
+                          decoration: InputDecoration(labelText: 'Service Date:'),
+                          keyboardType: TextInputType.datetime,
+                          onFieldSubmitted: (_) => submitData(),
+                        ),
+                        TextFormField(
+                          controller: costCon,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly
+                          ],
+                          decoration: InputDecoration(labelText: 'Cost:'),
+                          keyboardType: TextInputType.number,
+                          onFieldSubmitted: (_) => submitData(),
+                        ),
+                        TextFormField(
+                          controller: priceCon,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly
+                          ],
+                          decoration: InputDecoration(labelText: 'Price:'),
+                          keyboardType: TextInputType.number,
+                          onFieldSubmitted: (_) => submitData(),
+                        ),
+                        TextFormField(
+                          controller: timeCon,
+                          decoration: InputDecoration(labelText: 'Duration:'),
+                          onFieldSubmitted: (_) => submitData(),
+                        ),
+                        TextFormField(
+                          controller: descriptionCon,
+                          decoration: InputDecoration(labelText: 'Description:'),
+                          keyboardType: TextInputType.multiline,
+                          onFieldSubmitted: (_) => submitData(),
+                        ),
+                        //use dropdown selector for service, purchase, or sale
+                        Center(
+                          child: ElevatedButton(
+                            onPressed: submitData,
+                            child: Text('Add Transaction'),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -55,7 +55,7 @@ class _TransactionDetailsState extends State<TransactionDetails> {
       String fname, lname, phoneNumber, transactDate, transactTime, descript;
       var transactCost, transactPrice;
       widget.api.createTransaction(
-          fname, lname, phoneNumber, inDate, inTime, inDes, inCost, inPrice);
+          fname, lname, phoneNumber, inDate, inTime, inDes, inTitle, inCost, inPrice);
       Navigator.of(context).pop();
     }
     Navigator.of(context).pop();
