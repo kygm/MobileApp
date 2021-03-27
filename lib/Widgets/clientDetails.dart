@@ -13,7 +13,7 @@ class ClientDetails extends StatefulWidget {
   final String id, fname, lname, city, address, state, phoneNumber;
   ClientDetails(this.id, this.fname, this.lname, this.city, this.address,
       this.state, this.phoneNumber);
-      
+
   final ClientsApi api = ClientsApi();
   @override
   _ClientDetailsState createState() =>
@@ -32,13 +32,13 @@ class _ClientDetailsState extends State<ClientDetails> {
       descriptCon = TextEditingController(),
       phoneNumCon = TextEditingController();
   DateTime _selectedDate;
-  var c1 = Colors.lightBlue;
-  bool editStatus = false;
+  var c1 = Colors.grey;
+  bool editStatus = true;
   void editStateChange() {
-    if (editStatus == false) {
-      setState(() => editStatus = true);
-    } else if (editStatus == true) {
+    if (editStatus == true) {
       setState(() => editStatus = false);
+    } else if (editStatus == false) {
+      setState(() => editStatus = true);
     }
   }
 
@@ -57,16 +57,34 @@ class _ClientDetailsState extends State<ClientDetails> {
   }
 
   submitData() {
-    final inFName = fNameCon.text;
-    final inLName = lNameCon.text;
-    final inAddress = addressCon.text;
-    final inCity = cityCon.text;
+    var inFName = fNameCon.text;
+    var inLName = lNameCon.text;
+    var inAddress = addressCon.text;
+    var inCity = cityCon.text;
     String inState = stateCon.text;
-    final inDes = descriptCon.text;
-    final inPhoneNum = int.parse(phoneNumCon.text);
+    var inDes = descriptCon.text;
+    var inPhoneNum = phoneNumCon.toString();
     setState(() {
-      widget.api.createClient(inFName, inLName, inAddress, inCity, inState,
-          inPhoneNum.toString(), inDes);
+      if (inFName != null || inFName == '') {
+        inFName = fname;
+      }
+      if (inLName != null || inLName == '') {
+        inLName = lname;
+      }
+      if (inAddress != null || inAddress == '') {
+        inAddress = fname;
+      }
+      if (inCity != null || inCity == '') {
+        inCity = fname;
+      }
+      if (inState != null || inState == '') {
+        inState = fname;
+      }
+      if (inPhoneNum != null) {
+        inPhoneNum = phoneNumber;
+      }
+      widget.api.editClient(id, inFName, inLName, inAddress, inCity, inState,
+          inPhoneNum.toString());
       MaterialPageRoute(
         builder: (context) => MyHomePage(),
       );
@@ -110,101 +128,113 @@ class _ClientDetailsState extends State<ClientDetails> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("First Name: " + fname),
-                              Text("Last Name: " + lname),
-                              Text("State: " + state),
-                              Text("Phone Number: " + phoneNumber),
-                              Text("Address: " + address),
-                              Text("City: " + city),
+                              // Text("First Name: " + fname),
+                              // Text("Last Name: " + lname),
+                              // Text("State: " + state),
+                              // Text("Phone Number: " + phoneNumber),
+                              // Text("Address: " + address),
+                              // Text("City: " + city),
                               ElevatedButton(
-                                child: Text("Add Transaction"),
-                                onPressed: () => { 
-                                  Navigator.push(
+                                  child: Text("Add Transaction"),
+                                  onPressed: () => {
+                                        Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
                                                   AddTransaction(id, fname,
                                                       lname, phoneNumber)),
-                              ),}),
-                              ElevatedButton(
-                                  onPressed: () => print("Under Dev..."),
-                                  child: Text("Edit Client")),
-
-                              
-                              /*
-                              color: c1,
+                                        ),
+                                      }),
+                              ColoredBox(
+                                color: c1,
                                 child: Center(
                                     child: TextField(
+                                        enabled:
+                                            editStatus == true ? false : true,
+                                        readOnly: editStatus,
                                         controller: fNameCon,
                                         decoration: InputDecoration(
-                                            prefixText: "First Name: "),
+                                            prefixText: "First Name: ",
+                                            labelText: fname),
+                                        style: TextStyle(
+                                            fontSize: 20, color: Colors.black),
+                                        onSubmitted: (_) => submitData())),
+                              ),
+                              ColoredBox(
+                                color: c1,
+                                child: Center(
+                                    child: TextField(
+                                        enabled:
+                                            editStatus == true ? false : true,
+                                        readOnly: editStatus,
+                                        controller: lNameCon,
+                                        decoration: InputDecoration(
+                                            prefixText: "Last Name: ",
+                                            labelText: lname),
                                         style: TextStyle(fontSize: 20),
                                         onSubmitted: (_) => submitData())),
                               ),
                               ColoredBox(
                                 color: c1,
                                 child: Center(
-                                    child: TextFormField(
-                                        controller: lNameCon,
-                                        initialValue: lname,
-                                        decoration: InputDecoration(
-                                            prefixText: "Last Name: "),
-                                        style: TextStyle(fontSize: 20),
-                                        onFieldSubmitted: (_) => submitData())),
-                              ),
-                              ColoredBox(
-                                color: c1,
-                                child: Center(
-                                    child: TextFormField(
+                                    child: TextField(
+                                        enabled:
+                                            editStatus == true ? false : true,
+                                        readOnly: editStatus,
                                         controller: cityCon,
-                                        initialValue: city,
                                         decoration: InputDecoration(
-                                            prefixText: "City Name: "),
+                                            prefixText: "City Name: ",
+                                            labelText: city),
                                         style: TextStyle(fontSize: 20),
-                                        onFieldSubmitted: (_) => submitData())),
+                                        onSubmitted: (_) => submitData())),
                               ),
                               ColoredBox(
                                 color: c1,
                                 child: Center(
-                                    child: TextFormField(
+                                    child: TextField(
+                                        enabled:
+                                            editStatus == true ? false : true,
+                                        readOnly: editStatus,
                                         controller: stateCon,
-                                        initialValue: state,
                                         decoration: InputDecoration(
-                                            prefixText: "State: "),
+                                            prefixText: "State: ",
+                                            labelText: state),
                                         style: TextStyle(fontSize: 20),
-                                        onFieldSubmitted: (_) => submitData())),
+                                        onSubmitted: (_) => submitData())),
                               ),
                               ColoredBox(
                                 color: c1,
                                 child: Center(
-                                  child: TextFormField(
+                                  child: TextField(
+                                    enabled: editStatus == true ? false : true,
+                                    readOnly: editStatus,
                                     controller: addressCon,
-                                    initialValue: address,
-                                    decoration:
-                                        InputDecoration(prefixText: "Address:"),
+                                    decoration: InputDecoration(
+                                        prefixText: "Address:",
+                                        labelText: address),
                                     keyboardType: TextInputType.streetAddress,
                                     style: TextStyle(fontSize: 20),
-                                    onFieldSubmitted: (_) => submitData(),
-                                    readOnly: editStatus,
+                                    onSubmitted: (_) => submitData(),
                                   ),
                                 ),
                               ),
                               ColoredBox(
                                 color: c1,
                                 child: Center(
-                                  child: TextFormField(
+                                  child: TextField(
+                                    enabled: editStatus == true ? false : true,
+                                    readOnly: editStatus,
                                     controller: phoneNumCon,
-                                    initialValue: phoneNumber,
                                     inputFormatters: [
                                       FilteringTextInputFormatter.digitsOnly,
                                       LengthLimitingTextInputFormatter(11)
                                     ],
                                     decoration: InputDecoration(
-                                        prefixText: "Phone Number: "),
+                                        prefixText: "Phone Number: ",
+                                        labelText: phoneNumber),
                                     style: TextStyle(fontSize: 20),
-                                    onFieldSubmitted: (_) => submitData(),
+                                    onSubmitted: (_) => submitData(),
                                     keyboardType: TextInputType.phone,
-                                    readOnly: editStatus,
                                   ),
                                 ),
                               ),
@@ -218,35 +248,13 @@ class _ClientDetailsState extends State<ClientDetails> {
                                             Colors.yellow)),
                               ),
                               TextButton(
-                                onPressed: 
-                                    /*editStatus == true ? */ submitData(), /*: null,*/
+                                onPressed: submitData(),
                                 child: Text('Save Client',
                                     style: TextStyle(color: Colors.black)),
                                 style: ButtonStyle(
                                     backgroundColor:
                                         MaterialStateProperty.all<Color>(
                                             Colors.blue)),
-                              ),
-                              TextButton(
-                                child: Text(
-                                  'Add New Transaction',
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                                style: ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            Colors.green)),
-                                onPressed: () {
-                                  editStatus == true
-                                      ? null
-                                      : Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  AddTransaction(id, fname,
-                                                      lname, phoneNumber)),
-                                        );
-                                },
                               ),
                               TextButton(
                                 child: Text(
@@ -265,7 +273,6 @@ class _ClientDetailsState extends State<ClientDetails> {
                                   );
                                 },
                               ),
-                              */
                             ],
                           ),
                         ),

@@ -37,15 +37,8 @@ class ClientsApi {
     return Client.fromJson(response.data);
   }
 
-  Future<Client> editClient(
-      String id,
-      String fname,
-      String lname,
-      String address,
-      String city,
-      String state,
-      String descript,
-      String phoneNumber) async {
+  Future<Client> editClient(String id, String fname, String lname,
+      String address, String city, String state, String phoneNumber) async {
     final response = await _dio.post('/clientDetails', data: {
       'id': id,
       'fname': fname,
@@ -53,8 +46,7 @@ class ClientsApi {
       'address': address,
       'city': city,
       'state': state,
-      'phoneNumber': phoneNumber,
-      'descript': descript
+      'phoneNumber': phoneNumber
     });
     return Client.fromJson(response.data);
   }
@@ -72,7 +64,7 @@ class ClientsApi {
     final response = await _dio.post('/addTransaction', data: {
       'fname': fname,
       'lname': lname,
-      'phoneNumber' : phoneNumber,
+      'phoneNumber': phoneNumber,
       'transactDate': transactDate,
       'transactCost': transactCost,
       'transactPrice': transactPrice,

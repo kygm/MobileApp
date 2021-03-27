@@ -42,7 +42,7 @@ void start() async {
   ]);
   app.get('/getRevenue', [
     setCors,
-    (ServRequest req, ServResponse res) async{
+    (ServRequest req, ServResponse res) async {
       //we need to fill this variable with the revenue
       //by using aggregation in mongo
 
@@ -66,8 +66,8 @@ void start() async {
     (ServRequest req, ServResponse res) async {
       var id = req.body['_id'].substring(10, 34);
       //edit client stuff here
-      await clients.update(where.eq("_id" , ObjectId.parse(id)),
-      modify.set('fname', req.body["fname"]) );
+      await clients.update(where.eq("_id", ObjectId.parse(id)),
+          modify.set('fname', req.body["fname"]));
 
       //await where.eq('_id', theId), modify.set('fname', req.body['fname']));
     }
