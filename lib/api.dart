@@ -70,34 +70,11 @@ class ClientsApi {
       'transactPrice': transactPrice,
       'transactTime': transactTime,
       'descript': descript,
-      'transactName': transactName,
-      'dateEntered': DateTime.now().toString()
+      'transactName' : transactName,
+      'dateEntered' : DateTime.now().toString()
+      
     });
   }
-
-/*
-  Future<Transaction> editTransaction(
-      String id,
-      String fname,
-      String lname,
-      String phoneNumber,
-      String transactDate,
-      String transactTime,
-      String descript,
-      var transactCost,
-      var transactPrice) async {
-    final response = await _dio.post('/transactionDetails', data: {
-      'id': id,
-      'fname': fname,
-      'lname': lname,
-      'transactDate': transactDate,
-      'descript': descript,
-      'transactTime': transactTime,
-      'transactCost': transactCost,
-      'transactPrice': transactPrice
-    });
-  }
-  */
 
   Future deleteClient(String id) async {
     final response = await _dio.post('/deleteClient', data: {'_id': id});

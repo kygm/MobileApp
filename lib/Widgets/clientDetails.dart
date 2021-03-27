@@ -13,6 +13,7 @@ class ClientDetails extends StatefulWidget {
   final String id, fname, lname, city, address, state, phoneNumber;
   ClientDetails(this.id, this.fname, this.lname, this.city, this.address,
       this.state, this.phoneNumber);
+
   final ClientsApi api = ClientsApi();
   @override
   _ClientDetailsState createState() =>
