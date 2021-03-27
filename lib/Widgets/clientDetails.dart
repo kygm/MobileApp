@@ -33,12 +33,12 @@ class _ClientDetailsState extends State<ClientDetails> {
       phoneNumCon = TextEditingController();
   DateTime _selectedDate;
   var c1 = Colors.grey;
-  bool editStatus = false;
+  bool editStatus = true;
   void editStateChange() {
-    if (editStatus == false) {
-      setState(() => editStatus = true);
-    } else if (editStatus == true) {
+    if (editStatus == true) {
       setState(() => editStatus = false);
+    } else if (editStatus == false) {
+      setState(() => editStatus = true);
     }
   }
 
@@ -63,7 +63,7 @@ class _ClientDetailsState extends State<ClientDetails> {
     var inCity = cityCon.text;
     String inState = stateCon.text;
     var inDes = descriptCon.text;
-    var inPhoneNum = int.parse(phoneNumCon.text);
+    var inPhoneNum = phoneNumCon.toString();
     setState(() {
       if (inFName != null || inFName == '') {
         inFName = fname;
@@ -81,7 +81,7 @@ class _ClientDetailsState extends State<ClientDetails> {
         inState = fname;
       }
       if (inPhoneNum != null) {
-        inPhoneNum = int.parse(phoneNumber);
+        inPhoneNum = phoneNumber;
       }
       widget.api.editClient(id, inFName, inLName, inAddress, inCity, inState,
           inPhoneNum.toString());
@@ -128,12 +128,12 @@ class _ClientDetailsState extends State<ClientDetails> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("First Name: " + fname),
-                              Text("Last Name: " + lname),
-                              Text("State: " + state),
-                              Text("Phone Number: " + phoneNumber),
-                              Text("Address: " + address),
-                              Text("City: " + city),
+                              // Text("First Name: " + fname),
+                              // Text("Last Name: " + lname),
+                              // Text("State: " + state),
+                              // Text("Phone Number: " + phoneNumber),
+                              // Text("Address: " + address),
+                              // Text("City: " + city),
                               ElevatedButton(
                                   child: Text("Add Transaction"),
                                   onPressed: () => {
@@ -145,13 +145,13 @@ class _ClientDetailsState extends State<ClientDetails> {
                                                       lname, phoneNumber)),
                                         ),
                                       }),
-                              ElevatedButton(
-                                  onPressed: () => print("Under Dev..."),
-                                  child: Text("Edit Client")),
                               ColoredBox(
                                 color: c1,
                                 child: Center(
                                     child: TextField(
+                                        enabled:
+                                            editStatus == true ? false : true,
+                                        readOnly: editStatus,
                                         controller: fNameCon,
                                         decoration: InputDecoration(
                                             prefixText: "First Name: ",
@@ -164,6 +164,9 @@ class _ClientDetailsState extends State<ClientDetails> {
                                 color: c1,
                                 child: Center(
                                     child: TextField(
+                                        enabled:
+                                            editStatus == true ? false : true,
+                                        readOnly: editStatus,
                                         controller: lNameCon,
                                         decoration: InputDecoration(
                                             prefixText: "Last Name: ",
@@ -175,6 +178,9 @@ class _ClientDetailsState extends State<ClientDetails> {
                                 color: c1,
                                 child: Center(
                                     child: TextField(
+                                        enabled:
+                                            editStatus == true ? false : true,
+                                        readOnly: editStatus,
                                         controller: cityCon,
                                         decoration: InputDecoration(
                                             prefixText: "City Name: ",
@@ -186,6 +192,9 @@ class _ClientDetailsState extends State<ClientDetails> {
                                 color: c1,
                                 child: Center(
                                     child: TextField(
+                                        enabled:
+                                            editStatus == true ? false : true,
+                                        readOnly: editStatus,
                                         controller: stateCon,
                                         decoration: InputDecoration(
                                             prefixText: "State: ",
@@ -197,6 +206,8 @@ class _ClientDetailsState extends State<ClientDetails> {
                                 color: c1,
                                 child: Center(
                                   child: TextField(
+                                    enabled: editStatus == true ? false : true,
+                                    readOnly: editStatus,
                                     controller: addressCon,
                                     decoration: InputDecoration(
                                         prefixText: "Address:",
@@ -204,7 +215,6 @@ class _ClientDetailsState extends State<ClientDetails> {
                                     keyboardType: TextInputType.streetAddress,
                                     style: TextStyle(fontSize: 20),
                                     onSubmitted: (_) => submitData(),
-                                    readOnly: editStatus,
                                   ),
                                 ),
                               ),
@@ -212,6 +222,8 @@ class _ClientDetailsState extends State<ClientDetails> {
                                 color: c1,
                                 child: Center(
                                   child: TextField(
+                                    enabled: editStatus == true ? false : true,
+                                    readOnly: editStatus,
                                     controller: phoneNumCon,
                                     inputFormatters: [
                                       FilteringTextInputFormatter.digitsOnly,
@@ -223,68 +235,44 @@ class _ClientDetailsState extends State<ClientDetails> {
                                     style: TextStyle(fontSize: 20),
                                     onSubmitted: (_) => submitData(),
                                     keyboardType: TextInputType.phone,
-                                    readOnly: editStatus,
                                   ),
                                 ),
                               ),
-                              // TextButton(
-                              //   onPressed: editStateChange,
-                              //   child: Text('Edit Client',
-                              //       style: TextStyle(color: Colors.black)),
-                              //   style: ButtonStyle(
-                              //       backgroundColor:
-                              //           MaterialStateProperty.all<Color>(
-                              //               Colors.yellow)),
-                              // ),
-                              // TextButton(
-                              //   onPressed:
-                              //       /*editStatus == true ? */ submitData(),
-                              //   /*: null,*/
-                              //   child: Text('Save Client',
-                              //       style: TextStyle(color: Colors.black)),
-                              //   style: ButtonStyle(
-                              //       backgroundColor:
-                              //           MaterialStateProperty.all<Color>(
-                              //               Colors.blue)),
-                              // ),
-                              // TextButton(
-                              //   child: Text(
-                              //     'Add New Transaction',
-                              //     style: TextStyle(color: Colors.black),
-                              //   ),
-                              //   style: ButtonStyle(
-                              //       backgroundColor:
-                              //           MaterialStateProperty.all<Color>(
-                              //               Colors.green)),
-                              //   onPressed: () {
-                              //     editStatus == true
-                              //         ? null
-                              //         : Navigator.push(
-                              //             context,
-                              //             MaterialPageRoute(
-                              //                 builder: (context) =>
-                              //                     AddTransaction(id, fname,
-                              //                         lname, phoneNumber)),
-                              //           );
-                              //   },
-                              // ),
-                              // TextButton(
-                              //   child: Text(
-                              //     'Back To Clients',
-                              //     style: TextStyle(color: Colors.black),
-                              //   ),
-                              //   style: ButtonStyle(
-                              //       backgroundColor:
-                              //           MaterialStateProperty.all<Color>(
-                              //               Colors.lightGreen)),
-                              //   onPressed: () {
-                              //     Navigator.push(
-                              //       context,
-                              //       MaterialPageRoute(
-                              //           builder: (context) => ViewClients()),
-                              //     );
-                              //   },
-                              // ),
+                              TextButton(
+                                onPressed: editStateChange,
+                                child: Text('Edit Client',
+                                    style: TextStyle(color: Colors.black)),
+                                style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            Colors.yellow)),
+                              ),
+                              TextButton(
+                                onPressed: submitData(),
+                                child: Text('Save Client',
+                                    style: TextStyle(color: Colors.black)),
+                                style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            Colors.blue)),
+                              ),
+                              TextButton(
+                                child: Text(
+                                  'Back To Clients',
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                                style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            Colors.lightGreen)),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ViewClients()),
+                                  );
+                                },
+                              ),
                             ],
                           ),
                         ),
