@@ -123,9 +123,9 @@ class _ViewTransactsState extends State<ViewTransacts> {
                                           ),
                                         ),
                                         title: Text(
-                                          (transact['fname'] +
+                                          (transact['fname'].toString() +
                                               " " +
-                                              transact['lname']),
+                                              transact['lname'].toString()),
                                           style: TextStyle(fontSize: 20),
                                         ),
                                         trailing: TextButton(
