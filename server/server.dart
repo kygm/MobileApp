@@ -91,7 +91,7 @@ void start() async {
     setCors,
     (ServRequest req, ServResponse res) async {
       var theId = req.body['_id'].substring(10, 34);
-      //await transactions.update(where.id(ObjectId.parse(theId)), transactions);
+      await transactions.update(where.id(ObjectId.parse(theId)), transactions);
       // transactions.update(
       //     where.eq('id', theId), modify.set('transactName', req.body['transactName']));
       // //we may have to do this instead
