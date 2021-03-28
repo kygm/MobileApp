@@ -82,7 +82,8 @@ class _ViewClientsState extends State<ViewClients> {
           },
           child: Text(
             "KYGM Services",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
+            style: TextStyle(
+                fontWeight: FontWeight.bold, fontSize: 23, color: Colors.black),
           ),
         ),
       ),

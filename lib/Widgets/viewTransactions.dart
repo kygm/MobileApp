@@ -50,7 +50,8 @@ class _ViewTransactsState extends State<ViewTransacts> {
           },
           child: Text(
             "KYGM Services",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
+            style: TextStyle(
+                fontWeight: FontWeight.bold, fontSize: 23, color: Colors.black),
           ),
         ),
       ),
