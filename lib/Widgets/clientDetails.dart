@@ -95,6 +95,19 @@ class _ClientDetailsState extends State<ClientDetails> {
     Navigator.of(context).pop();
   }
 
+  void deleteClient(id) {
+    print("Deleting Client " + id);
+    setState(() {
+      widget.api.deleteClient(id);
+
+      MaterialPageRoute(
+        builder: (context) => ViewClients(),
+      );
+
+      Navigator.pop(context);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -166,6 +179,13 @@ class _ClientDetailsState extends State<ClientDetails> {
                                                   ViewClients()),
                                         );
                                       },
+                                    ),
+                                  ),
+                                  TextButton(
+                                    onPressed: () => {deleteClient(id)},
+                                    child: Icon(
+                                      Icons.delete,
+                                      size: 30,
                                     ),
                                   ),
                                 ],

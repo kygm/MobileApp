@@ -32,19 +32,6 @@ class _ViewClientsState extends State<ViewClients> {
 
   void _addNewTransaction(String phoneNum) {}
 
-  void deleteClient(id) {
-    print("Deleting Client " + id);
-    setState(() {
-      widget.api.deleteClient(id);
-
-      MaterialPageRoute(
-        builder: (context) => ViewClients(),
-      );
-
-      Navigator.pop(context);
-    });
-  }
-
   void _editClient(id) {
     print("Edit " + id);
   }
@@ -168,17 +155,6 @@ class _ViewClientsState extends State<ViewClients> {
                                               " " +
                                               client['lname']),
                                           style: TextStyle(fontSize: 20),
-                                        ),
-                                        trailing: TextButton(
-                                          onPressed: () => {
-                                            //_editClient(client['_id']),
-
-                                             deleteClient(client['_id'])
-                                          },
-                                          child: Icon(
-                                            Icons.delete,
-                                            size: 30,
-                                          ),
                                         ),
                                       ),
                                     ),

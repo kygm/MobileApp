@@ -125,25 +125,6 @@ class _TransactionDetailsState extends State<TransactionDetails> {
                                       "Description: " + description.toString()),
                                 ),
                                 TextButton(
-                                  onPressed: editStateChange,
-                                  child: Text('Edit Transaction',
-                                      style: TextStyle(color: Colors.black)),
-                                  style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all<Color>(
-                                              Colors.yellow)),
-                                ),
-                                TextButton(
-                                  // enabled:editStatus,
-                                  onPressed: null,
-                                  child: Text('Save Transaction',
-                                      style: TextStyle(color: Colors.black)),
-                                  style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all<Color>(
-                                              Colors.blue)),
-                                ),
-                                TextButton(
                                   child: Text(
                                     'Back To Transactions',
                                     style: TextStyle(color: Colors.black),
