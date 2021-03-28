@@ -1,4 +1,4 @@
-import 'package:KYGM_Mobile/Widgets/viewTransactions.dart';
+import './viewTransactions.dart';
 import 'package:flutter/material.dart';
 import '../main.dart';
 import './drawer.dart';
@@ -36,6 +36,17 @@ class _TransactionDetailsState extends State<TransactionDetails> {
     } else if (editStatus == true) {
       setState(() => editStatus = false);
     }
+  }
+
+  _deleteClient(id) {
+    setState(() {
+      print(id);
+      widget.api.deleteTransaction(id);
+
+      Navigator.pop(context);
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => ViewTransacts()));
+    });
   }
 
   submitData() {
@@ -97,6 +108,7 @@ class _TransactionDetailsState extends State<TransactionDetails> {
                             padding: const EdgeInsets.all(15.0),
                             child: ListView(
                               children: <Widget>[
+                                //Text(id.toString()),
                                 ColoredBox(
                                   color: c1,
                                   child: Text(
@@ -189,7 +201,9 @@ class _TransactionDetailsState extends State<TransactionDetails> {
                                       backgroundColor:
                                           MaterialStateProperty.all<Color>(
                                               Colors.red)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    _deleteClient(id.toString());
+                                  },
                                 ),
                               ],
                             ),

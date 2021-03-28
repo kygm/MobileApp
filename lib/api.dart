@@ -3,8 +3,10 @@ import 'package:dio/dio.dart';
 
 import './Models/client.dart';
 
+String heroku = "https://kygm-mobile.herokuapp.com/";
+String localhost = "http://localhost:1700/";
 class ClientsApi {
-  final _dio = Dio(BaseOptions(baseUrl: 'https://kygm-mobile.herokuapp.com/'));
+  final _dio = Dio(BaseOptions(baseUrl: localhost));
 
   Future<List> getClients() async {
     final response = await _dio.get('');
@@ -78,6 +80,11 @@ class ClientsApi {
 
   Future deleteClient(String id) async {
     final response = await _dio.post('/deleteClient', data: {'id': id});
+    return response.data;
+  }
+  Future deleteTransaction(String id) async {
+    final response = await _dio.post('/deleteTransact', data: {'id' : id});
+    print(id);
     return response.data;
   }
 }
