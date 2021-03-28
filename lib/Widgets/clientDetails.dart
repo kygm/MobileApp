@@ -35,11 +35,11 @@ class _ClientDetailsState extends State<ClientDetails> {
   var c1 = Colors.grey;
   bool editStatus = true;
   void editStateChange() {
-    // if (editStatus == true) {
-    //   setState(() => editStatus = false);
-    // } else if (editStatus == false) {
-    //   setState(() => editStatus = true);
-    // }
+    if (editStatus == true) {
+      setState(() => editStatus = false);
+    } else if (editStatus == false) {
+      setState(() => editStatus = true);
+    }
   }
 
   void _doDatePicker() {
