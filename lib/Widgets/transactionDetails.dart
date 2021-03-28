@@ -96,13 +96,16 @@ class _TransactionDetailsState extends State<TransactionDetails> {
                             padding: const EdgeInsets.all(15.0),
                             child: ListView(
                               children: <Widget>[
-                                Text("Name: " + fname + " " + lname),
-                                Text("Title: " + title),
-                                Text("Date: " + date),
-                                Text("Time: " + time),
+                                Text("Name: " +
+                                    fname.toString() +
+                                    " " +
+                                    lname.toString()),
+                                Text("Title: " + title.toString()),
+                                Text("Date: " + date.toString()),
+                                Text("Time: " + time.toString()),
                                 Text("Cost: " + cost.toString()),
                                 Text("Price: " + price.toString()),
-                                Text("Description: " + description),
+                                Text("Description: " + description.toString()),
                                 TextButton(
                                   onPressed: editStateChange,
                                   child: Text('Edit Transaction',
