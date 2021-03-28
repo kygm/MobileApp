@@ -28,6 +28,7 @@ class _TransactionDetailsState extends State<TransactionDetails> {
       timeCon = TextEditingController(),
       descriptionCon = TextEditingController();
   var c1 = Colors.lightBlue;
+  double t1 = 20;
   bool editStatus = false;
   void editStateChange() {
     if (editStatus == false) {
@@ -103,48 +104,62 @@ class _TransactionDetailsState extends State<TransactionDetails> {
                                         fname.toString() +
                                         " " +
                                         lname.toString(),
-                                    style: TextStyle(fontSize: 16),
+                                    style: TextStyle(
+                                        fontSize: t1,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ),
                                 ColoredBox(
                                     color: c1,
                                     child: Text(
                                       "Title: " + title.toString(),
-                                      style: TextStyle(fontSize: 16),
+                                      style: TextStyle(
+                                          fontSize: t1,
+                                          fontWeight: FontWeight.bold),
                                     )),
                                 ColoredBox(
                                   color: c1,
                                   child: Text(
                                     "Date: " + date.toString(),
-                                    style: TextStyle(fontSize: 16),
+                                    style: TextStyle(
+                                        fontSize: t1,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ),
                                 ColoredBox(
                                   color: c1,
                                   child: Text(
                                     "Time: " + time.toString(),
-                                    style: TextStyle(fontSize: 16),
+                                    style: TextStyle(
+                                        fontSize: t1,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ),
                                 ColoredBox(
                                   color: c1,
                                   child: Text(
                                     "Cost: " + cost.toString(),
-                                    style: TextStyle(fontSize: 16),
+                                    style: TextStyle(
+                                        fontSize: t1,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ),
                                 ColoredBox(
                                   color: c1,
                                   child: Text(
                                     "Price: " + price.toString(),
-                                    style: TextStyle(fontSize: 16),
+                                    style: TextStyle(
+                                        fontSize: t1,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ),
                                 ColoredBox(
                                   color: c1,
                                   child: Text(
                                     "Description: " + description.toString(),
-                                    style: TextStyle(fontSize: 16),
+                                    style: TextStyle(
+                                        fontSize: t1,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ),
                                 TextButton(
