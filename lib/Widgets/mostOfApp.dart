@@ -25,8 +25,8 @@ class _MostOfAppState extends State<MostOfApp> {
   double getTotal(transacts) {
     double p = 0, c = 0, total = 0;
     transacts.forEach((t) {
-      p += t.transactPrice;
-      c += t.transactCost;
+      p += t['transactPrice'];
+      c += t['transactCost'];
     });
     total = p - c;
     return total;
@@ -40,6 +40,7 @@ class _MostOfAppState extends State<MostOfApp> {
         transacts = data;
         //print(transacts.toString());
         loading = false;
+        getTotal(transacts);
       });
     });
   }
