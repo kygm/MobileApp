@@ -96,33 +96,56 @@ class _TransactionDetailsState extends State<TransactionDetails> {
                             padding: const EdgeInsets.all(15.0),
                             child: ListView(
                               children: <Widget>[
-                                Text("Name: " +
-                                    fname.toString() +
-                                    " " +
-                                    lname.toString()),
+                                ColoredBox(
+                                  color: c1,
+                                  child: Text(
+                                    "Name: " +
+                                        fname.toString() +
+                                        " " +
+                                        lname.toString(),
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                ),
                                 ColoredBox(
                                     color: c1,
-                                    child: Text("Title: " + title.toString())),
+                                    child: Text(
+                                      "Title: " + title.toString(),
+                                      style: TextStyle(fontSize: 16),
+                                    )),
                                 ColoredBox(
                                   color: c1,
-                                  child: Text("Date: " + date.toString()),
-                                ),
-                                ColoredBox(
-                                  color: c1,
-                                  child: Text("Time: " + time.toString()),
-                                ),
-                                ColoredBox(
-                                  color: c1,
-                                  child: Text("Cost: " + cost.toString()),
-                                ),
-                                ColoredBox(
-                                  color: c1,
-                                  child: Text("Price: " + price.toString()),
+                                  child: Text(
+                                    "Date: " + date.toString(),
+                                    style: TextStyle(fontSize: 16),
+                                  ),
                                 ),
                                 ColoredBox(
                                   color: c1,
                                   child: Text(
-                                      "Description: " + description.toString()),
+                                    "Time: " + time.toString(),
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                ),
+                                ColoredBox(
+                                  color: c1,
+                                  child: Text(
+                                    "Cost: " + cost.toString(),
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                ),
+                                ColoredBox(
+                                  color: c1,
+                                  child: Text(
+                                    "Price: " + price.toString(),
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                ),
+                                ColoredBox(
+                                  color: c1,
+                                  child: Text(
+                                    "Description: " + description.toString(),
+                                    style: TextStyle(fontSize: 16),
+                                  ),
                                 ),
                                 TextButton(
                                   child: Text(
@@ -141,6 +164,17 @@ class _TransactionDetailsState extends State<TransactionDetails> {
                                               ViewTransacts()),
                                     );
                                   },
+                                ),
+                                TextButton(
+                                  child: Text(
+                                    'Delete Transaction',
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                  style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all<Color>(
+                                              Colors.red)),
+                                  onPressed: () {},
                                 ),
                               ],
                             ),
