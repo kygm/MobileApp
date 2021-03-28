@@ -100,12 +100,30 @@ class _TransactionDetailsState extends State<TransactionDetails> {
                                     fname.toString() +
                                     " " +
                                     lname.toString()),
-                                Text("Title: " + title.toString()),
-                                Text("Date: " + date.toString()),
-                                Text("Time: " + time.toString()),
-                                Text("Cost: " + cost.toString()),
-                                Text("Price: " + price.toString()),
-                                Text("Description: " + description.toString()),
+                                ColoredBox(
+                                    color: c1,
+                                    child: Text("Title: " + title.toString())),
+                                ColoredBox(
+                                  color: c1,
+                                  child: Text("Date: " + date.toString()),
+                                ),
+                                ColoredBox(
+                                  color: c1,
+                                  child: Text("Time: " + time.toString()),
+                                ),
+                                ColoredBox(
+                                  color: c1,
+                                  child: Text("Cost: " + cost.toString()),
+                                ),
+                                ColoredBox(
+                                  color: c1,
+                                  child: Text("Price: " + price.toString()),
+                                ),
+                                ColoredBox(
+                                  color: c1,
+                                  child: Text(
+                                      "Description: " + description.toString()),
+                                ),
                                 TextButton(
                                   onPressed: editStateChange,
                                   child: Text('Edit Transaction',
