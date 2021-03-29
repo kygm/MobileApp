@@ -112,10 +112,9 @@ class _ViewClientsState extends State<ViewClients> {
               child: clients.isEmpty
                   ? Column(
                       children: <Widget>[
-                        Text('No Clients In DB'),
-                        SizedBox(
-                          height: 25,
-                        ),
+                        Center(
+              child: CircularProgressIndicator(),
+            ),
                       ],
                     )
                   : Expanded(

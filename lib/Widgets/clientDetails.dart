@@ -1,3 +1,4 @@
+import 'package:KYGM_Mobile/widgets/mostOfApp.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -56,6 +57,7 @@ class _ClientDetailsState extends State<ClientDetails> {
     });
   }
 
+
   submitData() {
     var inFName = fNameCon.text;
     var inLName = lNameCon.text;
@@ -100,8 +102,9 @@ class _ClientDetailsState extends State<ClientDetails> {
     setState(() {
       widget.api.deleteClient(id);
 
+      Navigator.pop(context);
       MaterialPageRoute(
-        builder: (context) => ViewClients(),
+        builder: (context) => MostOfApp(List.empty()),
       );
 
       Navigator.pop(context);

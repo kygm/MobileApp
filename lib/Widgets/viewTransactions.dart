@@ -66,18 +66,14 @@ class _ViewTransactsState extends State<ViewTransacts> {
                   color: Colors.green,
                   fontWeight: FontWeight.bold),
             ),
-            Text(
-              "Revenue | Full Name | View Details",
-              style: TextStyle(fontSize: 20),
-            ),
+            
             Container(
               child: transacts.isEmpty
                   ? Column(
                       children: <Widget>[
-                        Text('No Transacts In DB'),
-                        SizedBox(
-                          height: 25,
-                        ),
+                        Center(
+              child: CircularProgressIndicator(),
+            ),
                       ],
                     )
                   : Expanded(
