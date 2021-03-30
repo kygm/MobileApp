@@ -5,6 +5,7 @@ import './Models/client.dart';
 
 String heroku = "https://kygm-mobile.herokuapp.com/";
 String localhost = "http://localhost:1700/";
+
 class ClientsApi {
   final _dio = Dio(BaseOptions(baseUrl: heroku));
 
@@ -39,8 +40,15 @@ class ClientsApi {
     return Client.fromJson(response.data);
   }
 
-  Future<Client> editClient(String id, String fname, String lname,
-      String address, String city, String state, String phoneNumber) async {
+  Future<Client> editClient(
+      String id,
+      String fname,
+      String lname,
+      String address,
+      String city,
+      String state,
+      String phoneNumber,
+      String description) async {
     final response = await _dio.post('/clientDetails', data: {
       'id': id,
       'fname': fname,
@@ -48,7 +56,8 @@ class ClientsApi {
       'address': address,
       'city': city,
       'state': state,
-      'phoneNumber': phoneNumber
+      'phoneNumber': phoneNumber,
+      'description': description
     });
     return Client.fromJson(response.data);
   }
@@ -72,9 +81,8 @@ class ClientsApi {
       'transactPrice': transactPrice,
       'transactTime': transactTime,
       'descript': descript,
-      'transactName' : transactName,
-      'dateEntered' : DateTime.now().toString()
-      
+      'transactName': transactName,
+      'dateEntered': DateTime.now().toString()
     });
   }
 
@@ -82,8 +90,9 @@ class ClientsApi {
     final response = await _dio.post('/deleteClient', data: {'id': id});
     return response.data;
   }
+
   Future deleteTransaction(String id) async {
-    final response = await _dio.post('/deleteTransact', data: {'id' : id});
+    final response = await _dio.post('/deleteTransact', data: {'id': id});
     //print(id);
     return response.data;
   }

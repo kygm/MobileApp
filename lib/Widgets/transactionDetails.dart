@@ -38,7 +38,7 @@ class _TransactionDetailsState extends State<TransactionDetails> {
     }
   }
 
-  _deleteClient(id) {
+  _deleteTransaction(id) {
     setState(() {
       print(id);
       widget.api.deleteTransaction(id);
@@ -203,7 +203,11 @@ class _TransactionDetailsState extends State<TransactionDetails> {
                                           MaterialStateProperty.all<Color>(
                                               Colors.red)),
                                   onPressed: () {
-                                    _deleteClient(id.toString());
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) =>
+                                          _confirmWindow(context),
+                                    );
                                   },
                                 ),
                               ],
@@ -219,6 +223,51 @@ class _TransactionDetailsState extends State<TransactionDetails> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _confirmWindow(BuildContext context) {
+    return new AlertDialog(
+      title: const Text('Are you sure you want to delete this client?'),
+      content: new Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text('Are you sure? This action cannot be undone.'),
+          Row(
+            children: [
+              TextButton(
+                onPressed: _deleteTransaction(id.toString()),
+                child: Text('Yes', style: TextStyle(color: Colors.black)),
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.green)),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 150.0),
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('No', style: TextStyle(color: Colors.black)),
+                  style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(Colors.red)),
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          textColor: Theme.of(context).primaryColor,
+          child: const Text('Close'),
+        ),
+      ],
     );
   }
 }
