@@ -26,7 +26,7 @@ class _ViewTransactsState extends State<ViewTransacts> {
   //instance f(x) declaration
   void initState() {
     super.initState();
-    final s = widget.api.getTransactions();
+    //final s = widget.api.getTransactions();
 
     widget.api.getTransactions().then((data) {
       setState(() {
