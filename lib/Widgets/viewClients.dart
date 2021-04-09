@@ -113,8 +113,8 @@ class _ViewClientsState extends State<ViewClients> {
                   ? Column(
                       children: <Widget>[
                         Center(
-              child: CircularProgressIndicator(),
-            ),
+                          child: CircularProgressIndicator(),
+                        ),
                       ],
                     )
                   : Expanded(
@@ -132,15 +132,16 @@ class _ViewClientsState extends State<ViewClients> {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) => ClientDetails(
-                                                client['_id'],
-                                                client['fname'],
-                                                client['lname'],
-                                                client['city'],
-                                                client['state'],
-                                                client['address'],
-                                                client['phoneNumber']),
-                                          ),
+                                              builder: (context) =>
+                                                  ClientDetails(
+                                                      client['_id'],
+                                                      client['fname'],
+                                                      client['lname'],
+                                                      client['address'],
+                                                      client['city'],
+                                                      client['state'],
+                                                      client['phoneNumber'],
+                                                      client['descript'])),
                                         ),
                                       },
                                       child: ListTile(

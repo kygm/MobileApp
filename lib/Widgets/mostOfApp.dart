@@ -121,7 +121,6 @@ class _MostOfAppState extends State<MostOfApp> {
               //               minWidth: 370,
               child: Text('This Months Revenue'),
               onPressed: () => {
-                print("under dev..."),
                 showDialog(
                   context: context,
                   builder: (BuildContext context) => _revenueWindow(context),

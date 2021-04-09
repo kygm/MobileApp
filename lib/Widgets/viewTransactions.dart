@@ -66,14 +66,21 @@ class _ViewTransactsState extends State<ViewTransacts> {
                   color: Colors.green,
                   fontWeight: FontWeight.bold),
             ),
-            
+            Text(
+              "Search Transactions",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            TextFormField(
+              decoration: InputDecoration(labelText: 'keyword'),
+              onFieldSubmitted: null,
+            ),
             Container(
               child: transacts.isEmpty
                   ? Column(
                       children: <Widget>[
                         Center(
-              child: CircularProgressIndicator(),
-            ),
+                          child: CircularProgressIndicator(),
+                        ),
                       ],
                     )
                   : Expanded(

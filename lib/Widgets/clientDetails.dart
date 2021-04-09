@@ -11,28 +11,27 @@ import './viewClients.dart';
 import './addTransaction.dart';
 
 class ClientDetails extends StatefulWidget {
-  final String id, fname, lname, city, address, state, phoneNumber;
-  ClientDetails(this.id, this.fname, this.lname, this.city, this.address,
-      this.state, this.phoneNumber);
+  final String id, fname, lname, address, city, state, phoneNumber, description;
+  ClientDetails(this.id, this.fname, this.lname, this.address, this.city,
+      this.state, this.phoneNumber, this.description);
 
   final ClientsApi api = ClientsApi();
   @override
-  _ClientDetailsState createState() =>
-      _ClientDetailsState(id, fname, lname, city, address, state, phoneNumber);
+  _ClientDetailsState createState() => _ClientDetailsState(
+      id, fname, lname, address, city, state, phoneNumber, description);
 }
 
 class _ClientDetailsState extends State<ClientDetails> {
-  final String id, fname, lname, city, address, state, phoneNumber;
-  _ClientDetailsState(this.id, this.fname, this.lname, this.city, this.address,
-      this.state, this.phoneNumber);
+  final String id, fname, lname, address, city, state, phoneNumber, description;
+  _ClientDetailsState(this.id, this.fname, this.lname, this.address, this.city,
+      this.state, this.phoneNumber, this.description);
   final fNameCon = TextEditingController(),
       lNameCon = TextEditingController(),
       addressCon = TextEditingController(),
       cityCon = TextEditingController(),
       stateCon = TextEditingController(),
-      descriptCon = TextEditingController(),
-      phoneNumCon = TextEditingController();
-  DateTime _selectedDate;
+      phoneNumCon = TextEditingController(),
+      descriptCon = TextEditingController();
   var c1 = Colors.grey;
   bool editStatus = true;
   void editStateChange() {
@@ -43,52 +42,40 @@ class _ClientDetailsState extends State<ClientDetails> {
     }
   }
 
-  void _doDatePicker() {
-    showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2020),
-      lastDate: DateTime.now(),
-    ).then((pickedDate) {
-      if (pickedDate == null) return;
-      // setState(() {
-      //   _selectedDate = pickedDate;
-      // });
-    });
-  }
-
-
   submitData() {
-    var inFName = fNameCon.text;
-    var inLName = lNameCon.text;
-    var inAddress = addressCon.text;
-    var inCity = cityCon.text;
-    String inState = stateCon.text;
-    var inDes = descriptCon.text;
-    var inPhoneNum = phoneNumCon.toString();
+    var inFName = fNameCon.text,
+        inLName = lNameCon.text,
+        inAddress = addressCon.text,
+        inCity = cityCon.text,
+        inState = stateCon.text,
+        inPhoneNum = phoneNumCon.text,
+        inDes = descriptCon.text;
     setState(() {
-      if (inFName != null || inFName == '') {
+      if (inFName == null || inFName == '') {
         inFName = fname;
       }
-      if (inLName != null || inLName == '') {
+      if (inLName == null || inLName == '') {
         inLName = lname;
       }
-      if (inAddress != null || inAddress == '') {
-        inAddress = fname;
+      if (inAddress == null || inAddress == '') {
+        inAddress = address;
       }
-      if (inCity != null || inCity == '') {
-        inCity = fname;
+      if (inCity == null || inCity == '') {
+        inCity = city;
       }
-      if (inState != null || inState == '') {
-        inState = fname;
+      if (inState == null || inState == '') {
+        inState = state;
       }
-      if (inPhoneNum != null) {
+      if (inPhoneNum == null) {
         inPhoneNum = phoneNumber;
       }
-      widget.api.editClient(id, inFName, inLName, inAddress, inCity, inState,
-          inPhoneNum.toString());
+      if (inDes == null) {
+        inDes = description;
+      }
+      widget.api.editClient(
+          id, inFName, inLName, inAddress, inCity, inState, inPhoneNum, inDes);
       MaterialPageRoute(
-        builder: (context) => MyHomePage(),
+        builder: (context) => ViewClients(),
       );
       Navigator.of(context).pop();
     });
@@ -97,16 +84,14 @@ class _ClientDetailsState extends State<ClientDetails> {
     Navigator.of(context).pop();
   }
 
-  void deleteClient(id) {
+  void _deleteClient(id) {
     print("Deleting Client " + id);
     setState(() {
       widget.api.deleteClient(id);
-
       Navigator.pop(context);
       MaterialPageRoute(
-        builder: (context) => MostOfApp(List.empty()),
+        builder: (context) => ViewClients(),
       );
-
       Navigator.pop(context);
     });
   }
@@ -145,12 +130,6 @@ class _ClientDetailsState extends State<ClientDetails> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              // Text("First Name: " + fname),
-                              // Text("Last Name: " + lname),
-                              // Text("State: " + state),
-                              // Text("Phone Number: " + phoneNumber),
-                              // Text("Address: " + address),
-                              // Text("City: " + city),
                               Row(
                                 children: [
                                   ElevatedButton(
@@ -186,7 +165,13 @@ class _ClientDetailsState extends State<ClientDetails> {
                                     ),
                                   ),
                                   TextButton(
-                                    onPressed: () => {deleteClient(id)},
+                                    onPressed: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) =>
+                                            _confirmWindow(context),
+                                      );
+                                    },
                                     child: Icon(
                                       Icons.delete,
                                       size: 30,
@@ -287,6 +272,22 @@ class _ClientDetailsState extends State<ClientDetails> {
                                   ),
                                 ),
                               ),
+                              ColoredBox(
+                                color: c1,
+                                child: Center(
+                                  child: TextField(
+                                    enabled: editStatus == true ? false : true,
+                                    readOnly: editStatus,
+                                    controller: descriptCon,
+                                    decoration: InputDecoration(
+                                        prefixText: "Description:",
+                                        labelText: description),
+                                    keyboardType: TextInputType.multiline,
+                                    style: TextStyle(fontSize: 20),
+                                    onSubmitted: (_) => submitData(),
+                                  ),
+                                ),
+                              ),
                               Row(
                                 children: [
                                   Padding(
@@ -306,7 +307,7 @@ class _ClientDetailsState extends State<ClientDetails> {
                                   Padding(
                                     padding:
                                         const EdgeInsets.fromLTRB(40, 0, 20, 0),
-                                    child: ElevatedButton(
+                                    child: TextButton(
                                       child: Text('Save Client',
                                           style:
                                               TextStyle(color: Colors.black)),
@@ -333,6 +334,53 @@ class _ClientDetailsState extends State<ClientDetails> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _confirmWindow(BuildContext context) {
+    return new AlertDialog(
+      title: const Text('Are you sure you want to delete this client?'),
+      content: new Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text('Are you sure? This action cannot be undone.'),
+          Row(
+            children: [
+              TextButton(
+                onPressed: () {
+                  _deleteClient(id.toString());
+                },
+                child: Text('Yes', style: TextStyle(color: Colors.black)),
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.green)),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 150.0),
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('No', style: TextStyle(color: Colors.black)),
+                  style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(Colors.red)),
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          textColor: Theme.of(context).primaryColor,
+          child: const Text('Close'),
+        ),
+      ],
     );
   }
 }
