@@ -53,8 +53,20 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: _dbLoaded
           ? MostOfApp(clients)
-          : Center(
-              child: CircularProgressIndicator(),
+          : 
+          Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Text("DB Loading (May take up to 1 minute)",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.black)),
+                  ),
+                  CircularProgressIndicator(),
+                ],
+              ),
             ),
     );
   }

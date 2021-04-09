@@ -14,7 +14,7 @@ class ClientsApi {
   }
 
   Future<List> getTransactions() async {
-    final response = await _dio.get('/getTransacts');
+    final response = await _dio.post('/getTransacts');
     return response.data['transaction'];
   }
 
@@ -22,6 +22,10 @@ class ClientsApi {
     final response = await _dio.get('');
 
     return response.toString();
+  }
+  Future<String> searchClient() async {
+    final response = await _dio.post('/searchClient');
+    return response.data['client'];
   }
 
   //inFName, inLName, inAddress, inCity, inState, inDes, inPhoneNum
