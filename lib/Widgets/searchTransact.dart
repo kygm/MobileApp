@@ -1,48 +1,28 @@
-import 'package:KYGM_Mobile/Widgets/transactionDetails.dart';
 import 'package:flutter/material.dart';
 import './drawer.dart';
-import '../api.dart';
-import '../main.dart';
-import '../Models/transaction.dart';
-import './searchTransact.dart';
+import './mostOfApp.dart';
+import 'package:KYGM_Mobile/main.dart';
+import 'package:KYGM_Mobile/api.dart';
+import './transactionDetails.dart';
 
-class ViewTransacts extends StatefulWidget {
-  ViewTransacts({Key key, this.title, this.viewClients}) : super(key: key);
-
-  final String title;
-  //pull from database
-  final List<Transaction> viewClients;
-
+class SearchTransact extends StatefulWidget {
   final ClientsApi api = ClientsApi();
   @override
-  _ViewTransactsState createState() => _ViewTransactsState();
+  _SearchTransactState createState() => _SearchTransactState();
 }
 
-class _ViewTransactsState extends State<ViewTransacts> {
-  //instance var declaration
+class _SearchTransactState extends State<SearchTransact> {
+  final myController = TextEditingController();
+  var _search = false;
   List transacts = [];
-  bool loading = true;
-  String x;
 
-  //instance f(x) declaration
-  void initState() {
-    super.initState();
-    //final s = widget.api.getTransactions();
-
-    widget.api.getTransactions().then((data) {
+  void doSearch() {
+    widget.api.searchTransact(myController.text).then((data) {
       setState(() {
         transacts = data;
-        //print(transacts.toString());
-        loading = false;
+        _search = true;
+        print(transacts.toString());
       });
-    });
-  }
-
-  void searchTransact() {
-    setState(() {
-      Navigator.pop(context);
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => SearchTransact()));
     });
   }
 
@@ -64,7 +44,28 @@ class _ViewTransactsState extends State<ViewTransacts> {
           ),
         ),
       ),
-      body: Center(
+      //if search true
+      body: !_search
+          ? Column(
+              children: <Widget>[
+                TextFormField(
+                  controller: myController,
+                  decoration: InputDecoration(
+                    border: UnderlineInputBorder(),
+                    labelText: 'Search by first name',
+                  ),
+                ),
+                ElevatedButton(
+                    child: Text("Serach"),
+                    onPressed: () => {
+                          doSearch(),
+                        }),
+              ],
+            )
+          //if search false
+          : 
+          
+          Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -75,16 +76,8 @@ class _ViewTransactsState extends State<ViewTransacts> {
                   color: Colors.green,
                   fontWeight: FontWeight.bold),
             ),
-            Column(
-              children: [
-                ElevatedButton(
-                  onPressed: () => searchTransact(),
-                  child: Text("Search Transactions"),
-                ),
-              ],
-            ),
             Container(
-              child: transacts.isEmpty
+              child: transacts.isEmpty && _search == false
                   ? Column(
                       children: <Widget>[
                         Center(
@@ -92,7 +85,7 @@ class _ViewTransactsState extends State<ViewTransacts> {
                         ),
                       ],
                     )
-                  : Expanded(
+                  : transacts.isEmpty ? Expanded(
                       child: ListView(
                           shrinkWrap: true,
                           padding: EdgeInsets.all(15.0),
@@ -141,24 +134,20 @@ class _ViewTransactsState extends State<ViewTransacts> {
                                               transact['lname'].toString()),
                                           style: TextStyle(fontSize: 20),
                                         ),
-                                        trailing: TextButton(
-                                          onPressed: () => {null},
-                                          child: Icon(
-                                            Icons.arrow_forward,
-                                            size: 30,
-                                          ),
-                                        ),
+                                        
                                       ),
                                     ),
                                   ),
                                 )
                                 .toList(),
                           ]),
-                    ),
+                    )
+                    : Text("No Transacts Found!"),
             ),
           ],
         ),
       ),
+            //Text(transacts.toString()),
     );
   }
 }

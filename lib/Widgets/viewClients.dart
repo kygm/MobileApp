@@ -2,6 +2,7 @@
 
 //import 'package:KYGM_Mobile/Widgets/clientDetails.dart';
 //import 'package:KYGM_Mobile/widgets/clientDetails.dart';
+import 'package:KYGM_Mobile/widgets/searchClient.dart';
 import 'package:flutter/rendering.dart';
 import '../api.dart';
 import '../Models/client.dart';
@@ -95,18 +96,41 @@ class _ViewClientsState extends State<ViewClients> {
               "Click on client to add transact",
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
             ),
-            ElevatedButton(
-              child: Text('Add Clients'),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.red, // background
-                onPrimary: Colors.white, // foreground
-              ),
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => AddClient(_addNewTransaction)));
-              },
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    child: Text('Add Clients'),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.red, // background
+                      onPrimary: Colors.white, // foreground
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  AddClient(_addNewTransaction)));
+                    },
+                  ),
+                ),
+                ElevatedButton(
+                  child: Text('Search Clients'),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.green, // background
+                    onPrimary: Colors.white, // foreground
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                SearchClient()));
+                  },
+                ),
+              ],
             ),
             Container(
               child: clients.isEmpty

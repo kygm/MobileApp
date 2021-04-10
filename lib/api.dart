@@ -1,4 +1,5 @@
 import 'package:KYGM_Mobile/Models/transaction.dart';
+import 'package:KYGM_Mobile/widgets/searchTransact.dart';
 import 'package:dio/dio.dart';
 
 import './Models/client.dart';
@@ -25,10 +26,16 @@ class ClientsApi {
 
     return response.toString();
   }
-  Future<String> searchClient() async {
-    final response = await _dio.post('/searchClient');
+  Future<List> searchClient(String fname) async {
+    final response = await _dio.post('/searchClient' , data: {'fname' : fname});
     //print(response);
-    return response.data['client'];
+    return response.data['clients'];
+  }
+
+  Future<List> searchTransact(String fname) async {
+    final response = await _dio.post('/searchTransact', data: {'fname' : fname});
+
+    return response.data;
   }
 
   //inFName, inLName, inAddress, inCity, inState, inDes, inPhoneNum
