@@ -26,10 +26,10 @@ class _MostOfAppState extends State<MostOfApp> {
     double p = 0, c = 0, total = 0;
     // >DateTime.now().subtract(Duration(days: 31))
     transacts.forEach((t) {
-      if (DateTime.parse(t['transactDate']).month == DateTime.now().month) {
-        p += t['transactPrice'];
-        c += t['transactCost'];
-      }
+      // if (DateTime.parse(t['transactDate']).month == DateTime.now().month) {
+      p += t['transactPrice'];
+      c += t['transactCost'];
+      // }
     });
     total = p - c;
     return total;
