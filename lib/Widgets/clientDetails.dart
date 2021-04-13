@@ -34,6 +34,64 @@ class _ClientDetailsState extends State<ClientDetails> {
       descriptCon = TextEditingController();
   var c1 = Colors.grey;
   bool editStatus = true;
+  bool checkState() {
+    var inState = stateCon.text.toUpperCase();
+    if (inState != "AL" &&
+        inState != "AK" &&
+        inState != "AZ" &&
+        inState != "AR" &&
+        inState != "CA" &&
+        inState != "CO" &&
+        inState != "CT" &&
+        inState != "DE" &&
+        inState != "FL" &&
+        inState != "GA" &&
+        inState != "HI" &&
+        inState != "ID" &&
+        inState != "IL" &&
+        inState != "IN" &&
+        inState != "IA" &&
+        inState != "KS" &&
+        inState != "KY" &&
+        inState != "LA" &&
+        inState != "ME" &&
+        inState != "MD" &&
+        inState != "MA" &&
+        inState != "MI" &&
+        inState != "MN" &&
+        inState != "MS" &&
+        inState != "MO" &&
+        inState != "MT" &&
+        inState != "NE" &&
+        inState != "NV" &&
+        inState != "NH" &&
+        inState != "NJ" &&
+        inState != "NM" &&
+        inState != "NY" &&
+        inState != "NC" &&
+        inState != "ND" &&
+        inState != "OH" &&
+        inState != "OK" &&
+        inState != "OR" &&
+        inState != "PA" &&
+        inState != "RI" &&
+        inState != "SC" &&
+        inState != "SD" &&
+        inState != "TN" &&
+        inState != "TX" &&
+        inState != "UT" &&
+        inState != "VT" &&
+        inState != "VA" &&
+        inState != "WA" &&
+        inState != "WV" &&
+        inState != "WI" &&
+        inState != "WY") {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   void editStateChange() {
     if (editStatus == true) {
       setState(() => editStatus = false);
@@ -47,41 +105,46 @@ class _ClientDetailsState extends State<ClientDetails> {
         inLName = lNameCon.text,
         inAddress = addressCon.text,
         inCity = cityCon.text,
-        inState = stateCon.text,
+        inState = stateCon.text.toUpperCase(),
         inPhoneNum = phoneNumCon.text,
         inDes = descriptCon.text;
-    setState(() {
-      if (inFName == null || inFName == '') {
-        inFName = fname;
-      }
-      if (inLName == null || inLName == '') {
-        inLName = lname;
-      }
-      if (inAddress == null || inAddress == '') {
-        inAddress = address;
-      }
-      if (inCity == null || inCity == '') {
-        inCity = city;
-      }
-      if (inState == null || inState == '') {
-        inState = state;
-      }
-      if (inPhoneNum == null) {
-        inPhoneNum = phoneNumber;
-      }
-      if (inDes == null) {
-        inDes = description;
-      }
-      widget.api.editClient(
-          id, inFName, inLName, inAddress, inCity, inState, inPhoneNum, inDes);
-      MaterialPageRoute(
-        builder: (context) => ViewClients(),
+    if (checkState() == false) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => _stateErrorWindow(context),
       );
+    } else {
+      setState(() {
+        if (inFName == null || inFName == "") {
+          inFName = fname;
+        }
+        if (inLName == null || inLName == "") {
+          inLName = lname;
+        }
+        if (inAddress == null || inAddress == "") {
+          inAddress = address;
+        }
+        if (inCity == null || inCity == "") {
+          inCity = city;
+        }
+        if (inState == null || inState == "") {
+          inState = state;
+        }
+        if (inPhoneNum == null || inPhoneNum == "") {
+          inPhoneNum = phoneNumber;
+        }
+        if (inDes == null || inDes == "") {
+          inDes = description;
+        }
+        widget.api.editClient(id, inFName, inLName, inAddress, inCity, inState,
+            inPhoneNum, inDes);
+        MaterialPageRoute(
+          builder: (context) => ViewClients(),
+        );
+        Navigator.of(context).pop();
+      });
       Navigator.of(context).pop();
-    });
-    List<String> states = new List();
-    inState.length == 2 ? inState.toUpperCase() : inState.toLowerCase();
-    Navigator.of(context).pop();
+    }
   }
 
   void _deleteClient(id) {
@@ -282,7 +345,6 @@ class _ClientDetailsState extends State<ClientDetails> {
                                     decoration: InputDecoration(
                                         prefixText: "Description:",
                                         labelText: description),
-                                    keyboardType: TextInputType.multiline,
                                     style: TextStyle(fontSize: 20),
                                     onSubmitted: (_) => submitData(),
                                   ),
@@ -367,6 +429,42 @@ class _ClientDetailsState extends State<ClientDetails> {
                       backgroundColor:
                           MaterialStateProperty.all<Color>(Colors.red)),
                 ),
+              ),
+            ],
+          )
+        ],
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          textColor: Theme.of(context).primaryColor,
+          child: const Text('Close'),
+        ),
+      ],
+    );
+  }
+
+  Widget _stateErrorWindow(BuildContext context) {
+    return new AlertDialog(
+      title: const Text('State Input Error'),
+      content: new Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text('Please input the correct 2 letter'),
+          Text('abbreviation of the desired state.'),
+          Row(
+            children: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Ok', style: TextStyle(color: Colors.black)),
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.red)),
               ),
             ],
           )

@@ -71,7 +71,7 @@ class ClientsApi {
       'city': city,
       'state': state,
       'phoneNumber': phoneNumber,
-      'description': description
+      'descript': description
     });
     print(Client.fromJson(response.data));
     return Client.fromJson(response.data);

@@ -18,18 +18,20 @@ class AddTransaction extends StatefulWidget {
 
   final ClientsApi api = ClientsApi();
   @override
-  _AddTransactionState createState() => _AddTransactionState(id, fname, lname, phoneNumber);
+  _AddTransactionState createState() =>
+      _AddTransactionState(id, fname, lname, phoneNumber);
 }
 
 class _AddTransactionState extends State<AddTransaction> {
-
   final String id, phoneNumber, fname, lname;
 
   _AddTransactionState(this.id, this.fname, this.lname, this.phoneNumber);
 
-
   final titleCon = TextEditingController();
   final dateCon = TextEditingController();
+  final yearCon = TextEditingController();
+  final monthCon = TextEditingController();
+  final dayCon = TextEditingController();
   final costCon = TextEditingController();
   final priceCon = TextEditingController();
   final timeCon = TextEditingController();
@@ -55,9 +57,18 @@ class _AddTransactionState extends State<AddTransaction> {
     //print(3);
   }
 
+  bool dateChecker() {
+    var month = monthCon.text, day = dayCon.text;
+    if (int.parse(month) < 13 && int.parse(day) < 32) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   void submitData() {
     final inTitle = titleCon.text;
-    final inDate = dateCon.text;
+    final inDate = yearCon.text + "-" + monthCon.text + "-" + dayCon.text;
     final inCost = double.parse(costCon.text);
     final inPrice = double.parse(priceCon.text);
     final inTime = timeCon.text;
@@ -70,16 +81,19 @@ class _AddTransactionState extends State<AddTransaction> {
         inDes.isEmpty) {
       return;
     } else {
-      //String fname, lname, phoneNumber, transactDate, transactTime, descript;
-      //var transactCost, transactPrice;
-
-
-      widget.api.createTransaction(
-          fname, lname, phoneNumber, inDate, inTime, inTitle, inDes, inCost, inPrice);
-       //print(fname+ lname+ phoneNumber+inDate+ inTime+ inTitle+ inDes+ inCost.toString() +inPrice.toString());
+      if (dateChecker() != true) {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) => _dateErrorWindow(context),
+        );
+      } else {
+        widget.api.createTransaction(fname, lname, phoneNumber, inDate, inTime,
+            inTitle, inDes, inCost, inPrice);
+        //print(fname+ lname+ phoneNumber+inDate+ inTime+ inTitle+ inDes+ inCost.toString() +inPrice.toString());
+        Navigator.of(context).pop();
+      }
       Navigator.of(context).pop();
     }
-    Navigator.of(context).pop();
   }
 
   String dropdownValue = 'One';
@@ -112,20 +126,69 @@ class _AddTransactionState extends State<AddTransaction> {
                   child: Container(
                     padding: EdgeInsets.all(15),
                     child: Column(
+                      mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: <Widget>[
                         Text(""),
 
                         TextFormField(
                           controller: titleCon,
-                          decoration: InputDecoration(labelText: 'Service Name:'),
+                          decoration:
+                              InputDecoration(labelText: 'Service Name:'),
                           onFieldSubmitted: (_) => submitData(),
                         ),
-                        TextFormField(
-                          controller: dateCon,
-                          decoration: InputDecoration(labelText: 'Service Date:'),
-                          keyboardType: TextInputType.datetime,
-                          onFieldSubmitted: (_) => submitData(),
+                        Row(
+                          children: [
+                            Text(
+                              "Service Date:",
+                              style: TextStyle(fontSize: 16),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 40),
+                              child: SizedBox(
+                                width: 50,
+                                child: TextFormField(
+                                  controller: yearCon,
+                                  decoration:
+                                      InputDecoration(labelText: 'YYYY'),
+                                  expands: false,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.digitsOnly,
+                                    LengthLimitingTextInputFormatter(4)
+                                  ],
+                                  onFieldSubmitted: (_) => submitData(),
+                                ),
+                              ),
+                            ),
+                            Text(" -- "),
+                            SizedBox(
+                              width: 35,
+                              child: TextFormField(
+                                controller: monthCon,
+                                decoration: InputDecoration(labelText: 'MM'),
+                                expands: false,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly,
+                                  LengthLimitingTextInputFormatter(2)
+                                ],
+                                onFieldSubmitted: (_) => submitData(),
+                              ),
+                            ),
+                            Text(" -- "),
+                            SizedBox(
+                              width: 30,
+                              child: TextFormField(
+                                controller: dayCon,
+                                decoration: InputDecoration(labelText: 'DD'),
+                                expands: false,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly,
+                                  LengthLimitingTextInputFormatter(2)
+                                ],
+                                onFieldSubmitted: (_) => submitData(),
+                              ),
+                            ),
+                          ],
                         ),
                         TextFormField(
                           controller: costCon,
@@ -152,7 +215,8 @@ class _AddTransactionState extends State<AddTransaction> {
                         ),
                         TextFormField(
                           controller: descriptionCon,
-                          decoration: InputDecoration(labelText: 'Description:'),
+                          decoration:
+                              InputDecoration(labelText: 'Description:'),
                           keyboardType: TextInputType.multiline,
                           onFieldSubmitted: (_) => submitData(),
                         ),
@@ -172,6 +236,41 @@ class _AddTransactionState extends State<AddTransaction> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _dateErrorWindow(BuildContext context) {
+    return new AlertDialog(
+      title: const Text('Date Input Error'),
+      content: new Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text('Please input the date in the correct format.'),
+          Row(
+            children: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Ok', style: TextStyle(color: Colors.black)),
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.red)),
+              ),
+            ],
+          )
+        ],
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          textColor: Theme.of(context).primaryColor,
+          child: const Text('Close'),
+        ),
+      ],
     );
   }
 }
