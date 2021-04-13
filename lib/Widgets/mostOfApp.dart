@@ -122,7 +122,7 @@ class _MostOfAppState extends State<MostOfApp> {
             FlatButton(
               color: Colors.green,
               //               minWidth: 370,
-              child: Text('This Months Revenue'),
+              child: Text('Total Revenue'),
               onPressed: () => {
                 showDialog(
                   context: context,
@@ -186,7 +186,10 @@ class _MostOfAppState extends State<MostOfApp> {
                 );
               },
             ),
-            Image.asset('images/KYGM-LOGO.png', height: 150,),
+            Image.asset(
+              'images/KYGM-LOGO.png',
+              height: 150,
+            ),
             /*
             FlatButton(
               child: Text('Timer'),
@@ -220,7 +223,7 @@ class _MostOfAppState extends State<MostOfApp> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text( NumberFormat.simpleCurrency().format(double.parse(total))),
+          Text(NumberFormat.simpleCurrency().format(double.parse(total))),
         ],
       ),
       actions: <Widget>[
