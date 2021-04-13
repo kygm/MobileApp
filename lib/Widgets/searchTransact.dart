@@ -1,3 +1,4 @@
+import 'package:KYGM_Mobile/widgets/viewTransactions.dart';
 import 'package:flutter/material.dart';
 import './drawer.dart';
 import './mostOfApp.dart';
@@ -21,7 +22,7 @@ class _SearchTransactState extends State<SearchTransact> {
       setState(() {
         transacts = data;
         _search = true;
-        print(transacts.toString());
+        //print(transacts.toString());
       });
     });
   }
@@ -63,91 +64,115 @@ class _SearchTransactState extends State<SearchTransact> {
               ],
             )
           //if search false
-          : 
-          
-          Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              "Transactions",
-              style: TextStyle(
-                  fontSize: 25,
-                  color: Colors.green,
-                  fontWeight: FontWeight.bold),
-            ),
-            Container(
-              child: transacts.isEmpty && _search == false
-                  ? Column(
-                      children: <Widget>[
-                        Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                      ],
-                    )
-                  : transacts.isEmpty ? Expanded(
-                      child: ListView(
-                          shrinkWrap: true,
-                          padding: EdgeInsets.all(15.0),
-                          children: [
-                            ...transacts
-                                .map<Widget>(
-                                  (transact) => Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 30),
-                                    child: TextButton(
-                                      onPressed: () => {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                TransactionDetails(
-                                                    transact['_id'],
-                                                    transact['fname'],
-                                                    transact['lname'],
-                                                    transact['transactName'],
-                                                    transact['transactDate'],
-                                                    transact['transactTime'],
-                                                    transact['descript'],
-                                                    transact['transactCost'],
-                                                    transact['transactPrice']),
+          : Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    "Transactions",
+                    style: TextStyle(
+                        fontSize: 25,
+                        color: Colors.green,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  ElevatedButton(onPressed: () => {
+                  Navigator.pop(context),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ViewTransacts()),
+                ),
+                }, child: Text("Back to View All")),
+                  _search == false
+                      ? Column(
+                          children: <Widget>[
+                            Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          ],
+                        )
+                      : transacts.isEmpty
+                          ? Column(
+                              children: [
+                                Text(
+                                  "No Transactions under that name \n  Check Spelling",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                
+                              ],
+                            )
+                          : Container(
+                              child: Expanded(
+                              child: ListView(
+                                  shrinkWrap: true,
+                                  padding: EdgeInsets.all(15.0),
+                                  children: [
+                                    ...transacts
+                                        .map<Widget>(
+                                          (transact) => Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 30),
+                                            child: TextButton(
+                                              onPressed: () => {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        TransactionDetails(
+                                                            transact['_id'],
+                                                            transact['fname'],
+                                                            transact['lname'],
+                                                            transact[
+                                                                'transactName'],
+                                                            transact[
+                                                                'transactDate'],
+                                                            transact[
+                                                                'transactTime'],
+                                                            transact[
+                                                                'descript'],
+                                                            transact[
+                                                                'transactCost'],
+                                                            transact[
+                                                                'transactPrice']),
+                                                  ),
+                                                ),
+                                              },
+                                              child: ListTile(
+                                                leading: ColoredBox(
+                                                  color: Colors.lightBlue,
+                                                  child: Text(
+                                                    "\$" +
+                                                        (transact['transactPrice'] -
+                                                                transact[
+                                                                    'transactCost'])
+                                                            .toString(),
+                                                    style: TextStyle(
+                                                        fontSize: 30,
+                                                        color: Colors.yellow),
+                                                  ),
+                                                ),
+                                                title: Text(
+                                                  (transact['fname']
+                                                          .toString() +
+                                                      " " +
+                                                      transact['lname']
+                                                          .toString()),
+                                                  style:
+                                                      TextStyle(fontSize: 20),
+                                                ),
+                                              ),
+                                            ),
                                           ),
-                                        ),
-                                      },
-                                      child: ListTile(
-                                        leading: ColoredBox(
-                                          color: Colors.lightBlue,
-                                          child: Text(
-                                            "\$" +
-                                                (transact['transactPrice'] -
-                                                        transact[
-                                                            'transactCost'])
-                                                    .toString(),
-                                            style: TextStyle(
-                                                fontSize: 30,
-                                                color: Colors.yellow),
-                                          ),
-                                        ),
-                                        title: Text(
-                                          (transact['fname'].toString() +
-                                              " " +
-                                              transact['lname'].toString()),
-                                          style: TextStyle(fontSize: 20),
-                                        ),
-                                        
-                                      ),
-                                    ),
-                                  ),
-                                )
-                                .toList(),
-                          ]),
-                    )
-                    : Text("No Transacts Found!"),
+                                        )
+                                        .toList(),
+                                  ]),
+                            )),
+                            
+                ],
+              ),
             ),
-          ],
-        ),
-      ),
-            //Text(transacts.toString()),
+      //Text(transacts.toString()),
     );
   }
 }

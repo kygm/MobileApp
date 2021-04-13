@@ -4,6 +4,7 @@ import 'drawer.dart';
 import 'addClient.dart';
 import 'clientDetails.dart';
 import 'package:KYGM_Mobile/api.dart';
+import './viewClients.dart';
 
 class SearchClient extends StatefulWidget {
   final ClientsApi api = ClientsApi();
@@ -46,7 +47,9 @@ class _SearchClientState extends State<SearchClient> {
           ),
         ),
       ),
-      body: !_search
+      body: 
+      
+      !_search
           ? Column(
               children: <Widget>[
                 TextFormField(
@@ -64,7 +67,82 @@ class _SearchClientState extends State<SearchClient> {
               ],
             )
           //if search false
-          : Text(clients.toString()),
+          : clients.isEmpty 
+          ? Padding(
+            padding: const EdgeInsets.all(40.0),
+            child: Column(
+              children: [
+                Text("No clients with that name \n Check spelling.", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+                ElevatedButton(onPressed: () => {
+                  Navigator.pop(context),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ViewClients()),
+                ),
+                }, child: Text("Back to View All"))
+              ],
+            ),
+          ) :
+          
+           Column(
+              children: [
+                ElevatedButton(onPressed: () => {
+                  Navigator.pop(context),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ViewClients()),
+                ),
+                }, child: Text("Back to View All")),
+                Container(
+                  child: Expanded(
+                    child: ListView(
+                        shrinkWrap: true,
+                        padding: EdgeInsets.all(15.0),
+                        children: [
+                          ...clients
+                              .map<Widget>(
+                                (client) => Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 30),
+                                  child: TextButton(
+                                    onPressed: () => {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => ClientDetails(
+                                                client['_id'],
+                                                client['fname'],
+                                                client['lname'],
+                                                client['address'],
+                                                client['city'],
+                                                client['state'],
+                                                client['phoneNumber'],
+                                                client['descript'])),
+                                      ),
+                                    },
+                                    child: ListTile(
+                                      leading: CircleAvatar(
+                                        radius: 30,
+                                        child: Text(client['fname']
+                                                .substring(0, 1) +
+                                            client['lname'].substring(0, 1)),
+                                      ),
+                                      title: Text(
+                                        (client['fname'] +
+                                            " " +
+                                            client['lname']),
+                                        style: TextStyle(fontSize: 20),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                              .toList(),
+                        ]),
+                  ),
+                ),
+              ],
+            ),
     );
   }
 }

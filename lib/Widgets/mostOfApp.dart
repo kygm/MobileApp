@@ -186,6 +186,7 @@ class _MostOfAppState extends State<MostOfApp> {
                 );
               },
             ),
+            Image.asset('images/KYGM-LOGO.png', height: 150,),
             /*
             FlatButton(
               child: Text('Timer'),
@@ -219,15 +220,14 @@ class _MostOfAppState extends State<MostOfApp> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(total),
+          Text( NumberFormat.simpleCurrency().format(double.parse(total))),
         ],
       ),
       actions: <Widget>[
-        new FlatButton(
+        new ElevatedButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
-          textColor: Theme.of(context).primaryColor,
           child: const Text('Close'),
         ),
       ],

@@ -26,14 +26,15 @@ class ClientsApi {
 
     return response.toString();
   }
+
   Future<List> searchClient(String fname) async {
-    final response = await _dio.post('/searchClient' , data: {'fname' : fname});
+    final response = await _dio.post('/searchClient', data: {"fname": fname});
     //print(response);
-    return response.data['clients'];
+    return response.data;
   }
 
   Future<List> searchTransact(String fname) async {
-    final response = await _dio.post('/searchTransact', data: {'fname' : fname});
+    final response = await _dio.post('/searchTransact', data: {"fname": fname});
 
     return response.data;
   }
@@ -72,6 +73,7 @@ class ClientsApi {
       'phoneNumber': phoneNumber,
       'description': description
     });
+    print(Client.fromJson(response.data));
     return Client.fromJson(response.data);
   }
 
